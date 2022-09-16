@@ -1,0 +1,6 @@
+Value =
+	Engine.Intake.Manifold.Pressure *
+	Engine.Intake.Efficiency.Group 2 *
+	Parent.Fuel Vapor Correction *
+	(Engine.Properties.Displacement / Engine.Properties.Cylinders) *
+	(1 / (Constants.rAir * (Parent.Temperature + 273.15)));

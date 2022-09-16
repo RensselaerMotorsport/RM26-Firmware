@@ -1,0 +1,33 @@
+local offTempRange = Calculate.Hysteresis(
+		Engine.Water.Outlet.Temperature,
+		Shutoff Temperature,
+		Shutoff Temperature + Shutoff Temperature Hysteresis,
+		Shutoff Filter);
+local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
+		and (Engine.State eq Engine.State.Run or offTempRange)
+		and Engine.State neq Engine.State.Crank;
+
+if (not Output.IsActive()) {
+	State = State.Disabled;
+	Output.Duty Cycle = Off Duty Cycle;
+} else if (Engine.State eq Engine.State.Crank) {
+	Crank Timer.Start(4.0);
+	State = State.Crank;
+} else if (Engine.State eq Engine.State.Run and State eq State.Crank 
+		and Crank Timer.Remaining() > 0.0 and Crank Timer.Remaining() < 2.0) {
+	State = State.Startup;
+	Startup Procedure.Start(Startup On Time);
+} else if (State eq State.Startup and Engine.State eq Engine.State.Run 
+		and Startup Procedure.Remaining() > 0.0) {
+	State = State.Startup;
+	Output.Duty Cycle = Startup Duty;
+} else if (Test eq Test.Enabled) {
+	State = State.Test;
+	Output.Duty Cycle = Test Duty Cycle;
+} else if (on and State neq State.Startup and State neq State.Crank) {
+	State = State.Enabled;
+	Output.Duty Cycle = Duty Cycle;
+} else if (not on and State neq State.Startup and State neq State.Crank) {
+	State = State.Disabled;
+	Output.Duty Cycle = Off Duty Cycle;
+}

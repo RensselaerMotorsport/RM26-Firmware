@@ -1,0 +1,4 @@
+static local lastDiag = 0;
+local sensorFault = Module.Diagnostic.AsInteger() <= 0;
+Value = Module;
+Filtered = Library.Filter.FirstOrder(Value, This.Filter, lastDiag neq Module.Diagnostic.AsInteger() and not sensorFault);

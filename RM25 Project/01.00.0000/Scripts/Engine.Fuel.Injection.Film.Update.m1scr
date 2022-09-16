@@ -1,0 +1,7 @@
+if ((Engine.State eq Engine.State.Run)
+		and (Engine.State.Timer > Run Time Threshold)
+		and (Mode eq Mode.Enabled)) {
+	State = State.Enabled;
+} else {
+	State = State.Disabled;
+}

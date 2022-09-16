@@ -1,0 +1,28 @@
+local crankDelay = Library.Delay.Rising(Engine.State neq Engine.State.Crank, Enable Delay);
+local en = (Servo.Diagnostic.AsInteger() > 0) and crankDelay;
+Servo.SetEnable(en, true);
+Servo.Aim = Aim;
+
+when (Aim.State) {
+	is (Upshift or Downshift) {
+		Gain.Proportional = Gain.Shift.Proportional.Gain;
+		Gain.Integral = Gain.Shift.Integral.Gain;
+		Gain.Integral.Min = Gain.Shift.Integral.Min;
+		Gain.Integral.Max = Gain.Shift.Integral.Max;
+		Gain.Derivative = Gain.Shift.Derivative.Gain;
+	}
+	is (Neutral) {
+		Gain.Proportional = Gain.Neutral.Proportional.Gain;
+		Gain.Integral = Gain.Neutral.Integral.Gain;
+		Gain.Integral.Min = Gain.Neutral.Integral.Min;
+		Gain.Integral.Max = Gain.Neutral.Integral.Max;
+		Gain.Derivative = Gain.Neutral.Derivative.Gain;
+	}
+	is (Idle) {
+		Gain.Proportional = Gain.Idle.Proportional.Gain;
+		Gain.Integral = Gain.Idle.Integral.Gain;
+		Gain.Integral.Min = Gain.Idle.Integral.Min;
+		Gain.Integral.Max = Gain.Idle.Integral.Max;
+		Gain.Derivative = Gain.Idle.Derivative.Gain;
+	}
+}

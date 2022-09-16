@@ -1,0 +1,23 @@
+local result = 0.0;
+local initial = Primary * Final;
+when (In.Gear) {
+	is (Neutral) {
+		result = 0.0;
+	}
+	is (First) {
+		result = initial * First;
+	}
+	is (Second) {
+		result = initial * Second;
+	}
+	is (Third) {
+		result = initial * Third;
+	}
+	is (Fourth) {
+		result = initial * Fourth;
+	}
+	is (Fifth) {
+		result = initial * Fifth;
+	}
+}
+Out = result;

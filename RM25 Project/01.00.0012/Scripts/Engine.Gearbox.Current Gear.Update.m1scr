@@ -1,0 +1,7 @@
+local simpleMode = Engine.Gearbox.Control.Parameters.Smart Control eq Engine.Gearbox.Control.Parameters.Smart Control.Disabled;
+
+if (simpleMode or Engine.Gearbox.Shift Drum.Position.Sensor.Diagnostic eq Linear Diagnostic Enumeration.Not in Use) {
+	Value = Expected;
+} else {
+	Value = Measured;
+}

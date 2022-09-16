@@ -1,0 +1,1 @@
+Value = (Engine.Intake.Charge.Average * Engine.Speed * Engine.Properties.Cylinders) / Engine.Speed.Trigger.Reference.Cycle Duration;

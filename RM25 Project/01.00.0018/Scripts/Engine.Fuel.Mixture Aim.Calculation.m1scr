@@ -1,0 +1,17 @@
+local v = Main;
+local s = State.Main;
+
+if (Water Temperature < v) {
+	v = Water Temperature;
+	s = State.Water Temperature;
+}
+if (Intake Air Temperature < v) {
+	v = Intake Air Temperature;
+	s = State.Intake Air Temperature;
+}
+if (Throttle Area < v) {
+	v = Throttle Area;
+	s = State.Throttle Position;
+}
+Value = v;
+State = s;

@@ -1,0 +1,31 @@
+static local checked = false;
+
+if (not checked) {
+	Engine.Fuel.Injection.Output.Group.Peak Time = Calibration.Peak Time;
+	
+	local typeOk = true;
+	expand (n = 1 to Engine.Properties.Cylinders) {
+		if (Calibration.Type neq Calibration.Type.Saturated and 
+			Engine.Fuel.Injection.Cylinder $(n).Output.IsActive() and
+			Engine.Fuel.Injection.Cylinder $(n).Pin.Diagnostic eq Engine.Fuel.Injection.Cylinder $(n).Pin.Diagnostic.Not in Use
+			)
+		{
+			typeOk = false;
+		}	
+	}
+	
+	if (not Engine.Fuel.Injection.Cylinder 1.Output.IsActive()) {
+		Calibration.Diagnostic = Calibration.Diagnostic.Not in Use;
+	} else if (typeOk) {
+		Calibration.Diagnostic = Calibration.Diagnostic.OK;
+	} else {
+		Calibration.Diagnostic = Calibration.Diagnostic.Configuration Error;
+	}
+	
+	checked = true;
+	
+	local dummy = Calibration.Minimum Volume Hysteresis;
+	local dummy2 = Calibration.Flow Correction;
+	dummy = dummy;
+	dummy2 = dummy2;
+}

@@ -1,0 +1,17 @@
+if (Engine.Gearbox.Shifter.Aim.Request neq Engine.Gearbox.Shifter.Aim.Request.Idle) {
+	if (Calculate.Absolute(Engine.Gearbox.Shifter.Servo.Control.Error) < Engine.Gearbox.Control.Parameters.Shift Success Range) {
+		if (Engine.Gearbox.Shifter.Aim.Request eq Engine.Gearbox.Shifter.Aim.Request.Upshift) {
+			Value.Set(Value.AsInteger() + 1);
+		} else if (Engine.Gearbox.Shifter.Aim.Request eq Engine.Gearbox.Shifter.Aim.Request.Downshift) {
+			Value.Set(Value.AsInteger() - 1);
+		}
+	}
+} else {
+	if (not Calculate.IsNAN(Engine.Gearbox.Shift Drum.Position)) {
+		Value.Set(Parent.Measured);
+	} else if (not Calculate.IsNAN(Vehicle.Speed.Rear.Drive.Output)
+			and Engine.Gearbox.Control.State eq Engine.Gearbox.Control.State.Idle
+			and not (Parent.Effective eq Parent.Effective.Neutral)) {
+		Value.Set(Parent.Effective);
+	}
+}

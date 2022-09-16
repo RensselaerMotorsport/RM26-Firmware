@@ -1,0 +1,5 @@
+if (Calculate.IsNAN(Sensor)) {
+	Value = Estimate;
+} else {
+	Value = Sensor;
+}

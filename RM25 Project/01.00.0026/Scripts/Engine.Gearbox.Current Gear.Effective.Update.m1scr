@@ -1,0 +1,23 @@
+local effective = Engine.Gearbox.Current Gear.Drive Ratio.Effective;
+local first = Engine.Gearbox.Properties.Gear Ratio.Calculate(Gearbox Gear.First);
+local second = Engine.Gearbox.Properties.Gear Ratio.Calculate(Gearbox Gear.Second);
+local third = Engine.Gearbox.Properties.Gear Ratio.Calculate(Gearbox Gear.Third);
+local fourth = Engine.Gearbox.Properties.Gear Ratio.Calculate(Gearbox Gear.Fourth);
+local fifth = Engine.Gearbox.Properties.Gear Ratio.Calculate(Gearbox Gear.Fifth);
+local stable = Delay.Stable(Engine.Gearbox.Current Gear.Drive Ratio.Effective, Stability Delay, Stability Delta);
+
+if (Engine.Gearbox.Clutch.State eq Engine.Gearbox.Clutch.State.Closed and stable) {
+	if ((Calculate.Absolute(effective - first) / first) < This.Limit) {
+		Value.Set(Value.First);
+	} else if ((Calculate.Absolute(effective - second) / second) < This.Limit) {
+		Value.Set(Value.Second);
+	} else if ((Calculate.Absolute(effective - third) / third) < This.Limit) {
+		Value.Set(Value.Third);
+	} else if ((Calculate.Absolute(effective - fourth) / fourth) < This.Limit) {
+		Value.Set(Value.Fourth);
+	} else if ((Calculate.Absolute(effective - fifth) / fifth) < This.Limit) {
+		Value.Set(Value.Fifth);
+	} else {
+		Value.Set(Value.Neutral);
+	}
+}

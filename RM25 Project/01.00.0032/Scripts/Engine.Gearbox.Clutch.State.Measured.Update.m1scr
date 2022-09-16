@@ -1,0 +1,7 @@
+if (Engine.Gearbox.Clutch.Lever.Position.Sensor.Diagnostic neq Engine.Gearbox.Clutch.Lever.Position.Sensor.Diagnostic.OK) {
+	Value.Set(Value.Unknown);
+} else if (Engine.Gearbox.Clutch.Lever.Position < Closed Position) {
+	Value.Set(Value.Closed);
+} else if (Engine.Gearbox.Clutch.Lever.Position > Open Position) {
+	Value.Set(Value.Open);
+}

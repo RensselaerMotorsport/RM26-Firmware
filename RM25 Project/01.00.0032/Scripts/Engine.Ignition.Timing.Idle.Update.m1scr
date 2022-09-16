@@ -1,0 +1,38 @@
+local et = System.ElapsedTime();
+
+when (State) {
+	is (Disabled) {
+		Value = Calculate.NAN();
+		Control.Error = Calculate.NAN();
+		Control.Proportional = Calculate.NAN();
+		Control.Integral = Calculate.NAN();
+	}
+	is (Enabled) {
+		if (Calculate.IsNAN(Value)) {
+			Value = Calculate.Min(Engine.Ignition.Timing.GetUnscheduled() + (Ramp * et), Target);
+		} else {
+			local err = Engine.Speed - Aim;
+			
+			Control.Proportional = err * Control.Proportional.Gain;
+			local pid = Target + Control.Proportional;
+			
+			Control.Integral.Maximum = Library.Calculate.Max(Minimum - pid, 0.0);
+			Control.Integral.Minimum = Library.Calculate.Min(Engine.Ignition.Timing.Normal - pid, 0.0);
+			
+			if ((Control.Integral.Gain > 0) and not Calculate.IsNAN(Control.Integral)) {
+				Control.Integral = Library.Limit.Range(
+					Control.Integral + (Control.Integral.Gain * err * et),
+					Control.Integral.Minimum,
+					Control.Integral.Maximum);
+			} else {
+				Control.Integral = 0.0;
+			}
+			
+			Control.Error = err;
+			Value = Library.Limit.Range(
+				Control.Integral + pid,
+				Engine.Ignition.Timing.Normal,
+				Minimum);
+		}
+	}
+}

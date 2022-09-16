@@ -1,0 +1,83 @@
+local max = Maximum;
+local ir = Default.Ignition Range;
+local fr = Default.Fuel Range;
+local fm = Default.Fuel Margin;
+local s = State.Maximum;
+
+if (Engine.Speed.Trigger.Reference.State eq Engine.Speed.Trigger.Reference.State.Test) {
+	max = Engine.Speed.Trigger.Reference.Maximum;
+	s = State.Test;
+	Nominal = max;
+} else {
+	if(Calculate.IsNAN(Vehicle.Launch Control.Throttle Based Launch Control.Engine Speed.Limit) neq true and Vehicle.Launch Control.Throttle Based Launch Control.Engine Speed.Limit < max)
+	{
+		max = Vehicle.Launch Control.Throttle Based Launch Control.Engine Speed.Limit;
+		s = State.Launch;
+	}
+	if (max > Water Temperature) {
+		max = Water Temperature;
+		s = State.Water Temperature;
+	}
+	if (max > Engine.Speed.Trigger.Warning.GetEngineSpeedLimit()
+			and Engine.Speed.Trigger.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Speed.Trigger.Warning.GetEngineSpeedLimit();
+		s = State.Engine Speed Trigger Warning;
+	}
+	if (max > Engine.Oil.Block.Pressure.Warning.GetEngineSpeedLimit()
+			and Engine.Oil.Block.Pressure.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Oil.Block.Pressure.Warning.GetEngineSpeedLimit();
+		s = State.Oil Block Pressure Warning;
+	}
+	if (max > Engine.Oil.Block.Temperature.Warning.GetEngineSpeedLimit()
+			and Engine.Oil.Block.Temperature.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Oil.Block.Temperature.Warning.GetEngineSpeedLimit();
+		s = State.Oil Block Temperature Warning;
+	}
+	if (max > Engine.Oil.Pan.Temperature.Warning.GetEngineSpeedLimit()
+			and Engine.Oil.Pan.Temperature.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Oil.Pan.Temperature.Warning.GetEngineSpeedLimit();
+		s = State.Oil Pan Temperature Warning;
+	}
+	if (max > Engine.Oil.Tank.Temperature.Warning.GetEngineSpeedLimit()
+			and Engine.Oil.Tank.Temperature.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Oil.Tank.Temperature.Warning.GetEngineSpeedLimit();
+		s = State.Oil Tank Temperature Warning;
+	}
+	if (max > Engine.Water.Pressure.Warning.GetEngineSpeedLimit()
+			and Engine.Water.Pressure.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Water.Pressure.Warning.GetEngineSpeedLimit();
+		s = State.Water Pressure Warning;
+	}
+	if (max > Engine.Water.Outlet.Temperature.Warning.GetEngineSpeedLimit()
+			and Engine.Water.Outlet.Temperature.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Water.Outlet.Temperature.Warning.GetEngineSpeedLimit();
+		s = State.Water Temperature Warning;
+	}
+	if (max > Engine.Crankcase.Pressure.Warning.GetEngineSpeedLimit()
+			and Engine.Crankcase.Pressure.Warning.GetEngineSpeedLimit() > 0) {
+		max = Engine.Crankcase.Pressure.Warning.GetEngineSpeedLimit();
+		s = State.Crankcase Pressure Warning;
+	}
+	if (Engine.Gearbox.Shifter.Servo.InUse()
+			and Engine.Intake.Throttle.Control.Servo.Diagnostic.AsInteger() < 0
+			and max > Engine.Gearbox.Shifter.Servo.Fault.Engine Speed Limit
+			and Engine.Gearbox.Shifter.Servo.Fault.Engine Speed Limit > 0) {
+		max = Engine.Gearbox.Shifter.Servo.Fault.Engine Speed Limit;
+		s = State.Shifter Control Servo Fault;
+	}
+	if (Engine.Intake.Throttle.Control.Servo.InUse()
+			and Engine.Gearbox.Shifter.Servo.Diagnostic.AsInteger() < 0
+			and max > Engine.Intake.Throttle.Control.Servo.Fault.Engine Speed Limit
+			and Engine.Intake.Throttle.Control.Servo.Fault.Engine Speed Limit > 0) {
+		max = Engine.Intake.Throttle.Control.Servo.Fault.Engine Speed Limit;
+		s = State.Throttle Control Servo Fault;
+	}
+}
+
+This.Value = max;
+This.Ignition = max - Calculate.Min(fm, 0.0);
+This.Fuel = max + Calculate.Max(fm, 0.0);
+This.Ignition.Range = ir;
+This.Fuel.Margin = fm;
+This.Fuel.Range = fr;
+This.State = s;

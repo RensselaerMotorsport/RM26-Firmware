@@ -1,0 +1,30 @@
+local v = 0.0;
+local s = State.Pedal;
+local d = Diagnostic.OK;
+
+if (Calculate.IsNAN(Engine.Intake.Throttle.Pedal Position)) {
+	v = Calculate.NAN();
+	s = State.Pedal;
+	d = Diagnostic.Not in Use;
+} else {
+	static local pedalFault = true;
+	if (not Calculate.IsNAN(Engine.Intake.Throttle.Pedal Position)
+			and ((not pedalFault) or (Engine.Intake.Throttle.Pedal Position <= Value))) {
+		local pedal = Minimum + (1 - Minimum) * Engine.Intake.Throttle.Pedal Position;
+		if (v < pedal) {
+			v = Engine.Intake.Throttle.Pedal Position;
+			s = State.Pedal;
+		}
+		d = Diagnostic.OK;
+		pedalFault = false;
+	} else {
+		v = 0.0;
+		s = State.Pedal;
+		d = Diagnostic.Fault;
+		pedalFault = true;
+	}
+}
+
+Value = v;
+State = s;
+Diagnostic = d;

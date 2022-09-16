@@ -1,0 +1,26 @@
+local shiftSpeed = Engine.Speed > Engine Speed;
+local shifting = Engine.Gearbox.Control.State.GetUnscheduled() neq Engine.Gearbox.Control.State.Idle;
+local moving = Vehicle.Speed > Minimum Speed;
+local throttle = Engine.Intake.Throttle.Position > Throttle Position;
+local time = Timer.Remaining() <= 0.0;
+
+when (State) {
+	is (Disabled) {
+		if (Enable eq Enable.Enabled) {
+			State.Set(State.Ready);
+		}
+	}
+	is (Ready) {
+		if (Enable eq Enable.Disabled) {
+			State.Set(State.Disabled);
+		} else if (throttle and moving and shiftSpeed and not shifting) {
+			State.Set(State.Shift);
+			Timer.Start(Reset Time);
+		}
+	}
+	is (Shift) {
+		if (shifting or time) {
+			State.Set(State.Ready);
+		}
+	}
+}

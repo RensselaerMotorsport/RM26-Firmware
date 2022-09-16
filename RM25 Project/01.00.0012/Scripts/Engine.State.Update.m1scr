@@ -1,0 +1,62 @@
+local et = System.ElapsedTime();
+local stopped = false;
+local cyclelock = false;
+local turning = false;
+local running = false;
+
+when (Engine.Speed.Trigger.Reference.State) {
+	is (Open or Initialise or Error or Exit or Stall or Test) {
+		stopped = true;
+	}
+	is (First Edge or First Period or Pattern Lock or Search) {
+		turning = true;
+	}
+	is (Cycle Lock) {
+		turning = true;
+		cyclelock = true;
+	}
+}
+
+running = (Engine.Speed > Engine.Speed.Run Threshold) and cyclelock;
+
+when (Value) {
+	is (Startup) {
+		if (turning) {
+			Value = Value.Crank;
+			Timer = 0;
+		} else {
+			Timer += et;
+			Timer.Total.Startup Time += et;
+		}
+	}
+	is (Stop) {
+		if (turning) {
+			Value = Value.Crank;
+			Timer = 0;
+		} else {
+			Timer += et;
+			Timer.Total.Stall Time += et;
+		}
+	}
+	is (Crank) {
+		if (stopped) {
+			Value = Value.Stop;
+			Timer = 0;
+		} else if (running) {
+			Value = Value.Run;
+			Timer = 0;
+		} else {
+			Timer += et;
+			Timer.Total.Crank Time += et;
+		}
+	}
+	is (Run) {
+		if (stopped) {
+			Value = Value.Stop;
+			Timer = 0;
+		} else {
+			Timer += et;
+			Timer.Total.Run Time += et;
+		}
+	}
+}	

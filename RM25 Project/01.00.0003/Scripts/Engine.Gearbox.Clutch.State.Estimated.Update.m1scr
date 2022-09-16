@@ -1,0 +1,29 @@
+static local estimating = false;
+local stateChangeOpen = Value eq Value.Closed
+		and Engine.Gearbox.Clutch.Servo.Aim.State eq Engine.Gearbox.Clutch.Servo.Aim.State.Open;
+local stateChangeClosed = Value eq Value.Open
+		and Engine.Gearbox.Clutch.Servo.Aim.State eq Engine.Gearbox.Clutch.Servo.Aim.State.Close;
+local stateChange = stateChangeClosed or stateChangeOpen;
+
+if (not Engine.Gearbox.Clutch.Servo.Output.IsActive()) {
+	Value = Value.Unknown;
+} else if (stateChange) {
+	if (not estimating) {
+		estimating = true;
+		if (stateChangeOpen) {
+			Timer.Start(Open Time);
+		} else if (stateChangeClosed) {
+			Timer.Start(Close Time);
+		}
+	} else if (Timer.Remaining() <= 0) {
+		if (stateChangeOpen) {
+			Value.Set(Value.Open);
+		} else if (stateChangeClosed) {
+			Value.Set(Value.Closed);
+		}
+		estimating = false;
+	}
+} else if (estimating) {
+	estimating = false;
+	Timer.Start(0.0);
+}

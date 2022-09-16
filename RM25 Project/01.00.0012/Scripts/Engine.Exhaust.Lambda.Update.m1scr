@@ -1,0 +1,22 @@
+local cyl1 = not Calculate.IsNAN(MoTeC LTC.Module);
+local cyl2 = not Calculate.IsNAN(Innovate LC2);
+local comb = cyl1 and cyl2;
+
+local diff = 0.0;
+
+if (comb) {
+	Average = Calculate.Average(MoTeC LTC.Module, Innovate LC2);
+	Diagnostic.Set(Engine Exhaust Lambda Diagnostic.Combined);
+	diff = Calculate.Absolute(MoTeC LTC.Module - Innovate LC2);
+} else if (cyl1) {
+	Average = MoTeC LTC.Module;
+	Diagnostic.Set(Engine Exhaust Lambda Diagnostic.Cylinder 1);
+} else if (cyl2) {
+	Average = Innovate LC2;
+	Diagnostic.Set(Engine Exhaust Lambda Diagnostic.Cylinder 2);
+} else {
+	Average = Calculate.NAN();
+	Diagnostic.Set(Engine Exhaust Lambda Diagnostic.Not in Use);
+}
+
+Difference = diff;

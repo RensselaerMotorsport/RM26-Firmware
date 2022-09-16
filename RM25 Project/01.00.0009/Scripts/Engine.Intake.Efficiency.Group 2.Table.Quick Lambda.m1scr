@@ -1,0 +1,44 @@
+if (Math.IsNaN(Engine.Exhaust.Lambda.Group 2))
+{
+	UI.PromptOK(
+	    "Quick Lambda",
+	    "No lambda measurement available."
+	);
+}
+else if (Engine.Exhaust.Lambda.Group 2 < 0.2 or Engine.Exhaust.Lambda.Group 2 > 2.0)
+{
+    // Lambda out of range
+    UI.PromptOK(
+	    "Quick Lambda",
+	    "Lambda sensor error."
+    );
+}
+else if (Engine.Fuel.Mixture Aim < 0.2)
+{
+    // bad fuel aim
+    UI.PromptOK(
+	    "Quick Lambda",
+	    "Invalid fuel mixture aim."
+    );
+}
+else
+{
+    local new = This * Engine.Exhaust.Lambda.Group 2 / Engine.Fuel.Mixture Aim;
+
+    if (This.Validate(new))
+    {
+        // new value is valid so set and mark site as adjusted
+        This = new;
+        this.Mark(true);
+    }
+    else
+    {
+        // new value is out of range so clamp and report a message
+        This = This.Constrain(new);
+        This.Mark(false);
+        UI.PromptOK(
+		    "Quick Lambda",
+		    "Result clamped."
+        );
+    }
+}

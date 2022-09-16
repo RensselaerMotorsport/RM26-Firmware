@@ -1,0 +1,10 @@
+local noFront = Vehicle.Brake.Pressure.Front.Sensor.Diagnostic eq Vehicle.Brake.Pressure.Front.Sensor.Diagnostic.Not in Use;
+local noRear = Vehicle.Brake.Pressure.Rear.Sensor.Diagnostic eq Vehicle.Brake.Pressure.Rear.Sensor.Diagnostic.Not in Use;
+
+if (Front.AsInteger() >= 2 or (noFront and Rear.AsInteger() >= 2)) {
+	Value.Set(Value.Hard Braking);
+} else if ((Front.AsInteger() >= 1 and (Rear.AsInteger() >= 1  or noRear)) or (noFront and Rear.AsInteger() >= 1)) {
+	Value.Set(Value.Soft Braking);
+} else {
+	Value.Set(Value.Not Braking);
+}

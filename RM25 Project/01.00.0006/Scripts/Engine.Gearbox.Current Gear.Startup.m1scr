@@ -1,0 +1,5 @@
+if (Engine.Gearbox.Shift Drum.Position.Sensor.Diagnostic eq Linear Diagnostic Enumeration.Not in Use) {
+	Expected = Expected.Neutral;
+} else {
+	Expected = Measured;
+}

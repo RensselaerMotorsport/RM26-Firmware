@@ -1,0 +1,15 @@
+local et = System.ElapsedTime();
+local en = Engine.Ignition.Timing.Idle.State.GetUnscheduled() eq Engine.Ignition.Timing.Idle.State.Enabled;
+local sd = Library.Delay.Rising((Ramp Down >= Ramp Down.Limit) or en, Ramp Down.Delay);
+
+local normal = Main + Compensation;
+
+if (sd and en) {
+	Ramp Down = Calculate.Max(Ramp Down - (Ramp Down.Rate * et), 0.0);
+} else if (Engine.Ignition.Timing.Idle.State.Enable eq Engine.Ignition.Timing.Idle.State.Enable.Enabled) {
+	Ramp Down = Limit.Range(Engine.Speed - normal, Ramp Down, Ramp Down.Limit);
+} else {
+	Ramp Down = 0.0;
+}
+
+Value = Value + Ramp Down;

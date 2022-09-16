@@ -1,0 +1,14 @@
+when (Module) {
+	is (Not Set) {
+		Value = Calculate.NAN();
+		Filtered = Calculate.NAN();
+	}
+	is (MoTeC LTC) {
+		Value = Parent.MoTeC LTC;
+		Filtered = Parent.MoTeC LTC.Filtered;
+	}
+	is (Innovate LC2) {
+		Value = Parent.Innovate LC2;
+		Filtered = Parent.Innovate LC2.Filtered;
+	}
+}

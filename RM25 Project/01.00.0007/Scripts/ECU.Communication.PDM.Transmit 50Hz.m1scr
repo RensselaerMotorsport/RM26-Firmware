@@ -1,0 +1,27 @@
+local h = CanComms.TxOpen(true);
+
+if (CAN Bus neq CAN Bus.Not in Use)
+{
+	local ok = true;
+	local bus = CAN Bus.AsInteger() - 1;
+
+	/*
+	 * Some useful channels in the PDM
+	 */
+	CanComms.TxInitialise(h, 4);
+	CanComms.SetInteger	(h, 0, 8, Engine.State.AsInteger());
+	CanComms.SetInteger	(h, 8, 8, Convert.ToInteger(Engine.Water.Outlet.Temperature));
+	CanComms.SetInteger	(h, 16, 8, Convert.ToInteger(Engine.Water.Inlet.Temperature));
+	CanComms.SetInteger	(h, 24, 8, Engine.Water.Pump.State.AsInteger());
+	ok = CanComms.TxStandard(h, bus, 0x118);
+
+	/*
+	 * Shut up build
+	 */
+	ok = ok;
+
+	/*
+	 * Outputs
+	 */
+	Library.PDM.Transmit(bus, 0x119);
+}

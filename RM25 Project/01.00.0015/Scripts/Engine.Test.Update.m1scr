@@ -1,0 +1,40 @@
+when (Mode) {
+	is (Disabled) {
+		expand (n = 1 to Engine.Properties.Cylinders) {
+			Engine.Fuel.Injection.Cylinder $(n).Output.Test
+				= Engine.Fuel.Injection.Cylinder $(n).Output.Test.Disabled;
+			Engine.Ignition.Output.Cylinder $(n).Output.Test
+				= Engine.Ignition.Output.Cylinder $(n).Output.Test.Disabled;
+		}
+	}
+	is (Injection) {
+		expand (n = 1 to Engine.Properties.Cylinders) {
+			if ($(n) eq Cylinder) {
+				Engine.Fuel.Injection.Cylinder $(n).Output.Test
+					= Engine.Fuel.Injection.Cylinder $(n).Output.Test.Enabled;
+				Engine.Ignition.Output.Cylinder $(n).Output.Test
+					= Engine.Ignition.Output.Cylinder $(n).Output.Test.Disabled;
+			} else {
+				Engine.Fuel.Injection.Cylinder $(n).Output.Test
+					= Engine.Fuel.Injection.Cylinder $(n).Output.Test.Disabled;
+				Engine.Ignition.Output.Cylinder $(n).Output.Test
+					= Engine.Ignition.Output.Cylinder $(n).Output.Test.Disabled;
+			}
+		}
+	}
+	is (Ignition) {
+		expand (n = 1 to Engine.Properties.Cylinders) {
+			if ($(n) eq Cylinder) {
+				Engine.Fuel.Injection.Cylinder $(n).Output.Test
+					= Engine.Fuel.Injection.Cylinder $(n).Output.Test.Disabled;
+				Engine.Ignition.Output.Cylinder $(n).Output.Test
+					= Engine.Ignition.Output.Cylinder $(n).Output.Test.Enabled;
+			} else {
+				Engine.Fuel.Injection.Cylinder $(n).Output.Test
+					= Engine.Fuel.Injection.Cylinder $(n).Output.Test.Disabled;
+				Engine.Ignition.Output.Cylinder $(n).Output.Test
+					= Engine.Ignition.Output.Cylinder $(n).Output.Test.Disabled;
+			}
+		}
+	}
+}

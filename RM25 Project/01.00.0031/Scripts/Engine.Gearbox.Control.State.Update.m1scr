@@ -1,0 +1,159 @@
+local autoShift = Vehicle.Launch Control.Auto Upshift.State eq Vehicle.Launch Control.Auto Upshift.State.Shift;
+local upshift = autoShift or Parent.Upshift Button eq Parent.Upshift Button.On;
+local downshift = Parent.Downshift Button eq Parent.Downshift Button.On;
+local neutral = Parent.Neutral Button eq Parent.Neutral Button.On;
+local shiftRequest = upshift or downshift or neutral;
+local stabilized = Delay.Stable(
+		Engine.Gearbox.Current Gear.Drive Ratio.Error,
+		Engine.Gearbox.Control.Parameters.Gearbox Stabilization Time,
+		Engine.Gearbox.Control.Parameters.Gearbox Stabilization Error);
+local engineRunning = Engine.State.AsInteger() >= 2;
+local gearRatioCurrent = Engine.Gearbox.Properties.Gear Ratio.Calculate(Engine.Gearbox.Current Gear);
+local gearRatioNext = Engine.Gearbox.Properties.Gear Ratio.Calculate(Engine.Gearbox.Control.Desired Gear);
+local engSpeedNext = Engine.Speed;
+if (gearRatioNext > 0.0 and gearRatioCurrent > 0.0) {
+	engSpeedNext = (gearRatioNext / gearRatioCurrent) * Engine.Speed;		
+}
+local safeShiftSpeed = engSpeedNext < Engine.Gearbox.Control.Parameters.Overrev Speed
+		and engSpeedNext > Engine.Gearbox.Control.Parameters.Underrev Speed;
+local safeToShift = safeShiftSpeed or not engineRunning;
+local simpleShiftMode = Engine.Gearbox.Control.Parameters.Smart Control eq Engine.Gearbox.Control.Parameters.Smart Control.Disabled;
+local clutchOpen = Engine.Gearbox.Clutch.State eq Engine.Gearbox.Clutch.State.Open;
+local clutchClosed = Engine.Gearbox.Clutch.State eq Engine.Gearbox.Clutch.State.Closed;
+local clutchRequestOpen = Engine.Gearbox.Clutch.Servo.Aim.Request eq Engine.Gearbox.Clutch.Servo.Aim.Request.Open;
+local clutchRequestClose = Engine.Gearbox.Clutch.Servo.Aim.Request eq Engine.Gearbox.Clutch.Servo.Aim.Request.Close;
+local shiftComplete = Library.Delay.Rising(
+		Calculate.Absolute(Engine.Gearbox.Shifter.Servo.Control.Error) < Engine.Gearbox.Control.Parameters.Shift Success Range,
+		Engine.Gearbox.Control.Parameters.Shift Success Filter);
+local shifterIdle = Calculate.Absolute(Engine.Gearbox.Shifter.Servo.Aim - Engine.Gearbox.Shifter.Aim.Center) <= 0;
+local neutralLockout = Vehicle.Speed >= Engine.Gearbox.Control.Parameters.Neutral Lockout Speed;
+
+when (Value) {
+	// Reset the desired gear and shift speed limiter
+	// then increment failure count and go to idle
+	is (Shift Failure) {
+		Engine.Gearbox.Control.Desired Gear.Request.Set(Engine.Gearbox.Current Gear);
+		Engine.Gearbox.Shifter.Request Idle();
+		Engine.Gearbox.Clutch.Servo.Request Close();
+		
+		if (shifterIdle) {
+			Value.Set(Value.Idle);
+			Engine.Gearbox.Control.Failure.Count = Engine.Gearbox.Control.Failure.Count + 1;
+			Request.Set(Request.Idle.AsInteger());
+		}
+	}
+	
+	// Wait for a shift request and if a shift request occurs check that the
+	// shift will not under- or over-rev the engine before continuing.
+	is (Idle) {
+		Engine.Gearbox.Control.Desired Gear.Request.Set(Engine.Gearbox.Control.Desired Gear);
+		if (shiftRequest and Shift Timer.Remaining() <= 0.0) {	
+			if (safeToShift or simpleShiftMode) {
+				Shift Timer.Start(Engine.Gearbox.Control.Desired Gear.Update Delay);
+				if (upshift) {
+					Request.Set(Request.Upshift);
+					Value.Set(Value.Pre Shift.AsInteger());
+				} else if (downshift) {
+					Request.Set(Request.Downshift);
+					Value.Set(Value.Pre Shift.AsInteger());
+				} else if (neutral) {
+					Request.Set(Request.Neutral);
+					Value.Set(Value.Pre Shift.AsInteger());
+				}
+			} else {
+				Engine.Gearbox.Control.Failure.Mode.Set(Engine.Gearbox.Control.Failure.Mode.Unsafe Shift);
+				Value.Set(Value.Shift Failure.AsInteger());
+			}
+		}
+	}
+	
+	// If the shift is an upshift, set the engine speed limit to rev match
+	// If the shift is a downshift, send request for clutch to open and
+	// proceed once clutch is open, or report faiure if clutch request times out
+	is (Pre Shift) {
+		if (Request eq Request.Upshift) {
+			Value.Set(Value.Shift.AsInteger());
+		} else if (Request eq Request.Downshift) {
+			if (not clutchOpen and not clutchRequestOpen) {
+				Engine.Gearbox.Clutch.Servo.Request Open();
+				Timer.Start(Engine.Gearbox.Control.Parameters.Max Clutch Time);
+			} else if (clutchOpen) {
+				Value.Set(Value.Shift.AsInteger());
+				Timer.Start(0.0);
+			} else if (Timer.Remaining() <= 0.0) {
+				Engine.Gearbox.Clutch.Servo.Request Close();
+				Value.Set(Value.Shift Failure.AsInteger());
+				Engine.Gearbox.Control.Failure.Mode.Set(Engine.Gearbox.Control.Failure.Mode.Failed Clutch Open);
+			}
+		} else if (Request eq Request.Neutral) {
+			if (neutralLockout) {
+				Value.Set(Value.Shift Failure.AsInteger());
+				Engine.Gearbox.Control.Failure.Mode.Set(Engine.Gearbox.Control.Failure.Mode.Neutral Lockout Speed);
+			} else {
+				Value.Set(Value.Shift.AsInteger());
+			}
+		}
+	}
+	
+	// Send shift request to the shifter servo
+	// Proceed if current gear changes to desired gear before request times out
+	is (Shift) {
+		if (shifterIdle) {
+			Timer.Start(Engine.Gearbox.Control.Parameters.Max Shift Time);
+			if (Request eq Request.Upshift) {
+				Engine.Gearbox.Shifter.Request Upshift();
+			} else if (Request eq Request.Downshift) {
+				Engine.Gearbox.Shifter.Request Downshift();
+			} else if (Request eq Request.Neutral) {
+				Engine.Gearbox.Shifter.Request Neutral();
+			}
+		} else if (Request eq Request.Neutral) {
+			if (not neutral) {
+				if (shiftComplete) {
+					Engine.Gearbox.Shifter.Request Idle();
+					Timer.Start(0.0);
+					Value.Set(Value.Post Shift.AsInteger());
+				} else if (Timer.Remaining() <= 0.0) {
+					Engine.Gearbox.Shifter.Request Idle();
+					Engine.Gearbox.Control.Failure.Mode.Set(Engine.Gearbox.Control.Failure.Mode.Failed Shift);
+					Value.Set(Value.Shift Failure.AsInteger());
+				}
+			}
+		} else if (shiftComplete) {
+			Engine.Gearbox.Shifter.Request Idle();
+			Timer.Start(0.0);
+			Value.Set(Value.Post Shift.AsInteger());
+		} else if (Timer.Remaining() <= 0.0) {
+			Engine.Gearbox.Shifter.Request Idle();
+			Engine.Gearbox.Control.Failure.Mode.Set(Engine.Gearbox.Control.Failure.Mode.Failed Shift);
+			Value.Set(Value.Shift Failure.AsInteger());
+		}
+	}
+	
+	// If upshift, reset the speed limit then proceed
+	// If downshift, request for clutch to close and proceed once clutch is closed
+	is (Post Shift) {
+		if (Request eq Request.Upshift or Request eq Request.Neutral) {
+			Value.Set(Value.Recover.AsInteger());
+		} else if (Request eq Request.Downshift) {
+			if (clutchClosed) {
+				Value.Set(Value.Recover.AsInteger());
+			} else if (not clutchRequestClose) {
+				Engine.Gearbox.Clutch.Servo.Request Close();
+			}
+		}
+	}
+	
+	// Wait for the gearbox to stabilize before proceeding
+	is (Recover) {
+		if (simpleShiftMode or clutchOpen or stabilized) {
+			Value.Set(Value.Rearm.AsInteger());
+		}
+	}
+	
+	// Reset relevant states then return to idle
+	is (Rearm) {
+		Request.Set(Request.Idle);
+		Value.Set(Value.Idle.AsInteger());
+	}
+}

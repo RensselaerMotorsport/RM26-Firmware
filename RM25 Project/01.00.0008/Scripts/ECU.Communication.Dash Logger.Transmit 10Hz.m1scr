@@ -1,0 +1,38 @@
+local h = CanComms.TxOpen(true);
+
+if (CAN Bus neq CAN Bus.Not in Use)
+{
+	local ok = true;
+	local bus = CAN Bus.AsInteger() - 1;
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Engine.Water.Outlet.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Engine.Water.Inlet.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Engine.Oil.Block.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Fuel.Temperature + 40));
+	ok = CanComms.TxStandard(h, bus, 0x641);
+	
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(ECU.Logging.Used * 1.0e3));
+	CanComms.SetUnsignedInteger	(h, 16,  8, Convert.ToUnsignedInteger(Engine.Start.Relay.State.AsInteger()));
+	CanComms.SetUnsignedInteger	(h, 24,  8, Convert.ToUnsignedInteger(Vehicle.Launch Control.Throttle Based Launch Control.State.AsInteger()));
+	CanComms.SetInteger			(h, 32,  8, Engine.Gearbox.Clutch.State.AsInteger());
+	CanComms.SetUnsignedInteger	(h, 40,  8, Convert.ToUnsignedInteger(Vehicle.Launch Control.Timer.Ready.AsInteger()));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Fuel.Used * 1.0e5));	
+	ok = CanComms.TxStandard(h, bus, 0x644);
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetInteger			(h,  0,  8, Vehicle.Launch Control.Launch Traction Control Switch.AsInteger());
+	CanComms.SetInteger			(h,  8,  8, 0);
+	CanComms.SetUnsignedInteger	(h, 16,  8, Convert.ToUnsignedInteger(ECU.Communication.PDM.Receive.Total Current * 2.0));
+	CanComms.SetUnsignedInteger	(h, 24,  8, Convert.ToUnsignedInteger(ECU.Communication.PDM.Receive.Battery Voltage * 1.0e1));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(ECU.Communication.PDM.Receive.Internal Temperature));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(ECU.Temperature * 1.0e1));
+	ok = CanComms.TxStandard(h, bus, 0x648);
+
+	/*
+	* Shut up build
+	*/
+	ok = ok;
+}
+

@@ -1,0 +1,22 @@
+local range = Engine.Gearbox.Shift Drum.Position.Dead Band / 2;
+local position = Engine.Gearbox.Shift Drum.Position;
+local neutral = Engine.Gearbox.Shift Drum.Position.Neutral;
+local first = Engine.Gearbox.Shift Drum.Position.First;
+local second = Engine.Gearbox.Shift Drum.Position.Second;
+local third = Engine.Gearbox.Shift Drum.Position.Third;
+local fourth = Engine.Gearbox.Shift Drum.Position.Fourth;
+local fifth = Engine.Gearbox.Shift Drum.Position.Fifth;
+
+if (position < neutral + range and position > neutral - range) {
+	Value.Set(Value.Neutral);
+} else if (position < first + range and position > first - range) {
+	Value.Set(Value.First);
+} else if (position < second + range and position > second - range) {
+	Value.Set(Value.Second);
+} else if (position < third + range and position > third - range) {
+ 	Value.Set(Value.Third);
+} else if (position < fourth + range and position > fourth - range) {
+	Value.Set(Value.Fourth);
+} else if (position < fifth + range and position > fifth - range) {
+	Value.Set(Value.Fifth);
+}

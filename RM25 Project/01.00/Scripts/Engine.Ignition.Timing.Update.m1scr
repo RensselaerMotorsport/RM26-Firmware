@@ -1,0 +1,34 @@
+local v = Normal;
+local s = State.Normal;
+
+if (Engine.State neq Engine.State.Run) {
+	v = Cranking;
+	s = State.Cranking;
+} else {
+	v = Normal;
+	s = State.Normal;
+}
+
+if (not Calculate.IsNAN(Overrun) and v < Overrun) {
+	v = Overrun;
+	s = State.Overrun;
+}
+
+if (not Calculate.IsNAN(Idle) and v < Idle) {
+	v = Idle;
+	s = State.Idle;
+}
+
+if (v < This.Limit.Advance) {
+	v = This.Limit.Advance;
+	s = State.Limit Advance;
+}
+
+if (v > This.Limit.Retard) {
+	v = This.Limit.Retard;
+	s = State.Limit Retard;
+}
+
+Value = v;
+State = s;
+Mode = Mode.Normal;

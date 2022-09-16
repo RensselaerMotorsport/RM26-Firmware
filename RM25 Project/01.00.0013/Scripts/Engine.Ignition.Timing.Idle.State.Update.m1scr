@@ -1,0 +1,33 @@
+local esin = Engine.Speed < (Engine.Ignition.Timing.Idle.Aim + Engine.Ignition.Timing.Idle.Activate.Engine Speed Margin) 
+		or State eq State.Enabled;
+local tpin = not Calculate.Hysteresis(
+		Engine.Intake.Throttle.Position,
+		Engine.Ignition.Timing.Idle.Activate.Throttle Threshold,
+		Engine.Ignition.Timing.Idle.Activate.Throttle Threshold + Engine.Ignition.Timing.Idle.Activate.Throttle Hysteresis,
+		0.0);
+local normal =  Engine.Ignition.Timing.Mode.GetUnscheduled() eq Engine.Ignition.Timing.Mode.Normal;
+local run = Engine.State eq Engine.State.Run;
+local overrun = Engine.Ignition.Timing.Overrun.State neq Engine.Ignition.Timing.Overrun.State.Disabled 
+		and Engine.Ignition.Timing.Overrun.State neq Engine.Ignition.Timing.Overrun.State.Advance;
+
+local inidle = esin and tpin and normal and run and not overrun;
+
+when (Enable) {
+	is (Disabled) {
+		State = State.Disabled;
+	}
+	is (Enabled) {
+		if (inidle) {
+			when (State) {
+				is (Enabled) { }
+				is (Disabled) {
+					if (Engine.Speed < Engine.Ignition.Timing.Idle.Aim) {
+						State = State.Enabled;
+					}
+				}
+			}
+		} else {
+			State = State.Disabled;
+		}
+	}
+}

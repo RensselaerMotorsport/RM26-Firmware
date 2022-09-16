@@ -1,0 +1,21 @@
+static local calibrated = false;
+static local failed = false;
+
+local enable = failed ? Servo.Enable.Disabled : Servo.Enable.Enabled;
+local shutdown = Engine.State eq Engine.State.Startup or Engine.State eq Engine.State.Stop;
+local override = false;
+
+if (not calibrated) {
+	enable = Servo.Enable.Calibrate;
+	calibrated = not Servo.Calibrating();
+} else if (Engine.Intake.Throttle.Pedal Position <= 0.0) {
+	if (shutdown) {
+		enable = Servo.Enable.Disabled;
+	} else if (Servo.Failure()) {
+		failed = true;
+	}
+} else if (failed) {
+	failed = false;
+}
+
+Servo.SetEnable(enable, override);

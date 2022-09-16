@@ -1,0 +1,7 @@
+Fuel Vapor Correction = (1 / (1 + (Constants.mAir / 
+	(Engine.Fuel.Constant.Molar Mass *
+	Engine.Fuel.Mixture Aim *
+	Engine.Fuel.Constant.Stoichiometric Ratio))));
+	
+Average = Calculate.Average(Group 1.GetUnscheduled(), Group 2.GetUnscheduled());
+Difference = Calculate.Absolute(Group 1.GetUnscheduled() - Group 2.GetUnscheduled());

@@ -1,0 +1,18 @@
+when (Request) {
+	is (Idle) {
+		Value = Center;
+		State = State.Idle;
+	}
+	is (Upshift) {
+		Value = Upshift;
+		State = State.Upshift;
+	}
+	is (Downshift) {
+		Value = Downshift;
+		State = State.Downshift;
+	}
+	is (Neutral) {
+		Value = Neutral;
+		State = State.Neutral;
+	}
+}

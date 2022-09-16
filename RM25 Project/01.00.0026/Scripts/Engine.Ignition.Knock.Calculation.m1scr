@@ -1,0 +1,67 @@
+local icut = Change.By(Engine.Ignition.Output.Group.Cut Count, 1);
+local fcut = Change.By(Engine.Fuel.Injection.Output.Group.Cut Count, 1);
+local enabled = Engine.State eq Engine.State.Run and Mode neq Mode.Disabled;
+
+when (State) {
+	is (Disabled) {
+		if (enabled) {
+			Activate.Timer.Start(Activate.Delay);
+			State = State.Transient;
+		}
+	}
+	is (Enabled) {
+		if (not enabled) {
+			State = State.Disabled;
+		} else if (icut or fcut) {
+			State = State.Transient;
+			Activate.Timer.Start(Activate.Delay);
+		}
+	}
+	is (Transient) {
+		if (not enabled) {
+			State = State.Disabled;
+		} else if (Activate.Timer.Remaining() <= 0.0) {
+			State = State.Enabled;
+		}
+	}
+}
+
+when (State) {
+	is (Enabled or Transient) {
+		local max1 = 0.0;
+		local max2 = 0.0;
+		local max3 = 0.0;
+		local max4 = 0.0;
+		
+		if (Frequency A > 0.0 and Mode.AsInteger() > 0) {
+			expand (n = 1 to Engine.Properties.Cylinders) {
+				max$(n) = Cylinder $(n).Level A;
+			}
+		}
+		if (Frequency B > 0.0 and Mode.AsInteger() > 1) {
+			expand (n = 1 to Engine.Properties.Cylinders) {
+				max$(n) = Calculate.Max(max$(n), Cylinder $(n).Level B);
+			}
+		}
+		if (Frequency C > 0.0 and Mode.AsInteger() > 2) {
+			expand (n = 1 to Engine.Properties.Cylinders) {
+				max$(n) = Calculate.Max(max$(n), Cylinder $(n).Level C);
+			}
+		}
+		if (Frequency D > 0.0 and Mode.AsInteger() > 3) {
+			expand (n = 1 to Engine.Properties.Cylinders) {
+				max$(n) = Calculate.Max(max$(n), Cylinder $(n).Level D);
+			}
+		}
+		
+		expand(n = 1 to Engine.Properties.Cylinders) {
+			Engine.Ignition.Output.Cylinder $(n).Knock.Level = max$(n);
+		}
+		
+	}
+	is (Disabled) {
+		expand(n = 1 to Engine.Properties.Cylinders) {
+			Engine.Ignition.Output.Cylinder $(n).Knock.Level = Calculate.NAN();
+		}
+	}
+}

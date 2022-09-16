@@ -1,0 +1,2 @@
+Value = Sensor;
+Warning.Update(Sensor, false, Engine.State eq Engine.State.Run);

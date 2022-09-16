@@ -1,0 +1,19 @@
+local resetFuelUsed = Reset Button eq Reset Button.On;
+local delivered = 0.0;
+local usedCorr = Correction.GetUnscheduled();
+
+expand (n = 1 to Engine.Properties.Cylinders) {
+	delivered += (Calculate.IsNAN(Engine.Fuel.Injection.Cylinder $(n).Output.Delivered)
+		? 0
+		: Engine.Fuel.Injection.Cylinder $(n).Output.Delivered); 
+}
+
+if (resetFuelUsed) {
+	Initial = Initial - Value;
+	Value = 0.0;
+} else if (Calculate.IsNAN(Value)) {
+	Value = 0.0;
+	Initial = 0.0;
+} else {
+	Value = Initial + delivered * usedCorr;
+}

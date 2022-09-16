@@ -1,0 +1,11 @@
+when (Parent.Group) {
+	is (Not Set) {
+		Value = 0.0;
+	}
+	is (Group 1) {
+		Value = Engine.Fuel.Injection.Volume.Group 1;
+	}
+	is (Group 2) {
+		Value = Engine.Fuel.Injection.Volume.Group 2;
+	}
+}

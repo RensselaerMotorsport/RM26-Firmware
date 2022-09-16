@@ -1,0 +1,5 @@
+if (Measured neq Measured.Unknown) {
+	Value = Measured;
+} else {
+	Value = Estimated;
+}

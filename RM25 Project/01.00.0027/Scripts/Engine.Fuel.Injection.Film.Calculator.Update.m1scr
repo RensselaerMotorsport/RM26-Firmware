@@ -1,0 +1,5 @@
+local throttle = Change.By(Engine.Intake.Throttle.Area, Throttle Reset Tolerance);
+
+local reset = throttle;
+
+Value.Update(Engine.Exhaust.Lambda.Average, reset);

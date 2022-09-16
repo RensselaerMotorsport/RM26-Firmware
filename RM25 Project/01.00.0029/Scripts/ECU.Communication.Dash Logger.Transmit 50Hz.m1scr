@@ -1,0 +1,26 @@
+local h = CanComms.TxOpen(true);
+
+if (CAN Bus neq CAN Bus.Not in Use)
+{
+	local ok = true;
+	local bus = CAN Bus.AsInteger() - 1;
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Engine.Water.Pressure * 1.0e-2));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Engine.Crankcase.Pressure * 1.0e-2));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Engine.Oil.Block.Pressure * 1.0e-2));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Fuel.Pressure * 1.0e-2));
+	ok = CanComms.TxStandard(h, bus, 0x642);
+	
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Engine.Exhaust.Temperature.Cylinder 1 * 10));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Engine.Exhaust.Temperature.Cylinder 2 * 10));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Engine.Exhaust.Temperature.Cylinder 3 * 10));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Exhaust.Temperature.Cylinder 4 * 10));
+	ok = CanComms.TxStandard(h, bus, 0x647);
+
+	/*
+	 * Shut up build
+	 */
+	ok = ok;
+}

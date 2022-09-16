@@ -1,0 +1,27 @@
+if (Value eq Engine.Gearbox.Current Gear and Timer.Remaining() <= 0.0 and Parent.State eq Parent.State.Idle) {
+	if (Engine.Gearbox.Control.Upshift Button eq Universal Switch State.On) {
+		if (Value.AsInteger() < Value.Fifth.AsInteger()
+				and Value.AsInteger() > Value.Neutral.AsInteger()) {
+			Value.Set(Value.AsInteger()+1);
+			Timer.Start(Update Delay);
+		} else if (Value eq Value.Neutral
+				and (Engine.Gearbox.Clutch.State eq Engine.Gearbox.Clutch.State.Open
+				or Engine.State.AsInteger() <= 1)) {
+			Value.Set(Value.AsInteger()+1);
+			Timer.Start(Update Delay);
+		}
+	} else if (Engine.Gearbox.Control.Downshift Button eq Universal Switch State.On) {
+		if (Value.AsInteger() > Value.First.AsInteger()) {
+			Value.Set(Value.AsInteger()-1);
+			Timer.Start(Update Delay);
+		} else if (Vehicle.Speed < Engine.Gearbox.Control.Parameters.Neutral Lockout Speed
+				and Value.AsInteger() eq Value.First.AsInteger()) {
+			Value.Set(Value.AsInteger()-1);
+			Timer.Start(Update Delay);
+		}
+	}
+} else {
+	if (Request neq Value) {
+		Value.Set(Request);
+	}
+}

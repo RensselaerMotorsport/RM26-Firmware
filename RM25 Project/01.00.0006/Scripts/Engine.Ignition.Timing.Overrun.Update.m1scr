@@ -1,0 +1,62 @@
+local et = System.ElapsedTime();
+
+local esin = Calculate.Hysteresis(
+		Engine.Speed,
+		Engine Speed Threshold,
+		Engine Speed Threshold + Engine Speed Hysteresis,
+		0.0);
+		
+local tpin = not Calculate.Hysteresis(
+		Engine.Intake.Throttle.Position,
+		Throttle Threshold,
+		Throttle Threshold + Throttle Hysteresis,
+		0.0);
+		
+local enable = Library.Delay.Rising(esin and tpin and Mode eq Mode.Enabled, This.Delay);
+
+when (State) {
+	is (Disabled) {
+		if (enable) {
+			Value = Engine.Ignition.Timing.GetUnscheduled();
+			State = State.Retard;
+		} else {
+			Value = Calculate.NAN();
+		}
+	}
+	is (Retard) {
+		if (not enable) {
+			State = State.Advance;
+		} else {
+			local newtiming = Value + Retard Rate * et;
+			
+			if (Engine.Ignition.Timing.GetUnscheduled() > newtiming) {
+				newtiming = Engine.Ignition.Timing.GetUnscheduled();
+			}
+			
+			if (newtiming > Target) {
+				newtiming = Target;
+				State = State.Enabled;
+			}
+			
+			Value = newtiming;
+		}
+	}
+	is (Enabled) {
+		if (not enable) {
+			State = State.Advance;
+		}
+	}
+	is (Advance) {
+		if (Engine.Ignition.Timing.GetUnscheduled() > Value) {
+			State = State.Disabled;
+			Value = Calculate.NAN();
+		} else {
+			local newtiming = Value - Advance Rate * et;
+			if (Engine.Ignition.Timing.Normal > newtiming) {
+				newtiming = Calculate.NAN();
+				State = State.Disabled;
+			}
+			Value = newtiming;
+		}
+	}
+}

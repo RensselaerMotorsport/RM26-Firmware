@@ -1,0 +1,13 @@
+Nominal = Sensor;
+
+when (Mode) {
+	is (Corrected) {
+		Value = Sensor + Correction.Blend * Correction;
+	}
+	is (Nominal) {
+		Value = Sensor;
+	}
+	is (Estimated) {
+		Value = Estimate;
+	}
+}

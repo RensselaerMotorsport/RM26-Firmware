@@ -1,0 +1,6 @@
+Servo.Aim = Aim.Center;
+Gain.Proportional = Gain.Idle.Proportional.Gain;
+Gain.Integral = Gain.Idle.Integral.Gain;
+Gain.Integral.Min = Gain.Idle.Integral.Min;
+Gain.Integral.Max = Gain.Idle.Integral.Max;
+Gain.Derivative = Gain.Idle.Derivative.Gain;

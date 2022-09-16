@@ -1,0 +1,4 @@
+Relay.Update(
+	Engine.State eq Engine.State.Crank or
+	Engine.State eq Engine.State.Run,
+	true);

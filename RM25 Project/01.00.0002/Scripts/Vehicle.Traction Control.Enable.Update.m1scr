@@ -1,0 +1,4 @@
+local driverButtonDisabled = Button.Button.Pin.Diagnostic eq Button.Button.Pin.Diagnostic.Not in Use;
+local driverEnable = not driverButtonDisabled and (Button eq Button.On);
+local softwareEnable = Mode eq Mode.Enabled;
+Value = (driverEnable and softwareEnable) ? Value.Enabled : Value.Not in Use;

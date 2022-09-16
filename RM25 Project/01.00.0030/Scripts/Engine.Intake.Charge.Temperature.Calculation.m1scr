@@ -1,0 +1,9 @@
+local init = Engine.State eq Engine.State.Run;
+
+Port.Estimate = Filter.FirstOrder(Engine.Water.Outlet.Temperature, Port.Time Constant, init);
+Port.Delta = Port.Estimate - Engine.Intake.Manifold.Temperature;
+
+Correction = Correction.Factor.GetUnscheduled() * Port.Delta;
+
+local val = Filter.FirstOrder(Engine.Intake.Manifold.Temperature + Correction, Time Constant, init);
+Value = val - Engine.Intake.Charge.Cooling;

@@ -1,0 +1,2 @@
+Nominal = Engine.Intake.Charge.Group 2 / (Engine.Fuel.Constant.Stoichiometric Ratio * Engine.Fuel.Mixture Aim * Engine.Fuel.Density);
+Value = Nominal * Engine.Fuel.Injection.Volume.Compensation;

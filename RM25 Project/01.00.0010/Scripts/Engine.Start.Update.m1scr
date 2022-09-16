@@ -1,0 +1,21 @@
+when (Engine.State) {
+	is (Startup or Stop) {
+		Cycles = 0;
+		Relay.SetState(Button eq Button.On);
+	}
+	is (Run) {
+		Cycles = Calculate.NAN();
+		Relay.SetState(false);
+	}
+	is (Crank) {
+		local <Unsigned Integer> cyc = 0;
+		expand (n = 1 to Engine.Properties.Cylinders) {
+			cyc += Engine.Fuel.Injection.Cylinder $(n).Output.Cycle Count.GetUnscheduled();
+		}
+		cyc /= Engine.Properties.Cylinders;
+		if ((cyc > Convert.ToUnsignedInteger(Cycles)) or Calculate.IsNAN(Cycles)) {
+			Cycles = cyc;
+		}
+		Relay.SetState(Button eq Button.On);
+	}
+}

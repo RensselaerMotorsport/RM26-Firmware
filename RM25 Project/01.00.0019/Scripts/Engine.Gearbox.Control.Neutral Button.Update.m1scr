@@ -1,0 +1,20 @@
+static local switching = false;
+local time = Timer.Remaining() <= 0;
+
+when (Button) {
+	is (Off) {
+		switching = false;
+		if (time) {
+			Value = Value.Off;
+		}
+	}
+	is (On) {
+		if (not switching) {
+			Value = Value.On;
+			switching = true;
+			Timer.Start(0.05);
+		} else if (time) {
+			Value = Value.Off;
+		}
+	}
+}

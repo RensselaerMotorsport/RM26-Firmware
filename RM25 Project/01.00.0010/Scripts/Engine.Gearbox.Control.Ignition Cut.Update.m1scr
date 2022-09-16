@@ -1,0 +1,10 @@
+local running = Engine.State eq Engine.State.Run;
+local shifting = Engine.Gearbox.Control.State eq Engine.Gearbox.Control.State.Shift;
+local upshifting = Engine.Gearbox.Control.State.Request eq Engine.Gearbox.Control.State.Request.Upshift;
+local clutchOpen = Engine.Gearbox.Clutch.State eq Engine.Gearbox.Clutch.State.Open;
+
+if (not clutchOpen and running and shifting and upshifting) {
+	Value = Upshift;
+} else {
+	Value = 0.0;
+}

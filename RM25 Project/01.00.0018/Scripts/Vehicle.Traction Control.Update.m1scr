@@ -1,0 +1,34 @@
+local temp = 0;
+local Wheel = 0;
+local Diag = Traction Control Diagnostic.Enabled;
+
+if(Vehicle.Speed.Front.Right.Diagnostic neq Wheel Speed Diagnostic Enumeration.OK)
+{
+ Wheel = 1;
+}
+This.Rear Slip = (Vehicle.Speed.Rear.Left - Vehicle.Speed.Front.Right)/Vehicle.Speed.Front.Right;
+This.Rear Slip Rate = Derivative.Filtered(This.Rear Slip);
+This.Slip Error = (Slip Aim - Rear Slip);
+
+if(Engine.Exhaust.Temperature.Cylinder 1 > Max Exhaust Gas Temp)
+{
+	temp = 1;
+	Diag = Traction Control Diagnostic.Exhaust Gas Temperature High;
+}
+else
+{
+	temp = 0;
+}
+
+if(Engine.State eq Engine.State.Run and Engine.Speed > Min Engine Speed and Enable eq Subsystem Enable Enumeration.Enabled and Vehicle.Speed > Min Vehicle Speed and temp eq 0 and Wheel eq 0)
+{
+	This.Cut Percent = P Term + D Gain * (This.Rear Slip Rate);
+	Diag = Traction Control Diagnostic.Enabled;
+}
+
+if(Enable eq Subsystem Enable Enumeration.Not in Use)
+{
+	Diag = Traction Control Diagnostic.Disabled;
+}
+
+This.Diagnostic = Diag;

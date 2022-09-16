@@ -1,0 +1,39 @@
+local h = CanComms.TxOpen(true);
+
+if (CAN Bus neq CAN Bus.Not in Use) {
+
+	local ok = true;
+	local bus = CAN Bus.AsInteger() - 1;
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Engine.Speed / 360));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Engine.Intake.Manifold.Pressure * 1.0e-2));
+	CanComms.SetInteger			(h, 32, 16, Convert.ToInteger        (Engine.Intake.Manifold.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Intake.Throttle.Position * 1.0e3));
+	ok = CanComms.TxStandard(h, bus, 0x640);
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0,  8, Convert.ToUnsignedInteger(Vehicle.Speed * 3.6));
+	CanComms.SetUnsignedInteger	(h,  8,  8, Convert.ToUnsignedInteger(Vehicle.Traction Control.Diagnostic.AsInteger()));
+	CanComms.SetUnsignedInteger	(h, 16,  8, Convert.ToUnsignedInteger(Engine.Exhaust.Lambda.Group 1 * 1.0e2));
+	CanComms.SetUnsignedInteger	(h, 24,  8, Convert.ToUnsignedInteger(Engine.Exhaust.Lambda.Group 2 * 1.0e2));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Vehicle.Launch Control.Timer * 1.0e2));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Vehicle.Launch Control.Timer.Distance * 1.0e1));
+	ok = CanComms.TxStandard(h, bus, 0x643);
+
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Front Left * 1.0e5));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Front Right * 1.0e5));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Rear Left * 1.0e5));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Rear Right * 1.0e5));
+	ok = CanComms.TxStandard(h, bus, 0x645);
+	
+	CanComms.TxInitialise(h, 8);
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Front.Left * 36));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Front.Right * 36));
+	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Rear.Left * 36));
+	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Rear.Right * 36));
+	ok = CanComms.TxStandard(h, bus, 0x646);
+
+	ok = ok;
+}

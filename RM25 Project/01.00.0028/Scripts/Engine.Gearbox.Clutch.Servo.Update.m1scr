@@ -1,0 +1,7 @@
+local duty = (((Calculate.Min(Aim, Maximum Angle) / Maximum Angle)
+			* (Maximum Pulse Width - Minimum Pulse Width)) + Minimum Pulse Width)
+			* Frequency;
+			
+duty = 1 - duty;
+
+Duty Cycle = duty;

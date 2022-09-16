@@ -1,0 +1,10 @@
+local v = 0.0;
+local s = This.State.None;
+
+local diag = Engine.Fuel.Injection.Output.Group.Diagnostic.GetUnscheduled();
+if (s eq s.None and (diag eq diag.Engine Speed Limit or diag eq diag.Engine Speed Maximum)) {
+	s = State.Engine Speed Limit;
+}
+
+Value = v;
+State = s;

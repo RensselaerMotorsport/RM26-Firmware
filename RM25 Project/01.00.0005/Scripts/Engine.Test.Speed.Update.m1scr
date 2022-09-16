@@ -1,0 +1,8 @@
+when (Engine.Test.Mode) {
+	is (Disabled) {
+		Value = 0.0;
+	}
+	is (Injection or Ignition) {
+		Value = Set Point;
+	}
+}

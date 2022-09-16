@@ -1,0 +1,5 @@
+static local lastEstimate = 0.0;
+local et = System.ElapsedTime();
+local diff = Parent.Estimate - lastEstimate;
+Value = Value + diff - Decay * Value * et;
+lastEstimate = Parent.Estimate;

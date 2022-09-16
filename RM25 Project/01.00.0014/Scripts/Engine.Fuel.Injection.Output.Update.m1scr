@@ -1,0 +1,22 @@
+local cps = Engine.Speed / Engine.Speed.Trigger.Reference.Cycle Duration;
+local vol = 0.0;
+local pw = 0.0;
+
+expand (n = 1 to Engine.Properties.Cylinders) {
+	if (Engine.Fuel.Injection.Cylinder $(n).Output.Enable eq Engine.Fuel.Injection.Cylinder $(n).Output.Enable.Enabled) {
+		vol += Engine.Fuel.Injection.Cylinder $(n).Output.Volume;
+		pw = Calculate.Max(pw, Engine.Fuel.Injection.Cylinder $(n).Output.Pulse Width 1);
+	}
+}
+
+Engine.Fuel.Used.Pulse Width = pw;
+Engine.Fuel.Injection.Volume.Per Cycle = vol * (1 - Group.Cut Average);
+Engine.Fuel.Flow = Parent.Volume.Per Cycle * cps;
+
+if (not Calculate.IsNAN(Parent.Injector.Calibration.Differential Pressure)) {
+	Engine.Fuel.Injection.Injector.Calibration.Duty Cycle = pw * cps;
+} else {
+	Engine.Fuel.Injection.Injector.Calibration.Duty Cycle = Calculate.NAN();
+}
+
+Engine.Fuel.Injection.Injector.Calibration.Duty Cycle.Warning.Update(pw*cps, true, true);

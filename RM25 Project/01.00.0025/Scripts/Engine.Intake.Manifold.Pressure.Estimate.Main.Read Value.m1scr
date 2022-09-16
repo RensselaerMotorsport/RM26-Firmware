@@ -1,0 +1,10 @@
+if (Engine.Intake.Manifold.Pressure.Sensor.Diagnostic neq Engine.Intake.Manifold.Pressure.Sensor.Diagnostic.OK)
+{
+	UI.PromptOK(
+		"Error",
+		"Intake Manifold Pressure Sensor Fault."
+	);
+} else {
+	This = Engine.Intake.Manifold.Pressure.Sensor / 100000.0;
+}
+

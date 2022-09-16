@@ -1,0 +1,39 @@
+local driverAngle = (Driver * (Parent.Open Angle - Parent.Close Angle)) + Parent.Close Angle;
+
+when (State) {
+	is (Open) {
+		if (Request eq Request.Open or Driver >= 1) {
+			Value = Engine.Gearbox.Clutch.Servo.Open Angle;
+		} else if (Driver > 0 and Driver < 1) {
+			Value = driverAngle;
+			State.Set(State.Driver);
+		} else if (Request eq Request.Close and Driver <= 0) {
+			Value = Engine.Gearbox.Clutch.Servo.Close Angle;
+			State.Set(State.Close);
+		}
+	}
+	is (Close) {
+		if (Driver > 0 and Driver < 1) {
+			State.Set(State.Driver);
+			Value = driverAngle;
+		} else {
+			if (Request eq Request.Open) {
+				Value = Engine.Gearbox.Clutch.Servo.Open Angle;
+				State.Set(State.Open);
+			} else if (Request eq Request.Close) {
+				Value = Engine.Gearbox.Clutch.Servo.Close Angle;
+			}
+		}
+	}
+	is (Driver) {
+		if (Driver < 0) {
+			Value = Engine.Gearbox.Clutch.Servo.Close Angle;
+			State.Set(State.Close);
+		} else if (Driver > 1) {
+			Value = Engine.Gearbox.Clutch.Servo.Open Angle;
+			State.Set(State.Open);
+		} else {
+			Value = driverAngle;
+		}
+	}
+}

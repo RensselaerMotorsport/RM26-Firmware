@@ -1,0 +1,2 @@
+local et = System.ElapsedTime();
+Value = Value + Vehicle.Speed * et;

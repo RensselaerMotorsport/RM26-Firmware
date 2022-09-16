@@ -1,0 +1,1 @@
+Value = Engine.Intake.Mass Flow * (1 + 1 / (Engine.Fuel.Mixture Aim * Engine.Fuel.Constant.Stoichiometric Ratio));

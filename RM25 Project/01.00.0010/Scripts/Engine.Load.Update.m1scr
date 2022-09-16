@@ -1,0 +1,10 @@
+Value =
+	Engine.Intake.Charge.Average /
+	(Constants.PAir *
+	(Engine.Properties.Displacement / Engine.Properties.Cylinders) *
+	(1 / (Constants.rAir * (Constants.TAir + 273.15))));
+
+Average = Filter.FirstOrder(
+	Engine.State eq Engine.State.Run ? Value : 0.0,
+	Average.Time Constant
+);

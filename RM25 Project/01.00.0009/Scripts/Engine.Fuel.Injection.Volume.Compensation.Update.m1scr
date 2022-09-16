@@ -1,0 +1,10 @@
+local v = 0.0;
+
+v =	Water Temperature *
+	((Engine.State eq Engine.State.Run) ? Post Start : Cranking);
+
+if (Calculate.IsNAN(v)) {
+	v = 0.0;
+}
+
+Value = v;

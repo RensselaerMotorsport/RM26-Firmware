@@ -1,0 +1,35 @@
+static local startDist = 0.0;
+local et = System.ElapsedTime();
+local reset = Delay.Rising(Vehicle.Speed < Reset Speed, Reset Delay);
+local start = Calculate.Absolute(Vehicle.Acceleration.Longitudinal) > Start Acceleration;
+local enabled = Parent.Throttle Based Launch Control.State eq Parent.Throttle Based Launch Control.State.Enabled;
+static local hold = false;
+
+when (State) {
+	is (Disabled) {
+		if (start and not hold) {
+			Value = 0.0;
+			State.Set(State.Enabled);
+			startDist = Vehicle.Distance Travelled;
+			Distance = 0.0;
+			Ready.Set(Ready.Not Ready);
+			hold = true;
+		} else if (reset and enabled) {
+			hold = false;
+			Ready.Set(Ready.Ready);
+		}
+	}
+	is (Enabled) {
+		if (reset) {
+			State.Set(State.Disabled);
+			Ready.Set(Ready.Ready);
+			hold = false;
+		} else if (Vehicle.Distance Travelled - startDist >= Stop Distance) {
+			State.Set(State.Disabled);
+			Distance = Vehicle.Distance Travelled - startDist;
+		} else {
+			Distance = Vehicle.Distance Travelled - startDist;
+			Value += et;
+		}
+	}
+}

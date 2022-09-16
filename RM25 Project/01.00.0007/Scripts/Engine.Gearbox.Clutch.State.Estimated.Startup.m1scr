@@ -1,0 +1,7 @@
+if (not Engine.Gearbox.Clutch.Servo.Output.IsActive()) {
+	Value.Set(Value.Unknown);
+} else if (Engine.Gearbox.Clutch.Servo.Aim.State eq Engine.Gearbox.Clutch.Servo.Aim.State.Open) {
+	Value.Set(Value.Open);
+} else {
+	Value.Set(Value.Closed);
+}

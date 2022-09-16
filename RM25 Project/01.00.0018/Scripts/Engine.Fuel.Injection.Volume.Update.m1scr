@@ -1,0 +1,2 @@
+Average Nominal = Calculate.Average(Group 1.Nominal, Group 2.Nominal);
+Average = Calculate.Average(Group 1, Group 2);

@@ -1,0 +1,8 @@
+if (Vehicle.Speed.Rear.Drive > 0.0 and Estimated > 0.0) {
+	Effective = Engine.Speed / Vehicle.Speed.Rear.Drive;
+	Error = Calculate.Absolute(Estimated - Effective) / Estimated;
+} else {
+	Effective = 0.0;
+	Error = 0.0;
+}
+Estimated = Engine.Gearbox.Properties.Gear Ratio.Calculate(Parent.Value);

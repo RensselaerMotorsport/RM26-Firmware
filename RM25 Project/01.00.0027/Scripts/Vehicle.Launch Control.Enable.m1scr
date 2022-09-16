@@ -1,0 +1,5 @@
+if(This.Launch Traction Control Switch neq Nine Position Switch State Enumeration.Zero) {
+	This.Throttle Based Launch Control.SetEnable(true);
+} else {
+	This.Throttle Based Launch Control.SetEnable(false);
+}

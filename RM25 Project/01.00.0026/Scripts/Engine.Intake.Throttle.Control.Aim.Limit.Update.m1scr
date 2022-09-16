@@ -1,0 +1,14 @@
+local v = 1.0;
+local s = State.None;
+
+if (Engine Load < v) {
+	v = Engine Load;
+	s = State.Engine Load;
+}
+
+if (v >= 1.0) {
+	v = Calculate.NAN();
+}
+
+Value = v;
+State = s;

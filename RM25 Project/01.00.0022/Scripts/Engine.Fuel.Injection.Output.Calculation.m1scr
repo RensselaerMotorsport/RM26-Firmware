@@ -1,0 +1,59 @@
+local flow = Calculate.FastSquareRoot(
+            Engine.Fuel.Injection.Injector.Calibration.Differential Pressure
+            / Engine.Fuel.Injection.Injector.Calibration.Reference Pressure)
+        * Engine.Fuel.Injection.Injector.Calibration.Reference Flow;
+local cycleTime = Engine.Speed.Trigger.Reference.Cycle Duration;
+
+expand (n = 1 to Engine.Properties.Cylinders) {
+    local outputVolume = 0.0;
+    local outputPw1 = 0.0;
+    local outputPw2 = 0.0;
+    if (Engine.Test.Mode neq Engine.Test.Mode.Disabled and Engine.Test.Speed > 0.0) {
+        outputVolume = 0.0;
+        outputPw1 = 0.5 * cycleTime / Engine.Test.Speed;
+        outputPw2 = 0.0;
+    } else if (Engine.Fuel.Injection.Cylinder $(n).Volume <= Engine.Fuel.Injection.Injector.Calibration.Minimum Volume
+            or Engine.Fuel.Injection.Cylinder $(n).Output.Enable eq Engine.Fuel.Injection.Cylinder $(n).Output.Enable.Disabled) {
+        outputVolume = 0.0;
+        outputPw1 = 0.0;
+        outputPw2 = 0.0;
+    } else {
+        local volume = Engine.Fuel.Injection.Cylinder 1.Volume.Request.Primary;
+        local maxVolume = Engine.Fuel.Injection.Injector.Calibration.Linearisation.XAxisMaximum();
+        local pw = Engine.Fuel.Injection.Injector.Calibration.Linearisation.Lookup(
+            volume,
+            Engine.Fuel.Injection.Injector.Calibration.Differential Pressure,
+            ECU.Battery Voltage);
+        
+        outputVolume = volume;
+        
+        if (volume < maxVolume) {
+            outputPw1 = pw;
+        } else {
+            outputPw1 = pw + (volume - maxVolume) / flow;
+        }
+        
+        if (Engine.Fuel.Injection.Cylinder $(n).Output.Pulse Index eq 1
+                and Engine.Fuel.Injection.Timing.Makeup <= Engine.Fuel.Injection.Timing.Limit) {
+            local makeup = volume - Engine.Fuel.Injection.Cylinder $(n).Output.Cycle Volume;
+            if (makeup <= Engine.Fuel.Injection.Injector.Calibration.Minimum Volume) {
+                outputPw2 = 0.0;
+            } else {
+                pw = Engine.Fuel.Injection.Injector.Calibration.Linearisation.Lookup(
+                    makeup,
+                    Engine.Fuel.Injection.Injector.Calibration.Differential Pressure,
+                    ECU.Battery Voltage);
+                if (makeup < maxVolume) {
+                    outputPw2 = pw;
+                } else {
+                    outputPw2 = pw + (makeup - maxVolume) / flow;
+                }
+            }
+        } else {
+            outputPw2  = 0;
+        }
+    }
+    Engine.Fuel.Injection.Cylinder $(n).Output.Volume = outputVolume;
+    Engine.Fuel.Injection.Cylinder $(n).Output.Pulse Width 1 = outputPw1;
+    Engine.Fuel.Injection.Cylinder $(n).Output.Pulse Width 2 = outputPw2;
+}
