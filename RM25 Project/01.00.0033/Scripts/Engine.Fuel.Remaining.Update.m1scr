@@ -1,0 +1,5 @@
+local v = Capacity - Engine.Fuel.Used;
+if (v < 0.0) {
+	v = 0.0;
+}
+Value = v;

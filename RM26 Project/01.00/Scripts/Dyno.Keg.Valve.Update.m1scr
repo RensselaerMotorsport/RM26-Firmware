@@ -1,0 +1,5 @@
+if (Dyno.Keg.Temperature >= Threshold or Test eq Test.Enabled) {
+	Relay.Duty Cycle = -1;
+} else {
+	Relay.Duty Cycle = 0;
+}

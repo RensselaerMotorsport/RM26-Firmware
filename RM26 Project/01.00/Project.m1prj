@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <MoTeCM1BuildSession Locale="English_United States.1252" DefaultLocale="C" ProductName="M1Build (x64)" ProductVersion="1.4.2.75">
- <Project FileFormat="10106" Name="RM25 Project" VersionMajor="1" VersionMinor="0" BuildNumber="34" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
+ <Project FileFormat="10106" Name="RM26 Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
   <System VersionMajor="1" VersionMinor="4" VersionRelease="0" VersionBuild="0081" SelectedRelease="0" SelectedBuild="0081"/>
   <SelectedModuleSets>
    <File Name="MoTeC GPS" VersionMajor="1" VersionMinor="7" VersionBuild="11"/>
@@ -485,6 +485,7 @@
    <Project Name="Rensselaer Motorsport" Version="RM25" Major="1" Minor="2" Build="1"/>
    <Project Name="Rensselaer Motorsport Project" Version="1" Major="1" Minor="0" Build="0"/>
    <Project Name="Rensselaer Motorsport Project Test" Version="1" Major="1" Minor="0" Build="4"/>
+   <Project Name="RM25 Project" Version="2" Major="1" Minor="0" Build="34"/>
   </PkgUpgrades>
   <Build PackageSignKey="Rensselaer Polytechnic Institute.M1.Package.Development 01.04.00"/>
   <ComponentStream>

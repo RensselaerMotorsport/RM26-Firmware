@@ -1,0 +1,9 @@
+if (Parent.Injector.Calibration.Location eq Parent.Injector.Calibration.Location.Not in Use) {
+	expand (n = 1 to Engine.Properties.Cylinders) {
+		Engine.Fuel.Injection.Cylinder $(n).Output.Enable = Engine.Fuel.Injection.Cylinder $(n).Output.Enable.Disabled;
+	}
+} else {
+	expand (n = 1 to Engine.Properties.Cylinders) {
+		Engine.Fuel.Injection.Cylinder $(n).Output.Enable = Engine.Fuel.Injection.Cylinder $(n).Output.Enable.Enabled;
+	}
+}

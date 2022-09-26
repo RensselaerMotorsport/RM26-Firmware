@@ -1,0 +1,4 @@
+State = State.Enabled;
+expand (n = 1 to Engine.Properties.Cylinders) {
+	This.Cylinder $(n).Output.Enable = This.Cylinder $(n).Output.Enable.Enabled;
+}

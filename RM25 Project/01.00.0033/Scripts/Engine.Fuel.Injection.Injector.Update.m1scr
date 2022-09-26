@@ -1,0 +1,8 @@
+when (Calibration.Location) {
+	is (Not in Use or Before Throttle Boost Referenced or Before Throttle Airbox Referenced) {
+		Calibration.Differential Pressure = Calculate.NAN();
+	}
+	is (After Throttle) {
+		Calibration.Differential Pressure = Engine.Fuel.Pressure - Engine.Intake.Manifold.Pressure;
+	}
+}
