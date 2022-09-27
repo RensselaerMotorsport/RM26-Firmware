@@ -1,2 +1,0 @@
-Value = Engine.Fuel.Constant.Standard Density
-	- (Engine.Fuel.Temperature - 25.0) * Engine.Fuel.Constant.Coefficient of Thermal Expansion;

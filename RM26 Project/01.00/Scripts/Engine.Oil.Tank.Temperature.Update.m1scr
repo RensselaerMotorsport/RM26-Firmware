@@ -1,2 +1,0 @@
-Value = Calculate.IsNAN(Sensor) ? Estimate : Sensor;
-Warning.Update(Sensor, false, Sensor.Diagnostic eq Sensor.Diagnostic.OK);

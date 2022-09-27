@@ -1,5 +1,0 @@
-if (Sensor.Diagnostic neq Sensor.Diagnostic.OK) {
-	Value = Default;
-} else {
-	Value = Sensor;
-}

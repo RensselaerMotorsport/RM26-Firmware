@@ -1,2 +1,0 @@
-Average = Calculate.Average(Group 1, Group 2);
-Difference = Calculate.Absolute(Group 1 - Group 2);
