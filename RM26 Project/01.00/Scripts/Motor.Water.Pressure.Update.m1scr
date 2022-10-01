@@ -1,2 +1,2 @@
 Value = Sensor;
-Warning.Update(Sensor, false, Engine.State eq Engine.State.Run);
+Warning.Update(Sensor, false, Motor.State eq Motor.State.Run);
