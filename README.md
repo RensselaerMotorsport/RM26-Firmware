@@ -17,4 +17,8 @@ Additional Notes Worth Mentioning:
 * C125 Dash Manager - This is the dedicated software needed to adjust the firmware of the C125 dash logger that we use (allows for changing the display for the driver). It also allows for more functionallity but that has been mainly what has been used for in the past. It mainly acts as a pass-through for more analog voltage/temperature ports and ability to read GPS data.
 
 I will add the C125 dash firmware when I get the chance, but I need to get it off of an SSD on my computer that died (waiting on a M.2 to Thunderbolt dock).
+* Received the dock, just need to get the information off of it (haven't had the time and it's not crucial right now).
+
+
+
 
