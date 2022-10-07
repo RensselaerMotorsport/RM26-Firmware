@@ -4,7 +4,7 @@ local offTempRange = Calculate.Hysteresis(
 		Shutoff Temperature + Shutoff Temperature Hysteresis,
 		Shutoff Filter);
 local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
-		and (Motor.State eq Motor.State.Run or offTempRange);
+		and (Motor.State eq Motor.State.Running or offTempRange);
 
 if (not Output.IsActive()) {
 	State = State.Disabled;

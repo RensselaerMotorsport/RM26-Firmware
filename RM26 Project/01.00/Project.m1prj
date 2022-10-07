@@ -17,26 +17,7 @@
    <File Name="MoTeC Simulink Hardware Interface" VersionMajor="1" VersionMinor="0" VersionBuild="0"/>
   </SelectedModuleSets>
   <DataTypes>
-   <Type Name="Engine Test Mode Enumeration" Storage="enum" Default="Disabled">
-    <Enum Name="Disabled" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Injection" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Ignition" ContainerOrder="2">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Engine Sync Ignore Mode Enumeration" Storage="enum" Default="Disabled">
-    <Enum Name="Disabled" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Enabled" ContainerOrder="1">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Engine Speed Limit State Enumeration" Storage="enum" Default="Maximum">
+   <Type Name="Motor Speed Limit State Enumeration" Storage="enum" Default="Maximum">
     <Enum Name="Maximum" ContainerOrder="1">
      <Help/>
     </Enum>
@@ -46,7 +27,7 @@
     <Enum Name="Water Temperature" ContainerOrder="2">
      <Help/>
     </Enum>
-    <Enum Name="Engine Speed Trigger Warning" ContainerOrder="3">
+    <Enum Name="Motor Speed Trigger Warning" ContainerOrder="3">
      <Help/>
     </Enum>
     <Enum Name="Oil Block Pressure Warning" ContainerOrder="4">
@@ -99,7 +80,7 @@
      <Help/>
     </Enum>
    </Type>
-   <Type Name="Engine Water Pump State Enumeration" Storage="enum" Default="Disabled">
+   <Type Name="Motor Water Pump State Enumeration" Storage="enum" Default="Disabled">
     <Enum Name="Disabled" ContainerOrder="0">
      <Help/>
     </Enum>
@@ -113,113 +94,6 @@
      <Help/>
     </Enum>
     <Enum Name="Startup" ContainerOrder="4">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Shifter Control Aim State Enumeration" Storage="enum" Default="Idle">
-    <Enum Name="Downshift" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Idle" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Upshift" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Neutral" ContainerOrder="3">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Gear" Storage="enum" Default="Neutral">
-    <Enum Name="Neutral" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="First" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Second" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Third" ContainerOrder="3">
-     <Help/>
-    </Enum>
-    <Enum Name="Fourth" ContainerOrder="4">
-     <Help/>
-    </Enum>
-    <Enum Name="Fifth" ContainerOrder="5">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Clutch Control Aim State Enumeration" Storage="enum" Default="Close">
-    <Enum Name="Close" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Open" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Driver" ContainerOrder="1">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Control Shift Request" Storage="enum" Default="Idle">
-    <Enum Name="Downshift" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Idle" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Upshift" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Neutral" ContainerOrder="3">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Control State" Storage="enum" Default="Idle">
-    <Enum Name="Shift Failure" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Idle" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Pre Shift" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Shift" ContainerOrder="3">
-     <Help/>
-    </Enum>
-    <Enum Name="Post Shift" ContainerOrder="4">
-     <Help/>
-    </Enum>
-    <Enum Name="Rearm" ContainerOrder="5">
-     <Help/>
-    </Enum>
-    <Enum Name="Recover" ContainerOrder="6">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Control Failure Mode" Storage="enum" Default="None">
-    <Enum Name="None" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Unsafe Shift" ContainerOrder="1">
-     <Help/>
-    </Enum>
-    <Enum Name="Failed Shift" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Failed Clutch Open" ContainerOrder="3">
-     <Help/>
-    </Enum>
-    <Enum Name="Neutral Lockout Speed" ContainerOrder="4">
-     <Help/>
-    </Enum>
-   </Type>
-   <Type Name="Gearbox Shifter Control Flag" Storage="enum" Default="Idle">
-    <Enum Name="Idle" ContainerOrder="0">
-     <Help/>
-    </Enum>
-    <Enum Name="Shifting" ContainerOrder="1">
      <Help/>
     </Enum>
    </Type>
@@ -264,7 +138,7 @@
      <Help/>
     </Enum>
    </Type>
-   <Type Name="Engine Radiator Fan State Enumeration" Storage="enum" Default="Disabled">
+   <Type Name="Motor Radiator Fan State Enumeration" Storage="enum" Default="Disabled">
     <Enum Name="Disabled" ContainerOrder="0">
      <Help/>
     </Enum>
@@ -275,8 +149,11 @@
      <Help/>
     </Enum>
    </Type>
-   <Type Name="Motor State Enumeration" Storage="enum">
-    <Enum Name="Run" ContainerOrder="0">
+   <Type Name="Motor State Enumeration" Storage="enum" Default="Off">
+    <Enum Name="Off" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Running" ContainerOrder="1">
      <Help/>
     </Enum>
    </Type>
@@ -5178,13 +5055,13 @@
      </Props>
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Pump.Duty Cycle">
-     <Props NumAxes="2">
+     <Props>
       <List.UserTags>
        <Entry Value="Tune"/>
       </List.UserTags>
       <Axis>
        <X Source="Parent.Parent.Outlet.Temperature" MaxSites="21"/>
-       <Y Source="Parent.Parent.Parent.Load.Average" MaxSites="16"/>
+       <Y MaxSites="16"/>
       </Axis>
      </Props>
      <Comment/>
@@ -5206,7 +5083,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pump.State">
-     <Props Type="::This.Engine Water Pump State Enumeration">
+     <Props Type="::This.Motor Water Pump State Enumeration">
       <List.UserTags>
        <Entry Value="Normal"/>
       </List.UserTags>
@@ -5657,7 +5534,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.State">
-     <Props Type="::This.Engine Radiator Fan State Enumeration">
+     <Props Type="::This.Motor Radiator Fan State Enumeration">
       <List.UserTags>
        <Entry Value="Normal"/>
       </List.UserTags>
@@ -5905,17 +5782,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Crank Time">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="HH:MM:SS:ss" DPS="3"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer.Total">
      <Comment/>
     </Component>
@@ -5936,6 +5802,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Value">
+     <Props Type="::This.Motor State Enumeration"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Value">
@@ -5949,6 +5816,158 @@
      </Props>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS2.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Advanced"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.APPS.APPS2.Resource">
+     <Props NameCreation="Manual" NameTarget=""/>
+    </Component>
+    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.APPS.APPS2.Calibration"/>
+    <Component Classname="_CalibrationSchema.Throttle_Position_1" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Offset"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Scale"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 1.Transform"/>
+    <Component Classname="_CalibrationSchema.Throttle_Position_2" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Offset"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Scale"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Sensor Output"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Calibration.Throttle Position 2.Transform"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS.APPS1.Diagnostic"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS1.Diagnostic.Value"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS1.Diagnostic.Time"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Diagnostic.Low"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Diagnostic.High"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.APPS.APPS1.Diagnostic.Delay"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS.APPS2.Diagnostic"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Diagnostic.Delay.Value"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS1.Diagnostic.Margin"/>
+    <Component Classname="_IOMethod.ratio" Name="Root.Motor.APPS.APPS1.Voltage"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Resource"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Normalised Filtered"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Reference"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Voltage.Reference.Value"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Sensor Output"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Scale"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Offset"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Diagnostic Low"/>
+    <Component Classname="_CalibrationSchema.Throttle_Position_2" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Scale"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS2.Diagnostic.Value"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Value">
+     <Comment/>
+    </Component>
+    <Component Classname="_CalibrationSchema.Throttle_Position_1" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1"/>
+    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.APPS.APPS1.Calibration"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.APPS.APPS1.Resource">
+     <Props NameCreation="Manual" NameTarget=""/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS1.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Advanced"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="MoTeC Input.Throttle Position" Name="Root.Motor.APPS.APPS1">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Difference">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS2.Diagnostic.Time"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Diagnostic.High"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.APPS.APPS2.Diagnostic.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Diagnostic.Delay.Value"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS2.Diagnostic.Margin"/>
+    <Component Classname="_IOMethod.ratio" Name="Root.Motor.APPS.APPS2.Voltage"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Resource"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Normalised Filtered"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Reference"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Voltage.Reference.Value"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Update"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS2.Low"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS2.High"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Offset"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.APPS.APPS2.Offset.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Scale"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.APPS.APPS2.Scale.Set"/>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.APPS.APPS2.Calculation">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.APPS.APPS2.Startup"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.APPS.Update.m1scr" Name="Root.Motor.APPS.Update"/>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.APPS1 Parameter">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.APPS2 Parameter">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS.BSPD">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Update"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS2.Diagnostic.Low"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS1.Low"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.APPS.APPS1.High"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Offset"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.APPS.APPS1.Offset.Set"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.BMS">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Scale"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Transform"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.APPS.APPS1.Scale.Set"/>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.APPS.APPS1.Calculation">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.APPS.APPS1.Startup"/>
+    <Component Classname="MoTeC Input.Throttle Position" Name="Root.Motor.APPS.APPS2">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Offset"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6631,13 +6650,145 @@
         <Component Name="Startup"/>
        </Component>
       </Component>
-      <Component Name="APPS"/>
+      <Component Name="APPS">
+       <Component Name="Value"/>
+       <Component Name="Difference"/>
+       <Component Name="APPS1">
+        <Component Name="Value"/>
+        <Component Name="Resource"/>
+        <Component Name="Calibration">
+         <Component Name="Throttle Position 1">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Offset"/>
+          <Component Name="Scale"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+         <Component Name="Throttle Position 2">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Offset"/>
+          <Component Name="Scale"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+        </Component>
+        <Component Name="Diagnostic">
+         <Component Name="Value"/>
+         <Component Name="Time"/>
+         <Component Name="Low"/>
+         <Component Name="High"/>
+         <Component Name="Delay">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Margin"/>
+        </Component>
+        <Component Name="Voltage">
+         <Component Name="Resource"/>
+         <Component Name="Normalised Filtered"/>
+         <Component Name="Absolute"/>
+         <Component Name="Filter">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reference">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reserve"/>
+         <Component Name="Release"/>
+         <Component Name="Initialise"/>
+         <Component Name="Update"/>
+         <Component Name="Input Impedance"/>
+         <Component Name="Input Source"/>
+         <Component Name="Input Bandwidth"/>
+         <Component Name="Input Minimum"/>
+         <Component Name="Input Maximum"/>
+         <Component Name="Input Resolution"/>
+        </Component>
+        <Component Name="Low"/>
+        <Component Name="High"/>
+        <Component Name="Offset">
+         <Component Name="Set"/>
+        </Component>
+        <Component Name="Scale">
+         <Component Name="Set"/>
+        </Component>
+        <Component Name="Calculation"/>
+        <Component Name="Startup"/>
+       </Component>
+       <Component Name="APPS2">
+        <Component Name="Value"/>
+        <Component Name="Resource"/>
+        <Component Name="Calibration">
+         <Component Name="Throttle Position 1">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Offset"/>
+          <Component Name="Scale"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+         <Component Name="Throttle Position 2">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Offset"/>
+          <Component Name="Scale"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+        </Component>
+        <Component Name="Diagnostic">
+         <Component Name="Value"/>
+         <Component Name="Time"/>
+         <Component Name="Low"/>
+         <Component Name="High"/>
+         <Component Name="Delay">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Margin"/>
+        </Component>
+        <Component Name="Voltage">
+         <Component Name="Resource"/>
+         <Component Name="Normalised Filtered"/>
+         <Component Name="Absolute"/>
+         <Component Name="Filter">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reference">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reserve"/>
+         <Component Name="Release"/>
+         <Component Name="Initialise"/>
+         <Component Name="Update"/>
+         <Component Name="Input Impedance"/>
+         <Component Name="Input Source"/>
+         <Component Name="Input Bandwidth"/>
+         <Component Name="Input Minimum"/>
+         <Component Name="Input Maximum"/>
+         <Component Name="Input Resolution"/>
+        </Component>
+        <Component Name="Low"/>
+        <Component Name="High"/>
+        <Component Name="Offset">
+         <Component Name="Set"/>
+        </Component>
+        <Component Name="Scale">
+         <Component Name="Set"/>
+        </Component>
+        <Component Name="Calculation"/>
+        <Component Name="Startup"/>
+       </Component>
+       <Component Name="Update"/>
+       <Component Name="APPS1 Parameter"/>
+       <Component Name="APPS2 Parameter"/>
+       <Component Name="BSPD"/>
+      </Component>
       <Component Name="State">
        <Component Name="Value"/>
        <Component Name="Update"/>
        <Component Name="Timer">
         <Component Name="Total">
-         <Component Name="Crank Time"/>
          <Component Name="Stall Time"/>
          <Component Name="Run Time"/>
          <Component Name="Startup Time"/>
@@ -6645,6 +6796,8 @@
         <Component Name="Value"/>
        </Component>
       </Component>
+      <Component Name="ESC"/>
+      <Component Name="BMS"/>
      </Component>
      <Component Name="Events">
       <Component Name="On 500Hz"/>

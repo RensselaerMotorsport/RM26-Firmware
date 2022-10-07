@@ -1,7 +1,6 @@
 local et = System.ElapsedTime();
 local stopped = false;
-local cyclelock = false;
-local turning = false;
+//local cyclelock = false;
 local running = false;
 /*
 when (Engine.Speed.Trigger.Reference.State) {

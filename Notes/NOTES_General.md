@@ -4,7 +4,10 @@ General Notes:
 * Also need to research how much power draw the ESC will draw from the smaller 12V battery.
 - We will already have a difficult time making sure all of the LV devices will have enough power, the ESC was not considered (as it should have been).
 * I need to look into how the ECU interacts with the BMS also
-- Assuming it is also CAN, simply because of how many sensors and how much data is being kept track of.
+- Assuming it is also CAN, simply because of how many sensors and how much data is being kept track of
+
+
+Data Acquisition Logging Goal = 60 minutes of logging.
 
 
 
