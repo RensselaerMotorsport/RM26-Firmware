@@ -2,7 +2,7 @@ local et = System.ElapsedTime();
 local stopped = false;
 //local cyclelock = false;
 local running = false;
-/*
+
 when (Engine.Speed.Trigger.Reference.State) {
 	is (Open or Initialise or Error or Exit or Stall or Test) {
 		stopped = true;
@@ -59,4 +59,4 @@ when (Value) {
 		}
 	}
 }	
-*/
+

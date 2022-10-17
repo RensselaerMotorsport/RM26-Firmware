@@ -9,5 +9,8 @@ General Notes:
 
 Data Acquisition Logging Goal = 60 minutes of logging.
 
+Emailed MoTeC Customer Service about VCU GPA Package
+* They do not have a GPA example VCU firmware sadly.
+* They also weren't able to give an answer about using the VCU option within the M1 Build software, will need to do our own testing to determine if it's possible. I still believe that it is.
 
 

@@ -1,11 +1,11 @@
 local offTempRange = Calculate.Hysteresis(
-		Engine.Water.Outlet.Temperature,
+		Motor.Water.Outlet.Temperature,
 		Shutoff Temperature,
 		Shutoff Temperature + Shutoff Temperature Hysteresis,
 		Shutoff Filter);
 local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
-		and (Engine.State eq Engine.State.Run or offTempRange)
-		and Engine.State neq Engine.State.Crank;
+		and (Motor.State eq Motor.State.Running or offTempRange)
+		and Motor.State neq Motor.State.Startup;
 
 Relay.SetState(on or Test eq Test.Enabled);
 

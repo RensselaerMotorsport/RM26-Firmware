@@ -6,7 +6,7 @@ local offTempRange = Calculate.Hysteresis(
 local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
 		and (Engine.State eq Engine.State.Run or offTempRange)
 		and Engine.State neq Engine.State.Crank;
-
+		
 if (not Output.IsActive()) {
 	State = State.Disabled;
 	Output.Duty Cycle = Off Duty Cycle;
