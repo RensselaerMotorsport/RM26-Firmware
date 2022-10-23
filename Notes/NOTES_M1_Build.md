@@ -11,6 +11,8 @@ Notes on Enumerations:
 * Enumerations are just variables that hold the current global states of things (in a sense at least).
 * Something that confused me for awhile was that the original Engine State Object just defaulted to Engine.State.Value, but it wasn't something that was visible because it is a MoTeC specific enumeration (cannot be changed). This can also be done with a custom object (such as Motor State) and I was able to default Motor.State to Motor.State.Value (just simplifies things a little bit).
 
+Notes On New Revision of M1 Build vs Old (102 vs 81):
+* The newest revision of build does not have a built-in GPS Receive module. Will need to manually set this up later, but for now this does not matter enough to fix currently (removed it for the time being)..
 
  
 

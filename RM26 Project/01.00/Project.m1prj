@@ -3,7 +3,6 @@
  <Project FileFormat="10106" Name="RM26 Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
   <System VersionMajor="1" VersionMinor="4" VersionRelease="0" VersionBuild="0102" SelectedRelease="0" SelectedBuild="0102"/>
   <SelectedModuleSets>
-   <File Name="MoTeC GPS" VersionMajor="1" VersionMinor="7" VersionBuild="24"/>
    <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="58"/>
    <File Name="MoTeC Types" VersionMajor="1" VersionMinor="6" VersionBuild="0"/>
    <File Name="MoTeC Comms" VersionMajor="1" VersionMinor="10" VersionBuild="8"/>
@@ -15,6 +14,7 @@
    <File Name="MoTeC PDM" VersionMajor="1" VersionMinor="4" VersionBuild="7"/>
    <File Name="MoTeC Warning" VersionMajor="1" VersionMinor="4" VersionBuild="21"/>
    <File Name="MoTeC Simulink Hardware Interface" VersionMajor="1" VersionMinor="0" VersionBuild="0"/>
+   <File Name="MoTeC GPS" VersionMajor="1" VersionMinor="7" VersionBuild="24"/>
   </SelectedModuleSets>
   <DataTypes>
    <Type Name="Motor Speed Limit State Enumeration" Storage="enum" Default="Maximum">
@@ -153,10 +153,16 @@
     <Enum Name="Off" ContainerOrder="0">
      <Help/>
     </Enum>
-    <Enum Name="Running" ContainerOrder="2">
+    <Enum Name="Running" ContainerOrder="4">
      <Help/>
     </Enum>
     <Enum Name="Startup" ContainerOrder="1">
+     <Help/>
+    </Enum>
+    <Enum Name="Ready" ContainerOrder="2">
+     <Help/>
+    </Enum>
+    <Enum Name="Wait" ContainerOrder="3">
      <Help/>
     </Enum>
    </Type>
@@ -3982,40 +3988,9 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2219" Name="Root.ECU.Communication.GPS.Receive.Longitude"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2220" Name="Root.ECU.Communication.GPS.Receive.Diagnostic"/>
-    <Component Classname="BuiltIn.Parameter" ObjectStreamFileLoadOrder="2221" Name="Root.ECU.Communication.GPS.Receive.CAN ID Base.Value"/>
-    <Component Classname="BuiltIn.Reference" ObjectStreamFileLoadOrder="2222" Name="Root.ECU.Communication.GPS.Receive.CAN ID Base"/>
-    <Component Classname="BuiltIn.GroupCompound" ObjectStreamFileLoadOrder="2223" Name="Root.ECU.Communication.GPS.Receive.Fault"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2224" Name="Root.ECU.Communication.GPS.Receive.Latitude"/>
-    <Component Classname="BuiltIn.Reference" ObjectStreamFileLoadOrder="2225" Name="Root.ECU.Communication.GPS.Receive.Interface"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2226" Name="Root.ECU.Communication.GPS.Receive.Ticks"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2227" Name="Root.ECU.Communication.GPS.Receive.Valid"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2228" Name="Root.ECU.Communication.GPS.Receive.FAA Mode"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2229" Name="Root.ECU.Communication.GPS.Receive.Magnetic Variation"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2230" Name="Root.ECU.Communication.GPS.Receive.Fix Quality"/>
-    <Component Classname="BuiltIn.Constant" ObjectStreamFileLoadOrder="2231" Name="Root.ECU.Communication.GPS.Receive.Zero"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2232" Name="Root.ECU.Communication.GPS.Receive.DGPS Update Time"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2233" Name="Root.ECU.Communication.GPS.Receive.WGS84 Height"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2234" Name="Root.ECU.Communication.GPS.Receive.Altitude"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2235" Name="Root.ECU.Communication.GPS.Receive.Time"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2236" Name="Root.ECU.Communication.GPS.Receive.Date"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2237" Name="Root.ECU.Communication.GPS.Receive.True Course"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2238" Name="Root.ECU.Communication.GPS.Receive.Speed"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2239" Name="Root.ECU.Communication.GPS.Receive.DGPS Station ID"/>
-    <Component Classname="BuiltIn.Parameter" ObjectStreamFileLoadOrder="2240" Name="Root.ECU.Communication.GPS.Receive.Interface.Value"/>
-    <Component Classname="BuiltIn.Reference" ObjectStreamFileLoadOrder="2241" Name="Root.ECU.Communication.GPS.Receive.Fault.Delay"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2242" Name="Root.ECU.Communication.GPS.Receive.HDOP"/>
-    <Component Classname="BuiltIn.Channel" ObjectStreamFileLoadOrder="2243" Name="Root.ECU.Communication.GPS.Receive.Satellites"/>
-    <Component Classname="BuiltIn.Parameter" ObjectStreamFileLoadOrder="2244" Name="Root.ECU.Communication.GPS.Receive.Fault.Delay.Value"/>
-    <Component Classname="BuiltIn.MethodUser" ObjectStreamFileLoadOrder="2245" Name="Root.ECU.Communication.GPS.Receive.Startup"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.GPS">
      <Comment/>
     </Component>
-    <Component Classname="MoTeC GPS.GPS" ObjectStreamFileLoadOrder="2247" Name="Root.ECU.Communication.GPS.Receive">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.MethodUser" ObjectStreamFileLoadOrder="2248" Name="Root.ECU.Communication.GPS.Receive.Script"/>
     <Component Classname="BuiltIn.Channel" Name="Root.ECU.Logging.Request">
      <Props DiagnosticLog="true" DiagnosticLogRate="100MS" Type="::Builtin.Logging Mode">
       <List.UserTags>
@@ -5954,6 +5929,34 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Diagnostic"/>
     <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Resource"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Release"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Running VSM">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Wait VSM">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Ready VSM">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Off VSM">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive VSM">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.Base Address">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.Message Offset">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive VSM.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive VSM.Receive"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.Strain Gauges">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.CAN Bus">
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6777,8 +6780,19 @@
         </Component>
         <Component Name="Value"/>
        </Component>
+       <Component Name="Running VSM"/>
+       <Component Name="Off VSM"/>
+       <Component Name="Ready VSM"/>
+       <Component Name="Wait VSM"/>
       </Component>
-      <Component Name="ESC"/>
+      <Component Name="ESC">
+       <Component Name="CAN Receive VSM">
+        <Component Name="CAN Bus"/>
+        <Component Name="Base Address"/>
+        <Component Name="Message Offset"/>
+        <Component Name="Receive"/>
+       </Component>
+      </Component>
       <Component Name="BMS"/>
      </Component>
      <Component Name="Events">
@@ -7826,42 +7840,8 @@
         <Component Name="Channel 3"/>
         <Component Name="Channel 4"/>
        </Component>
-       <Component Name="GPS">
-        <Component Name="Receive">
-         <Component Name="Interface">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="CAN ID Base">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Diagnostic"/>
-         <Component Name="Latitude"/>
-         <Component Name="Longitude"/>
-         <Component Name="Speed"/>
-         <Component Name="True Course"/>
-         <Component Name="Date"/>
-         <Component Name="Time"/>
-         <Component Name="Altitude"/>
-         <Component Name="WGS84 Height"/>
-         <Component Name="Magnetic Variation"/>
-         <Component Name="Satellites"/>
-         <Component Name="HDOP"/>
-         <Component Name="DGPS Station ID"/>
-         <Component Name="DGPS Update Time"/>
-         <Component Name="Fix Quality"/>
-         <Component Name="FAA Mode"/>
-         <Component Name="Valid"/>
-         <Component Name="Ticks"/>
-         <Component Name="Fault">
-          <Component Name="Delay">
-           <Component Name="Value"/>
-          </Component>
-         </Component>
-         <Component Name="Script"/>
-         <Component Name="Startup"/>
-         <Component Name="Zero"/>
-        </Component>
-       </Component>
+       <Component Name="GPS"/>
+       <Component Name="Strain Gauges"/>
       </Component>
      </Component>
      <Component Name="Vehicle">

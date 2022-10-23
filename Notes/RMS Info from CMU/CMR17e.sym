@@ -1,0 +1,964 @@
+FormatVersion=5.0 // Do not edit this line!
+Title="CMR17e"
+
+{ENUMS}
+enum State(0="GLV_ON", // GLV On
+  1="HV_EN", // HV Enable
+  2="RTD", // Ready To Drive
+  3="ERROR", // Error
+  4="CLEAR_ERROR", 5="STATE_UNKNOWN")
+enum Pump_State(1="PUMP_ON", 0="PUMP_OFF")
+enum BMS_Precharge_State(0="Error", 1="Idle", 2="Measure", 3="Precharge", 
+  4="Run", 5="Enable Pack")
+enum BMS_Precharge_Timer_State(0="Timer Not Elapsed", 1="Timer Elapsed")
+enum Fan_State(0="FAN_OFF", 1="FAN_RAMPING", 2="FAN_LOW", 3="FAN_HIGH", 
+  4="FAN_ERROR")
+enum Cooling_State(0="COOLING_OFF", 1="COOLING_LOW", 2="COOLING_HIGH")
+enum BMS_Ignition(0="BMS_ACCESS", 96="BMS_START", 32="BMS_RUN")
+enum Gear(0="GEAR_SLOW", 1="GEAR_ENDUR", 2="GEAR_ACCEL", 3="GEAR_AUTOX", 
+  4="GEAR_UNKNOWN", 5="GEAR_REV")
+
+{SENDRECEIVE}
+
+[SM_Heartbeat]
+ID=200h
+CycleTime=10
+Timeout=100
+Var=SM_State State 0,8
+Var=SM_Vbatt unsigned 8,8 /u:V /f:0.066666
+Var=Target_State State 16,8
+Var=CC_Heartbeat_Timed_Out bit 24,1
+Var=FSM_Heartbeat_Timed_Out bit 25,1
+Var=RSM_Heartbeat_Timed_Out bit 26,1
+Var=DIM_Heartbeat_Timed_Out bit 27,1
+Var=AFC_Heartbeat_Timed_Out unsigned 28,1
+Var=TM_Heartbeat_Timed_Out bit 29,1
+Var=CC_State_Timed_Out unsigned 32,1
+Var=FSM_State_Timed_Out unsigned 33,1
+Var=RSM_State_Timed_Out unsigned 34,1
+Var=DIM_State_Timed_Out unsigned 35,1
+Var=AFC_State_Timed_Out unsigned 36,1
+Var=TM_State_Timed_Out unsigned 37,1
+Var=IMD_ERROR bit 40,1
+Var=BMS_Error bit 41,1
+Var=BSPD_Error bit 42,1
+Var=Egress bit 44,1
+Var=Check bit 43,1
+Var=DCDC_ERROR bit 45,1
+Var=Cooling_State Cooling_State 48,8
+Var=Rear_Brake_Pressure unsigned 56,8
+
+[CC_Heartbeat]
+ID=201h
+DLC=3
+CycleTime=10
+Timeout=100
+Var=CC_State State 0,8
+Var=CC_VBatt unsigned 8,8 /u:V /f:0.066666
+Var=CC_Gear Gear 16,8
+
+[FSM_Heartbeat]
+ID=202h	// Front Sensor Module Heartbeat
+DLC=4
+CycleTime=10
+Timeout=100
+Var=FSM_State State 0,8	// Current Module State
+Var=FSM_VBatt unsigned 8,8 /u:V /f:0.066666
+Var=Requested_Torque unsigned 16,8
+Var=Throttle_Position unsigned 24,8 /u:MPH
+
+[RSM_Heartbeat]
+ID=203h
+DLC=5
+CycleTime=10
+Timeout=100
+Var=RSM_State State 0,8
+Var=RSM_VBatt unsigned 8,8 /f:0.066666
+Var=Radiator_Fan_State Fan_State 16,8
+Var=Pump_L_Status Pump_State 24,8
+Var=Pump_R_Status Pump_State 32,8
+
+[DIM_Heartbeat]
+ID=204h	// Driver Interface Module Hearbeat
+DLC=4
+CycleTime=10
+Timeout=100
+Var=DIM_State State 0,8
+Var=Requested_State State 16,8
+Var=DIM_VBatt unsigned 8,8 /u:V /f:0.066666
+Var=Requested_Gear Gear 24,8
+
+[AFC_Heartbeat]
+ID=205h
+DLC=8
+CycleTime=10
+Timeout=100
+Var=AFC_State State 0,8
+Var=AFC_VBatt unsigned 8,8 /u:V /f:0.066666
+Var=Fan_1_Current unsigned 24,8 /u:A
+Var=Fan_2_Current unsigned 40,8 /u:A
+Var=AFC_PCB_Temp unsigned 56,8 /u:degC /f:0.5
+Var=Fan_3_State Fan_State 48,8
+Var=Fan_2_State Fan_State 32,8
+Var=Fan_1_State Fan_State 16,8
+
+[TM_Heartbeat]
+ID=206h
+DLC=2
+CycleTime=10
+Timeout=100
+Var=TM_State State 0,8
+Var=TM_VBatt unsigned 8,8 /u:V /f:0.066666
+
+[Comms_Heartbeat]
+ID=207h	// Comms Module Heartbeat
+DLC=2
+CycleTime=10
+Timeout=100
+Var=Comms_State State 0,8	// Current Module State
+Var=Comms_VBatt unsigned 8,8 /u:V /f:0.066666
+
+[CMRduino_Heartbeat]
+ID=210h	// CMRduino Heartbeat
+DLC=8
+CycleTime=10
+Timeout=100
+Var=Comms_State State 0,8	// Current Module State
+Var=Comms_VBatt unsigned 8,8 /u:V /f:0.066666
+
+[CC_Data]
+ID=281h
+DLC=8
+CycleTime=10
+Timeout=100
+Var=CC_AccelX signed 0,16 /u:m/s^2 /f:0.0009765625
+Var=CC_AccelY signed 16,16 /u:m/s^2 /f:0.0009765625
+Var=CC_VelRoll signed 32,16 /u:rad/s /f:0.0009765625
+Var=CC_VelYaw signed 48,16 /u:rad/s /f:0.0009765625
+
+[FSM_Data]
+ID=282h
+DLC=6
+CycleTime=10
+Timeout=100
+Var=Left_Wheel_Speed unsigned 0,8 /u:rpm /f:7.763
+Var=Right_Wheel_Speed unsigned 8,8 /u:rpm /f:7.763
+Var=Front_Brake_Pressure unsigned 16,8
+Var=Steering_Wheel_Angle unsigned 24,8
+Var=Damper_Pos_FL unsigned 32,8
+Var=Damper_Pos_FR unsigned 40,8
+
+[RSM_Data]
+ID=283h
+DLC=5
+CycleTime=10
+Timeout=100
+Var=Radiator_Fan_Current unsigned 0,8 /u:mA
+Var=Radiator_Temp_Pre unsigned 8,8 /u:degC
+Var=Radiator_Temp_Post unsigned 16,8 /u:degC
+Var=Damper_Pos_RL unsigned 24,8
+Var=Damper_Pos_RR unsigned 32,8
+
+[MC_L_Modulation_And_Flux_Info]
+ID=3ADh
+DLC=8
+Var=MC_L_Iq_Command signed 48,16 /u:A /f:0.1 /max:3276.7	// The commanded Q-axis current
+Var=MC_L_Id_Command signed 32,16 /u:A /f:0.1 /max:3276.7	// The commanded D-axis current
+Var=MC_L_Flux_Weakening_Output signed 16,16 /u:A /f:0.1 /max:3276.7	// This is the current output of the flux regulator.
+Var=MC_L_Modulation_Index signed 0,16 /f:0.0001	// This is the modulation index. The scale factor is x100. To get the actual modulation index divide the value by 100.
+
+[MC_L_Torque_And_Timer_Info]
+ID=3ACh
+DLC=8
+CycleTime=10
+Var=MC_L_Power_On_Timer unsigned 32,32 /u:Sec /f:0.003	// Updated every 3 msec. This will roll over in approximately 150 days!
+Var=MC_L_Torque_Feedback signed 16,16 /u:Nm /f:0.1 /max:3276.7	// Estimated motor torque feedback
+Var=MC_L_Commanded_Torque signed 0,16 /u:Nm /f:0.1 /max:3276.7	// The commanded Torque
+
+[MC_L_Read_Write_Param_Response]
+ID=3C2h	// To write a parameter use message 0x0C1 with byte #2 set to 1 (write). To read a parameter use message 0x0C1 with byte #2 to set 0 (read). 
+DLC=8
+CycleTime=10
+Var=MC_L_Write_Success bit 16,1	// 0=Write failure, 1=Success
+Var=MC_L_Data_Response signed 32,16	// All EEPROM data is 16 bits and is contained in bytes 4 and 5. Bytes 6 and 7 should be ignored.
+Var=MC_L_Parameter_Address_Response unsigned 0,16	// Valid EEPROM Parameter CAN addresses are between 100 and 499.
+
+[MC_L_Read_Write_Param_Command]
+ID=3C1h	// To write a parameter use message 0x0C1 with byte #2 set to 1 (write). To read a parameter use message 0x0C1 with byte #2 to set 0 (read). 
+DLC=8
+CycleTime=10
+Var=MC_L_Data_Command signed 32,16	// All EEPROM data is 16 bits and is contained in bytes 4 and 5.
+Var=MC_L_Read_Write_Command bit 16,1	// 0=Read, 1=Write
+Var=MC_L_Parameter_Address_Command unsigned 0,16	// Valid EEPROM Parameter CAN addresses are between 100 and 499.
+
+[MC_L_Command_Message]
+ID=3C0h	// The command message is used to transmit data to the controller. This message is sent from a user supplied external controller to the PMxxx controller.
+DLC=8
+CycleTime=10
+Timeout=50
+Var=MC_L_Inverter_Enable bit 40,1 /u:Bit	// 0=Inverter OFF, 1 = Inverter ON
+Var=MC_L_Direction_Command bit 32,1 /u:Bit	// 0=CW, 1=CCW as veiwed from the shaft end of the motor
+Var=MC_L_Speed_Command signed 16,16 /u:rpm	// Speed commandused when in speed mode
+Var=MC_L_Torque_Command signed 0,16 /u:Nm /f:0.1 /max:3276.7	// Torque command when in torque mode
+Var=MC_L_Inverter_Discharge bit 41,1 /u:Bit	// 0=Discharge Disable,=Discharge Enable
+Var=MC_L_Torque_Limit_Command signed 48,16 /u:Nm /min:-3276.8 /max:3276.7	// Torque Limit, set to 0 to keep default
+Var=MC_L_Speed_Mode_Enable bit 42,1 /u:Bit	// 0 = No change to mode, 1 = change to speed mode from torque mode
+
+[MC_L_Fault_Codes]
+ID=3ABh
+DLC=8
+CycleTime=100
+Var=MC_L_Run_Fault_Hi unsigned 48,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_L_Post_Fault_Hi unsigned 16,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_L_Run_Fault_Lo unsigned 32,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_L_Post_Fault_Lo unsigned 0,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+
+[MC_L_Internal_States]
+ID=3AAh
+DLC=8
+CycleTime=100
+Var=MC_L_Direction_Command unsigned 56,8 /max:1	// 1 = Forward0 = 'Reverse' if inverter enabled  & 'Stopped' if inverter is disabled
+Var=MC_L_Inverter_Enable_State bit 48,1	// 0=Inverter Disabled, 1=Inverter Enabled
+Var=MC_L_Relay_3_Status bit 26,1	// 0=OFF, 1=ON
+Var=MC_L_Relay_4_Status bit 27,1	// 0=OFF, 1=ON
+Var=MC_L_Relay_2_Status bit 25,1	// 0=OFF, 1=ON
+Var=MC_L_Inverter_Run_Mode bit 32,1	// 0=Torque Mode, 1=Speed Mode
+Var=MC_L_Inverter_Command_Mode bit 40,1	// 0=CAN mode, 1=VSM mode
+Var=MC_L_Relay_1_Status bit 24,1	// 0=OFF, 1=ON
+Var=MC_L_Inverter_State unsigned 16,8	// Different states for the inverter state machine
+Var=MC_L_VSM_State unsigned 0,16 /max:15	// Different states for the vehicle state machine
+Var=MC_L_Inverter_Enable_Lockout bit 55,1	// 0=Lockout Disabled, 1=Lockout Enabled
+Var=MC_L_Inverter_Discharge_State unsigned 37,3	// 0 = Disabled, 1 = Enabled, 2 = Speed Check, 3 = Active, 4 = Complete
+Var=MC_L_Relay_5_Status bit 28,1	// 0=OFF, 1=ON
+Var=MC_L_Relay_6_Status bit 29,1	// 0=OFF, 1=ON
+
+[MC_L_Internal_Voltages]
+ID=3A9h
+DLC=8
+CycleTime=100
+Var=MC_L_Reference_Voltage_12_0 signed 48,16 /u:V /f:0.01	// 12V Input Voltage
+Var=MC_L_Reference_Voltage_5_0 signed 32,16 /u:V /f:0.01	// Transducer voltage
+Var=MC_L_Reference_Voltage_2_5 signed 16,16 /u:V /f:0.01	// Internal reference voltage
+Var=MC_L_Reference_Voltage_1_5 signed 0,16 /u:V /f:0.01	// Internal reference voltage
+
+[MC_L_Flux_ID_IQ_Info]
+ID=3A8h
+DLC=8
+CycleTime=10
+Var=MC_L_Iq signed 48,16 /u:A /f:0.1 /max:3276.7	// The measured Iq current
+Var=MC_L_Id signed 32,16 /u:A /f:0.1 /max:3276.7	// The measured Id current
+Var=MC_L_Flux_Feedback signed 16,16 /u:Wb /f:0.001	// The estimated flux
+Var=MC_L_Flux_Command signed 0,16 /u:Wb /f:0.001	// The commanded flux
+
+[MC_L_Voltage_Info]
+ID=3A7h
+DLC=8
+CycleTime=10
+Var=MC_L_Phase_BC_Voltage signed 48,16 /u:V /f:0.1 /max:3276.7	// Measured value of the voltage between Phase B and Phase C
+Var=MC_L_Phase_AB_Voltage signed 32,16 /u:V /f:0.1 /max:3276.7	// Measured value of the voltage betwen phase A and Phase B
+Var=MC_L_Output_Voltage signed 16,16 /u:V /f:0.1 /max:3276.7	// The calculated value of the output voltage, in peak line-neutral volts
+Var=MC_L_DC_Bus_Voltage signed 0,16 /u:V /f:0.1 /max:3276.7	// The actual measured value of the DC bus voltage
+
+[MC_L_Current_Info]
+ID=3A6h
+DLC=8
+CycleTime=10
+Var=MC_L_DC_Bus_Current signed 48,16 /u:A /f:0.1 /max:3276.7	// The Calculated DC Bus Current
+Var=MC_L_Phase_C_Current signed 32,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase C current
+Var=MC_L_Phase_B_Current signed 16,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase B current
+Var=MC_L_Phase_A_Current signed 0,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase A current
+
+[MC_L_Motor_Position_Info]
+ID=3A5h
+DLC=8
+CycleTime=10
+Var=MC_L_Delta_Resolver_Filtered signed 48,16 /u:deg /f:0.1 /max:3276.7	// Used in calibration of resolver angle adjustment.
+Var=MC_L_Electrical_Output_Frequency signed 32,16 /u:hz /f:0.1 /max:3276.7	// The actual electrical frequency of the inverter
+Var=MC_L_Motor_Speed signed 16,16 /u:rpm /f:-1	// The measured speed of the motor
+Var=MC_L_Motor_Angle_Electrical unsigned 0,16 /u:deg /f:0.1	// The Electrical Angle of the motor as read by the encoder or resolver
+
+[MC_L_Digital_Input_Status]
+ID=3A4h
+DLC=8
+CycleTime=10
+Var=MC_L_Digital_Input_5 bit 32,1 /u:boolean	// Status of Digital Input #5
+Var=MC_L_Digital_Input_4 bit 24,1 /u:boolean	// Status of Digital Input #4
+Var=MC_L_Digital_Input_3 bit 16,1 /u:boolean	// Status of Digital Input #3
+Var=MC_L_Digital_Input_2 bit 8,1 /u:boolean	// Status of Digital Input #2
+Var=MC_L_Digital_Input_1 bit 0,1 /u:boolean	// Status of Digital Input #1
+Var=MC_L_Digital_Input_6 bit 40,1 /u:boolean	// Status of Digital Input #6
+Var=MC_L_Digital_Input_7 bit 48,1 /u:boolean	// Status of Digital Input #7
+Var=MC_L_Digital_Input_8 bit 56,1 /u:boolean	// Status of Digital Input #8
+
+[MC_L_Analog_Input_Voltages]
+ID=3A3h
+DLC=8
+CycleTime=10
+Var=MC_L_Analog_Input_4_Voltage signed 48,16 /u:V /f:0.01	// Voltage on Analog Input #4
+Var=MC_L_Analog_Input_3_Voltage signed 32,16 /u:V /f:0.01	// Voltage on Analog Input #3
+Var=MC_L_Analog_Input_2_Voltage signed 16,16 /u:V /f:0.01	// Voltage on Analog Input #2
+Var=MC_L_Analog_Input_1_Voltage signed 0,16 /u:V /f:0.01	// Voltage on Analog Input #1
+
+[MC_L_Temperature_Set_3]
+ID=3A2h
+DLC=8
+CycleTime=100
+Var=MC_L_Torque_Shudder signed 48,16 /u:Nm /f:0.1 /max:3276.7	// Shudder compensation value of torque
+Var=MC_L_Motor_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// Motor Temperature Sensor
+Var=MC_L_RTD5_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// RTD 5 (PT1000) Temperature
+Var=MC_L_RTD4_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// RTD 4 (PT1000) Temperature
+
+[MC_L_Temperature_Set_2]
+ID=3A1h
+DLC=8
+CycleTime=100
+Var=MC_L_RTD3_Temp signed 48,16 /u:degC /f:0.1 /max:3276.7	// RTD input 3 (PT1000) Temperature
+Var=MC_L_RTD2_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// RTD input 2 (PT1000) Temperature
+Var=MC_L_RTD1_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// RTD input 1 (PT1000) Temperature
+Var=MC_L_Control_Board_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// Control Board Temperature
+
+[MC_L_Temperature_Set_1]
+ID=3A0h
+DLC=8
+CycleTime=100
+Var=MC_L_Gate_Driver_Board_Temp signed 48,16 /u:degC /f:0.1 /max:3276.7	// Gate Driver Board Temperature
+Var=MC_L_Module_C_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module C Temperature
+Var=MC_L_Module_B_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module B Temperature
+Var=MC_L_Module_A_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module A Temperature
+
+[MC_L_Firmware_Info]
+ID=3AEh
+DLC=8
+Var=MC_L_Project_Code_EEP_Ver unsigned 0,16
+Var=MC_L_SW_Version unsigned 16,16
+Var=MC_L_DateCode_MMDD unsigned 32,16
+Var=MC_L_DateCode_YYYY unsigned 48,16
+
+[MC_L_Diagnostic_Data]
+ID=3AFh
+DLC=8
+Var=MC_L_Buffer_Record unsigned 0,8 /max:160
+Var=MC_L_Buffer_Segment unsigned 8,8 /max:5
+Var=MC_L_Diag_Data_1 signed 16,16 /min:0
+Var=MC_L_Diag_Data_2 signed 32,16 /min:0
+Var=MC_L_Diag_Data_3 signed 48,16 /min:0
+
+[MC_R_Modulation_And_Flux_Info]
+ID=4ADh
+DLC=8
+Var=MC_R_Iq_Command signed 48,16 /u:A /f:0.1 /max:3276.7	// The commanded Q-axis current
+Var=MC_R_Id_Command signed 32,16 /u:A /f:0.1 /max:3276.7	// The commanded D-axis current
+Var=MC_R_Flux_Weakening_Output signed 16,16 /u:A /f:0.1 /max:3276.7	// This is the current output of the flux regulator.
+Var=MC_R_Modulation_Index signed 0,16 /f:0.0001	// This is the modulation index. The scale factor is x100. To get the actual modulation index divide the value by 100.
+
+[MC_R_Torque_And_Timer_Info]
+ID=4ACh
+DLC=8
+CycleTime=10
+Var=MC_R_Power_On_Timer unsigned 32,32 /u:Sec /f:0.003	// Updated every 3 msec. This will roll over in approximately 150 days!
+Var=MC_R_Torque_Feedback signed 16,16 /u:Nm /f:0.1 /max:3276.7	// Estimated motor torque feedback
+Var=MC_R_Commanded_Torque signed 0,16 /u:Nm /f:0.1 /max:3276.7	// The commanded Torque
+
+[MC_R_Read_Write_Param_Response]
+ID=4C2h	// To write a parameter use message 0x0C1 with byte #2 set to 1 (write). To read a parameter use message 0x0C1 with byte #2 to set 0 (read). 
+DLC=8
+CycleTime=10
+Var=MC_R_Write_Success bit 16,1	// 0=Write failure, 1=Success
+Var=MC_R_Data_Response signed 32,16	// All EEPROM data is 16 bits and is contained in bytes 4 and 5. Bytes 6 and 7 should be ignored.
+Var=MC_R_Parameter_Address_Response unsigned 0,16	// Valid EEPROM Parameter CAN addresses are between 100 and 499.
+
+[MC_R_Read_Write_Param_Command]
+ID=4C1h	// To write a parameter use message 0x0C1 with byte #2 set to 1 (write). To read a parameter use message 0x0C1 with byte #2 to set 0 (read). 
+DLC=8
+CycleTime=10
+Var=MC_R_Data_Command signed 32,16	// All EEPROM data is 16 bits and is contained in bytes 4 and 5.
+Var=MC_R_Read_Write_Command bit 16,1	// 0=Read, 1=Write
+Var=MC_R_Parameter_Address_Command unsigned 0,16	// Valid EEPROM Parameter CAN addresses are between 100 and 499.
+
+[MC_R_Command_Message]
+ID=4C0h	// The command message is used to transmit data to the controller. This message is sent from a user supplied external controller to the PMxxx controller.
+DLC=8
+CycleTime=10
+Timeout=50
+Var=MC_R_Inverter_Enable bit 40,1 /u:Bit	// 0=Inverter OFF, 1 = Inverter ON
+Var=MC_R_Direction_Command bit 32,1 /u:Bit	// 0=CW, 1=CCW as veiwed from the shaft end of the motor
+Var=MC_R_Speed_Command signed 16,16 /u:rpm	// Speed commandused when in speed mode
+Var=MC_R_Torque_Command signed 0,16 /u:Nm /f:0.1 /max:3276.7	// Torque command when in torque mode
+Var=MC_R_Inverter_Discharge bit 41,1 /u:Bit	// 0=Discharge Disable,=Discharge Enable
+Var=MC_R_Torque_Limit_Command signed 48,16 /u:Nm /min:-3276.8 /max:3276.7	// Torque Limit, set to 0 to keep default
+Var=MC_R_Speed_Mode_Enable bit 42,1 /u:Bit	// 0 = No change to mode, 1 = change to speed mode from torque mode
+
+[MC_R_Fault_Codes]
+ID=4ABh
+DLC=8
+CycleTime=100
+Var=MC_R_Run_Fault_Hi unsigned 48,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_R_Post_Fault_Hi unsigned 16,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_R_Run_Fault_Lo unsigned 32,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+Var=MC_R_Post_Fault_Lo unsigned 0,16	// Each bit represents a fault. Please refer to PM100 Users Manual for details.
+
+[MC_R_Internal_States]
+ID=4AAh
+DLC=8
+CycleTime=100
+Var=MC_R_Direction_Command unsigned 56,8 /max:1	// 1 = Forward0 = 'Reverse' if inverter enabled  & 'Stopped' if inverter is disabled
+Var=MC_R_Inverter_Enable_State bit 48,1	// 0=Inverter Disabled, 1=Inverter Enabled
+Var=MC_R_Relay_3_Status bit 26,1	// 0=OFF, 1=ON
+Var=MC_R_Relay_4_Status bit 27,1	// 0=OFF, 1=ON
+Var=MC_R_Relay_2_Status bit 25,1	// 0=OFF, 1=ON
+Var=MC_R_Inverter_Run_Mode bit 32,1	// 0=Torque Mode, 1=Speed Mode
+Var=MC_R_Inverter_Command_Mode bit 40,1	// 0=CAN mode, 1=VSM mode
+Var=MC_R_Relay_1_Status bit 24,1	// 0=OFF, 1=ON
+Var=MC_R_Inverter_State unsigned 16,8	// Different states for the inverter state machine
+Var=MC_R_VSM_State unsigned 0,16 /max:15	// Different states for the vehicle state machine
+Var=MC_R_Inverter_Enable_Lockout bit 55,1	// 0=Lockout Disabled, 1=Lockout Enabled
+Var=MC_R_Inverter_Discharge_State unsigned 37,3	// 0 = Disabled, 1 = Enabled, 2 = Speed Check, 3 = Active, 4 = Complete
+Var=MC_R_Relay_5_Status bit 28,1	// 0=OFF, 1=ON
+Var=MC_R_Relay_6_Status bit 29,1	// 0=OFF, 1=ON
+
+[MC_R_Internal_Voltages]
+ID=4A9h
+DLC=8
+CycleTime=100
+Var=MC_R_Reference_Voltage_12_0 signed 48,16 /u:V /f:0.01	// 12V Input Voltage
+Var=MC_R_Reference_Voltage_5_0 signed 32,16 /u:V /f:0.01	// Transducer voltage
+Var=MC_R_Reference_Voltage_2_5 signed 16,16 /u:V /f:0.01	// Internal reference voltage
+Var=MC_R_Reference_Voltage_1_5 signed 0,16 /u:V /f:0.01	// Internal reference voltage
+
+[MC_R_Flux_ID_IQ_Info]
+ID=4A8h
+DLC=8
+CycleTime=10
+Var=MC_R_Iq signed 48,16 /u:A /f:0.1 /max:3276.7	// The measured Iq current
+Var=MC_R_Id signed 32,16 /u:A /f:0.1 /max:3276.7	// The measured Id current
+Var=MC_R_Flux_Feedback signed 16,16 /u:Wb /f:0.001	// The estimated flux
+Var=MC_R_Flux_Command signed 0,16 /u:Wb /f:0.001	// The commanded flux
+
+[MC_R_Voltage_Info]
+ID=4A7h
+DLC=8
+CycleTime=10
+Var=MC_R_Phase_BC_Voltage signed 48,16 /u:V /f:0.1 /max:3276.7	// Measured value of the voltage between Phase B and Phase C
+Var=MC_R_Phase_AB_Voltage signed 32,16 /u:V /f:0.1 /max:3276.7	// Measured value of the voltage betwen phase A and Phase B
+Var=MC_R_Output_Voltage signed 16,16 /u:V /f:0.1 /max:3276.7	// The calculated value of the output voltage, in peak line-neutral volts
+Var=MC_R_DC_Bus_Voltage signed 0,16 /u:V /f:0.1 /max:3276.7	// The actual measured value of the DC bus voltage
+
+[MC_R_Current_Info]
+ID=4A6h
+DLC=8
+CycleTime=10
+Var=MC_R_DC_Bus_Current signed 48,16 /u:A /f:0.1 /max:3276.7	// The Calculated DC Bus Current
+Var=MC_R_Phase_C_Current signed 32,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase C current
+Var=MC_R_Phase_B_Current signed 16,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase B current
+Var=MC_R_Phase_A_Current signed 0,16 /u:A /f:0.1 /max:3276.7	// The measured value of Phase A current
+
+[MC_R_Motor_Position_Info]
+ID=4A5h
+DLC=8
+CycleTime=10
+Var=MC_R_Delta_Resolver_Filtered signed 48,16 /u:deg /f:0.1 /max:3276.7	// Used in calibration of resolver angle adjustment.
+Var=MC_R_Electrical_Output_Frequency signed 32,16 /u:hz /f:0.1 /max:3276.7	// The actual electrical frequency of the inverter
+Var=MC_R_Motor_Speed signed 16,16 /u:rpm	// The measured speed of the motor
+Var=MC_R_Motor_Angle_Electrical unsigned 0,16 /u:deg /f:0.1	// The Electrical Angle of the motor as read by the encoder or resolver
+
+[MC_R_Digital_Input_Status]
+ID=4A4h
+DLC=8
+CycleTime=10
+Var=MC_R_Digital_Input_5 bit 32,1 /u:boolean	// Status of Digital Input #5
+Var=MC_R_Digital_Input_4 bit 24,1 /u:boolean	// Status of Digital Input #4
+Var=MC_R_Digital_Input_3 bit 16,1 /u:boolean	// Status of Digital Input #3
+Var=MC_R_Digital_Input_2 bit 8,1 /u:boolean	// Status of Digital Input #2
+Var=MC_R_Digital_Input_1 bit 0,1 /u:boolean	// Status of Digital Input #1
+Var=MC_R_Digital_Input_6 bit 40,1 /u:boolean	// Status of Digital Input #6
+Var=MC_R_Digital_Input_7 bit 48,1 /u:boolean	// Status of Digital Input #7
+Var=MC_R_Digital_Input_8 bit 56,1 /u:boolean	// Status of Digital Input #8
+
+[MC_R_Analog_Input_Voltages]
+ID=4A3h
+DLC=8
+CycleTime=10
+Var=MC_R_Analog_Input_4 signed 48,16 /u:V /f:0.01	// Voltage on Analog Input #4
+Var=MC_R_Analog_Input_3 signed 32,16 /u:V /f:0.01	// Voltage on Analog Input #3
+Var=MC_R_Analog_Input_2 signed 16,16 /u:V /f:0.01	// Voltage on Analog Input #2
+Var=MC_R_Analog_Input_1 signed 0,16 /u:V /f:0.01	// Voltage on Analog Input #1
+
+[MC_R_Temperature_Set_3]
+ID=4A2h
+DLC=8
+CycleTime=100
+Var=MC_R_Torque_Shudder signed 48,16 /u:Nm /f:0.1 /max:3276.7	// Shudder compensation value of torque
+Var=MC_R_Motor_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// Motor Temperature Sensor
+Var=MC_R_RTD5_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// RTD 5 (PT1000) Temperature
+Var=MC_R_RTD4_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// RTD 4 (PT1000) Temperature
+
+[MC_R_Temperature_Set_2]
+ID=4A1h
+DLC=8
+CycleTime=100
+Var=MC_R_RTD3_Temp signed 48,16 /u:degC /f:0.1 /max:3276.7	// RTD input 3 (PT1000) Temperature
+Var=MC_R_RTD2_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// RTD input 2 (PT1000) Temperature
+Var=MC_R_RTD1_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// RTD input 1 (PT1000) Temperature
+Var=MC_R_Control_Board_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// Control Board Temperature
+
+[MC_R_Temperature_Set_1]
+ID=4A0h
+DLC=8
+CycleTime=100
+Var=MC_R_Gate_Driver_Board_Temp signed 48,16 /u:degC /f:0.1 /max:3276.7	// Gate Driver Board Temperature
+Var=MC_R_Module_C_Temp signed 32,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module C Temperature
+Var=MC_R_Module_B_Temp signed 16,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module B Temperature
+Var=MC_R_Module_A_Temp signed 0,16 /u:degC /f:0.1 /max:3276.7	// IGBT Module A Temperature
+
+[MC_R_Firmware_Info]
+ID=4AEh
+DLC=8
+Var=MC_R_Project_Code_EEP_Ver unsigned 0,16
+Var=MC_R_SW_Version unsigned 16,16
+Var=MC_R_DateCode_MMDD unsigned 32,16
+Var=MC_R_DateCode_YYYY unsigned 48,16
+
+[MC_R_Diagnostic_Data]
+ID=4AFh
+DLC=8
+Var=MC_R_Buffer_Record unsigned 0,8 /max:160
+Var=MC_R_Buffer_Segment unsigned 8,8 /max:5
+Var=MC_R_Diag_Data_1 signed 16,16 /min:0
+Var=MC_R_Diag_Data_2 signed 32,16 /min:0
+Var=MC_R_Diag_Data_3 signed 48,16 /min:0
+
+[BMS_BMU_Heartbeat]
+ID=500h
+DLC=8
+Var=Device_ID unsigned 0,32
+Var=Device_Serial unsigned 32,32
+
+[BMS_Factory_Config_Calibration]
+ID=5F0h
+DLC=8
+
+[BMS_Pack_SOC]
+ID=5F4h
+DLC=8
+Var=BMS_Pack_SOC_Ah float 0,32 /u:Ah
+Var=BMS_Pack_SOC_Percent unsigned 32,32 /u:%
+
+[BMS_Balance_SOC]
+ID=5F5h
+DLC=8
+Var=BMS_Balance_SOC_Ah float 0,32 /u:Ah
+Var=BMS_Balance_SOC_Percent float 32,32 /u:%
+
+[BMS_Charger_Control_Info]
+ID=5F6h
+DLC=8
+Var=BMS_Charging_Cell_Voltage_Error unsigned 0,16 /u:mV
+Var=BMS_Cell_Temp_Margin unsigned 16,16 /u:"1/10 C"
+Var=BMS_Discharge_Cell_Voltage_Error unsigned 32,16 /u:mV
+Var=BMS_Total_Pack_Capacity unsigned 48,16 /u:Ah
+
+[BMS_Precharge_12V_Status]
+ID=5F7h
+DLC=8
+Var=BMS_Contactor_1_Error_Status unsigned 0,1
+Var=BMS_Contactor_2_Error_Status unsigned 1,1
+Var=BMS_Contactor_1_Output_Status unsigned 2,1
+Var=BMS_Contactor_2_Output_Status unsigned 3,1
+Var=BMS_Contactor_Supply_Voltage_OK unsigned 4,1
+Var=BMS_Contactor_3_Error_Status unsigned 5,1
+Var=BMS_Contactor_3_Output_Status unsigned 6,1
+Var=BMS_Unused_1 unsigned 7,1
+Var=BMS_Precharge_State BMS_Precharge_State 8,8
+Var=BMS_12V_Contactor_Supply_Voltage unsigned 16,16 /u:mV
+Var=BMS_Unused_2 unsigned 32,16
+Var=BMS_Precharge_Timer_Status unsigned 48,8
+Var=BMS_Precharge_Timer_Counter unsigned 56,8
+
+[BMS_Min_Max_Cell_Voltage]
+ID=5F8h
+DLC=8
+Var=BMS_Min_Cell_Voltage unsigned 0,16 /u:mV
+Var=BMS_Max_Cell_Voltage unsigned 16,16 /u:mV
+Var=BMS_Min_Voltage_CMU_Num unsigned 32,8
+Var=BMS_Min_Voltage_CMU_Cell_Num unsigned 40,8
+Var=BMS_Max_Voltage_CMU_Num unsigned 48,8
+Var=BMS_Max_Voltage_CMU_Cell_Num unsigned 56,8
+
+[BMS_Min_Max_Cell_Temperature]
+ID=5F9h
+DLC=8
+Var=BMS_Min_Cell_Temp unsigned 0,16 /u:"1/10 C"
+Var=BMS_Max_Cell_Temp unsigned 16,16 /u:"1/10 C"
+Var=BMS_Min_Temp_CMU_Num unsigned 32,8
+Var=BMS_Unused_1 unsigned 40,8
+Var=BMS_Max_Temp_CMU_Num unsigned 48,8
+Var=BMS_Unused_2 unsigned 56,8
+
+[BMS_Pack_Voltage_Current]
+ID=5FAh
+DLC=8
+Var=BMS_Battery_Voltage unsigned 0,32 /u:V
+Var=BMS_Battery_Current unsigned 32,32 /u:mA
+
+[BMS_Pack_Status]
+ID=5FBh
+DLC=8
+Var=BMS_Balance_Voltage_Thresh_Rise unsigned 0,16
+Var=BMS_Balance_Voltage_Thresh_Fall unsigned 16,16
+Var=BMS_Status_Flags unsigned 32,8
+Var=BMS_CMU_Count unsigned 40,8
+Var=BMS_BMU_Firmware_Build unsigned 48,16
+
+[BMS_Fan_12V_Status]
+ID=5FCh
+DLC=8
+Var=BMS_Fan_Speed_0 unsigned 0,16 /u:RPM
+Var=BMS_Fan_Speed_1 unsigned 16,16 /u:RPM
+Var=BMS_12V_Fan_Contactor_Current unsigned 32,16 /u:mA
+Var=BMS_12V_CMU_Current unsigned 48,16 /u:mA
+
+[BMS_Extended_Pack_Status]
+ID=5FDh
+DLC=8
+Var=BMS_Cell_Over_Voltage_Flag bit 0,1
+Var=BMS_BMU_Hardware_Version unsigned 32,8
+Var=BMS_BMU_Model_ID unsigned 40,8
+Var=BMS_Status_Unused unsigned 48,16
+Var=BMS_Cell_Under_Voltage_Flag unsigned 1,1
+Var=BMS_Cell_Over_Temp_Flag unsigned 2,1
+Var=BMS_Measurement_Untrusted_Flag unsigned 3,1
+Var=BMS_CMU_Comms_Timeout_Flag unsigned 4,1
+Var=BMS_Vehicle_Comms_Timeout_Flag unsigned 5,1
+Var=BMS_BMU_Setup_Flag unsigned 6,1
+Var=BMS_CMU_CAN_PWR_Flag unsigned 7,1
+Var=BMS_Pack_Iso_Test_Fail_Flag unsigned 8,1
+Var=BMS_SOC_Meas_Invalid_Flag unsigned 9,1
+Var=BMS_CAN_12V_Low_Flag unsigned 10,1
+Var=BMS_Contactor_Stuck_Flag unsigned 11,1
+Var=BMS_CMU_Extra_Cell_Flag unsigned 12,1
+
+[BMS_Bootloader_1]
+ID=7F0h
+DLC=8
+
+[BMS_Bootloader_2]
+ID=7F1h
+DLC=8
+
+[BMS_Bootloader_3]
+ID=7F2h
+DLC=8
+
+[BMS_Bootloader_4]
+ID=7F3h
+DLC=8
+
+[BMS_Bootloader_5]
+ID=7F4h
+DLC=8
+
+[BMS_CMU_1_Status]
+ID=501h
+DLC=8
+Var=BMS_CMU_1_SN unsigned 0,32
+Var=BMS_CMU_1_PCB_Temp unsigned 32,16
+Var=BMS_CMU_1_Cell_Temp unsigned 48,16
+
+[BMS_CMU_1_Low_Cells]
+ID=502h
+DLC=8
+Var=BMS_CMU_1_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_1_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_1_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_1_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_1_High_Cells]
+ID=503h
+DLC=8
+Var=BMS_CMU_1_Cell_H0_Voltage unsigned 0,16
+Var=BMS_CMU_1_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_1_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_1_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_2_Status]
+ID=504h
+DLC=8
+Var=BMS_CMU_2_SN unsigned 0,32
+Var=BMS_CMU_2_PCB_Temp unsigned 32,16
+Var=BMS_CMU_2_Cell_Temp unsigned 48,16
+
+[BMS_CMU_2_Low_Cells]
+ID=505h
+DLC=8
+Var=BMS_CMU_2_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_2_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_2_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_2_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_2_High_Cells]
+ID=506h
+DLC=8
+Var=BMS_CMU_2_Cell_H0_Voltage unsigned 0,16
+Var=BMS_CMU_2_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_2_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_2_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_3_Status]
+ID=507h
+DLC=8
+Var=BMS_CMU_3_SN unsigned 0,32
+Var=BMS_CMU_3_PCB_Temp unsigned 32,16
+Var=BMS_CMU_3_Cell_Temp unsigned 48,16
+
+[BMS_CMU_4_Status]
+ID=50Ah
+DLC=8
+Var=BMS_CMU_4_SN unsigned 0,32
+Var=BMS_CMU_4_PCB_Temp unsigned 32,16
+Var=BMS_CMU_4_Cell_Temp unsigned 48,16
+
+[BMS_CMU_5_Status]
+ID=50Dh
+DLC=8
+Var=BMS_CMU_5_SN unsigned 0,32
+Var=BMS_CMU_5_PCB_Temp unsigned 32,16
+Var=BMS_CMU_5_Cell_Temp unsigned 48,16
+
+[BMS_CMU_6_Status]
+ID=510h
+DLC=8
+Var=BMS_CMU_6_SN unsigned 0,32
+Var=BMS_CMU_6_PCB_Temp unsigned 32,16
+Var=BMS_CMU_6_Cell_Temp unsigned 48,16
+
+[BMS_CMU_7_Status]
+ID=513h
+DLC=8
+Var=BMS_CMU_7_SN unsigned 0,32
+Var=BMS_CMU_7_PCB_Temp unsigned 32,16
+Var=BMS_CMU_7_Cell_Temp unsigned 48,16
+
+[BMS_CMU_8_Status]
+ID=516h
+DLC=8
+Var=BMS_CMU_8_SN unsigned 0,32
+Var=BMS_CMU_8_PCB_Temp unsigned 32,16
+Var=BMS_CMU_8_Cell_Temp unsigned 48,16
+
+[BMS_CMU_9_Status]
+ID=519h
+DLC=8
+Var=BMS_CMU_9_SN unsigned 0,32
+Var=BMS_CMU_9_PCB_Temp unsigned 32,16
+Var=BMS_CMU_9_Cell_Temp unsigned 48,16
+
+[BMS_CMU_10_Status]
+ID=51Ch
+DLC=8
+Var=BMS_CMU_10_SN unsigned 0,32
+Var=BMS_CMU_10_PCB_Temp unsigned 32,16
+Var=BMS_CMU_10_Cell_Temp unsigned 48,16
+
+[BMS_CMU_11_Status]
+ID=51Fh
+DLC=8
+Var=BMS_CMU_11_SN unsigned 0,32
+Var=BMS_CMU_11_PCB_Temp unsigned 32,16
+Var=BMS_CMU_11_Cell_Temp unsigned 48,16
+
+[BMS_CMU_12_Status]
+ID=522h
+DLC=8
+Var=BMS_CMU_12_SN unsigned 0,32
+Var=BMS_CMU_12_PCB_Temp unsigned 32,16
+Var=BMS_CMU_12_Cell_Temp unsigned 48,16
+
+[BMS_CMU_3_Low_Cells]
+ID=508h
+DLC=8
+Var=BMS_CMU_3_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_3_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_3_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_3_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_4_Low_Cells]
+ID=50Bh
+DLC=8
+Var=BMS_CMU_4_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_4_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_4_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_4_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_5_Low_Cells]
+ID=50Eh
+DLC=8
+Var=BMS_CMU_5_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_5_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_5_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_5_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_6_Low_Cells]
+ID=511h
+DLC=8
+Var=BMS_CMU_6_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_6_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_6_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_6_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_7_Low_Cells]
+ID=514h
+DLC=8
+Var=BMS_CMU_7_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_7_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_7_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_7_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_8_Low_Cells]
+ID=517h
+DLC=8
+Var=BMS_CMU_8_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_8_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_8_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_8_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_9_Low_Cells]
+ID=51Ah
+DLC=8
+Var=BMS_CMU_9_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_9_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_9_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_9_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_10_Low_Cells]
+ID=51Dh
+DLC=8
+Var=BMS_CMU_10_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_10_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_10_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_10_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_11_Low_Cells]
+ID=520h
+DLC=8
+Var=BMS_CMU_11_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_11_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_11_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_11_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_12_Low_Cells]
+ID=523h
+DLC=8
+Var=BMS_CMU_12_Cell_L0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_12_Cell_L1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_12_Cell_L2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_12_Cell_L3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_3_High_Cells]
+ID=509h
+DLC=8
+Var=BMS_CMU_3_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_3_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_3_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_3_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_4_High_Cells]
+ID=50Ch
+DLC=8
+Var=BMS_CMU_4_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_4_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_4_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_4_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_5_High_Cells]
+ID=50Fh
+DLC=8
+Var=BMS_CMU_5_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_5_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_5_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_5_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_6_High_Cells]
+ID=512h
+DLC=8
+Var=BMS_CMU_6_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_6_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_6_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_6_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_7_High_Cells]
+ID=515h
+DLC=8
+Var=BMS_CMU_7_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_7_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_7_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_7_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_8_High_Cells]
+ID=518h
+DLC=8
+Var=BMS_CMU_8_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_8_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_8_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_8_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_9_High_Cells]
+ID=51Bh
+DLC=8
+Var=BMS_CMU_9_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_9_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_9_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_9_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_10_High_Cells]
+ID=51Eh
+DLC=8
+Var=BMS_CMU_10_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_10_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_10_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_10_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+// CAN ID conflicts with BRUSA_Charger_Act1
+//[BMS_CMU_11_High_Cells]
+//ID=521h
+//DLC=8
+//Var=BMS_CMU_11_Cell_H0_Voltage unsigned 0,16 /u:mV
+//Var=BMS_CMU_11_Cell_H1_Voltage unsigned 16,16 /u:mV
+//Var=BMS_CMU_11_Cell_H2_Voltage unsigned 32,16 /u:mV
+//Var=BMS_CMU_11_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[BMS_CMU_12_High_Cells]
+ID=524h
+DLC=8
+Var=BMS_CMU_12_Cell_H0_Voltage unsigned 0,16 /u:mV
+Var=BMS_CMU_12_Cell_H1_Voltage unsigned 16,16 /u:mV
+Var=BMS_CMU_12_Cell_H2_Voltage unsigned 32,16 /u:mV
+Var=BMS_CMU_12_Cell_H3_Voltage unsigned 48,16 /u:mV
+
+[LED_Brightness]
+ID=6FFh
+DLC=1
+Var=LED_Brightness unsigned 0,8
+
+[BMS_Drive_Control]
+ID=605h
+DLC=8
+Var=BMS_Ignition_Switch unsigned 0,16 /e:BMS_Ignition
+Var=BMS_Unused_1 unsigned 16,16
+Var=BMS_Unused_2 unsigned 32,16
+Var=BMS_Unused_3 unsigned 48,16
+
+[BRUSA_Charger_Control]
+ID=528h
+DLC=7
+Var=Charger_Enable_Vector unsigned 0,8
+Var=Max_Mains_Current unsigned 8,16 -m /u:A /f:0.1
+Var=Requested_Voltage unsigned 24,16 -m /u:V /f:0.1
+Var=Requested_Current unsigned 40,16 -m /u:A /f:0.1
+
+[BRUSA_Charger_Act_I]
+ID=521h
+DLC=8
+Var=Mains_Current unsigned 0,16 -m /u:A /f:0.01
+Var=Mains_Voltage unsigned 16,16 -m /u:V /f:0.1
+Var=Batt_Voltage unsigned 32,16 -m /u:V /f:0.1
+Var=Batt_Current unsigned 48,16 -m /u:A /f:0.01

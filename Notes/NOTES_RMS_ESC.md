@@ -10,5 +10,9 @@ Relevant Information on Cascadia-Reinhart Motorsports ESC:
 Important Notes:
 * Startup requires that the brake be pressed on startup for the ESC to turn on. Needs to just be set to the enumeration connected to the brake light (uses brake pressure to determine state). 
 * Need to determine how/when the start state should engage the start sound. Does it engage the sound when HV is just on or whenever the engine is actually "Started."
+* When setting up the CAN on the ESC, the ESC side has a built-in termination resistor (that can be toggled on and off oddly enough). By default it is toggled on, which is what we want so we don't need to solder on a termination resistor (just for ease of life)
 
+
+Neat Things That I Have Found:
+* The ESC allows for sending the desired torque and RPM output over CAN message.
 

@@ -1,7 +1,7 @@
 local et = System.ElapsedTime();
 local stopped = false;
 //local cyclelock = false;
-local running = false;
+local Running VSM = false;
 
 when (Engine.Speed.Trigger.Reference.State) {
 	is (Open or Initialise or Error or Exit or Stall or Test) {
@@ -16,7 +16,7 @@ when (Engine.Speed.Trigger.Reference.State) {
 	}
 }
 
-running = (Engine.Speed > Engine.Speed.Run Threshold) and cyclelock;
+Running VSM = (Engine.Speed > Engine.Speed.Run Threshold) and cyclelock;
 
 when (Value) {
 	is (Startup) {
@@ -41,7 +41,7 @@ when (Value) {
 		if (stopped) {
 			Value = Value.Stop;
 			Timer = 0;
-		} else if (running) {
+		} else if (Running VSM) {
 			Value = Value.Run;
 			Timer = 0;
 		} else {
