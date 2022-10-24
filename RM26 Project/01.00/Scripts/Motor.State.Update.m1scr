@@ -1,0 +1,160 @@
+local et = System.ElapsedTime();
+static local VSM;
+static local VSM Update;
+
+// Internal States (IS) Can PID = 0x0AA, VSM = Byte 0
+local IS Handle = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Receive.CAN Bus.AsInteger()-1,
+				Constants.Internal States Address,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(IS Handle)) {
+	VSM = CanComms.GetInteger(IS Handle, 0, 8);
+}
+
+/*
+if (VSM eq 0) {
+	Value.Set(Value.Startup);
+	Timer.Total.Startup Time += et;
+	Timer.Total.Run Time = 0;
+}
+else if (VSM eq 4) {
+	Value.Set(Value.Wait);
+}
+else if (VSM eq 5) {
+	Value.Set(Value.Ready);
+}
+else if (VSM eq 6) {
+	Value.Set(Value.Running);
+	Timer.Total.Run Time += et;
+	Timer.Total.Startup Time = 0;
+}
+else if (VSM eq 1) {
+	Value.Set(Value.PreChrg Init);
+}
+else if (VSM eq 2) {
+	Value.Set(Value.PreChrg Active);
+}
+else if (VSM eq 3) {
+	Value.Set(Value.PreChrg Complete);
+}
+else if (VSM eq 7) {
+	Value.Set(Value.Blink Fault Code);
+}
+else if (VSM eq 14) {
+	Value.Set(Value.Shutdown In Progress);
+}
+else if (VSM eq 15) {
+	Value.Set(Value.Recycle Power);
+}
+else {
+	Value.Set(Value.Off);
+}
+*/
+
+when (Value) {
+	is (Off) {
+		if (VSM eq 0) {
+			Value.Set(Value.Startup);
+		}
+		else if (VSM eq 4) {
+			Value.Set(Value.Wait);
+		}
+		else if (VSM eq 5) {
+			Value.Set(Value.Ready);
+		}
+		else if (VSM eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM eq 1) {
+			Value.Set(Value.PreChrg Init);
+		}
+		else if (VSM eq 2) {
+			Value.Set(Value.PreChrg Active);
+		}
+		else if (VSM eq 3) {
+			Value.Set(Value.PreChrg Complete);
+		}
+		else if (VSM eq 7) {
+			Value.Set(Value.Blink Fault Code);
+		}
+		else if (VSM eq 14) {
+			Value.Set(Value.Shutdown In Progress);
+		}
+		else if (VSM eq 15) {
+			Value.Set(Value.Recycle Power);
+		}
+		else {
+			Timer.Total.Run Time = 0;
+		}
+	}
+	is (Startup) {
+		if (VSM eq 4) {
+			Value.Set(Value.Wait);
+		}
+		else if (VSM eq 5) {
+			Value.Set(Value.Ready);
+		}
+		else if (VSM eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM eq 1) {
+			Value.Set(Value.PreChrg Init);
+		}
+		else if (VSM eq 2) {
+			Value.Set(Value.PreChrg Active);
+		}
+		else if (VSM eq 3) {
+			Value.Set(Value.PreChrg Complete);
+		}
+		else if (VSM eq 7) {
+			Value.Set(Value.Blink Fault Code);
+		}
+		else if (VSM eq 14) {
+			Value.Set(Value.Shutdown In Progress);
+		}
+		else if (VSM eq 15) {
+			Value.Set(Value.Recycle Power);
+		}
+		else {
+			Timer.Total.Startup Time += et;
+			Timer.Total.Run Time = 0;
+		}
+	}
+	is (PreChrg Init) {
+		if (VSM eq 0) {
+			Value.Set(Value.Startup);
+		}
+		else if (VSM eq 4) {
+			Value.Set(Value.Wait);
+		}
+		else if (VSM eq 5) {
+			Value.Set(Value.Ready);
+		}
+		else if (VSM eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM eq 1) {
+			Timer.Total.PreChrg Time += et;
+		}
+		else if (VSM eq 2) {
+			Value.Set(Value.PreChrg Active);
+		}
+		else if (VSM eq 3) {
+			Value.Set(Value.PreChrg Complete);
+		}
+		else if (VSM eq 7) {
+			Value.Set(Value.Blink Fault Code);
+		}
+		else if (VSM eq 14) {
+			Value.Set(Value.Shutdown In Progress);
+		}
+		else if (VSM eq 15) {
+			Value.Set(Value.Recycle Power);
+		}
+		else {
+			Value.Set(Value.Off);
+		}
+	}
+}

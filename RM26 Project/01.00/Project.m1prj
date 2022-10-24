@@ -5669,7 +5669,7 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.Rx CAN To Update.m1scr" Name="Root.Motor.State.Rx CAN To Update">
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.Update.m1scr" Name="Root.Motor.State.Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Value">
@@ -5976,6 +5976,10 @@
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.Internal States Address">
      <Props Type="u32" Value="170"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.PreChrg Time">
+     <Props Qty="s"/>
      <Comment/>
     </Component>
    </List>
@@ -6795,11 +6799,12 @@
         <Component Name="Total">
          <Component Name="Run Time"/>
          <Component Name="Startup Time"/>
+         <Component Name="PreChrg Time"/>
         </Component>
         <Component Name="Value"/>
        </Component>
        <Component Name="Value"/>
-       <Component Name="Rx CAN To Update"/>
+       <Component Name="Update"/>
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Receive">
