@@ -165,6 +165,24 @@
     <Enum Name="Wait" ContainerOrder="3">
      <Help/>
     </Enum>
+    <Enum Name="PreChrg Init" ContainerOrder="5">
+     <Help/>
+    </Enum>
+    <Enum Name="PreChrg Active" ContainerOrder="6">
+     <Help/>
+    </Enum>
+    <Enum Name="PreChrg Complete" ContainerOrder="7">
+     <Help/>
+    </Enum>
+    <Enum Name="Shutdown In Progress" ContainerOrder="8">
+     <Help/>
+    </Enum>
+    <Enum Name="Recycle Power" ContainerOrder="9">
+     <Help/>
+    </Enum>
+    <Enum Name="Blink Fault Code" ContainerOrder="10">
+     <Help/>
+    </Enum>
    </Type>
   </DataTypes>
   <PkgUpgrades>
@@ -5644,73 +5662,21 @@
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Seven"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Filter.Value"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State">
-     <Props UseDefValue="true" DefValue="This.Value"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Run Time">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="HH:MM:SS:ss" DPS="3"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Startup Time">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="HH:MM:SS:ss" DPS="3"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer.Total">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer">
-     <Props UseDefValue="true" DefValue="This.Value"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.Update.m1scr" Name="Root.Motor.State.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 10Hz">
+     <Props UseDefValue="true" DefValue="This.Value">
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
      </Props>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Stall Time">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="HH:MM:SS:ss" DPS="3"/>
-      </Locale>
-     </Props>
      <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.Rx CAN To Update.m1scr" Name="Root.Motor.State.Rx CAN To Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Value">
      <Props Type="::This.Motor State Enumeration">
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Normal"/>
       </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Value">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="MM:SS:ss" DPS="3"/>
-      </Locale>
      </Props>
      <Comment/>
     </Component>
@@ -5929,32 +5895,87 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Diagnostic"/>
     <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Resource"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Release"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Running VSM">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Wait VSM">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.Base Address">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Ready VSM">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.Message Offset">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.State.Off VSM">
-     <Comment/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive.Receive">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive VSM">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.Base Address">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.Message Offset">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive VSM.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive VSM.Receive"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.Strain Gauges">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive VSM.CAN Bus">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.CAN Bus">
+     <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer.Total">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.IGBT Temps Address">
+     <Props Type="u32" Value="160"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Command Message Address">
+     <Props Type="u32" Value="192"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer">
+     <Props UseDefValue="true" DefValue="This.Value"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Diagnostic Data Address">
+     <Props Type="u32" Value="175"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Fault Codes Address">
+     <Props Type="u32" Value="171"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Value">
+     <Props Qty="s">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+      <Locale>
+       <Default Format="MM:SS:ss" DPS="3"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC Temps Address">
+     <Props Type="u32" Value="162"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Startup Time">
+     <Props Qty="s">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+      <Locale>
+       <Default Format="HH:MM:SS:ss" DPS="3"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Run Time">
+     <Props Qty="s">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+      <Locale>
+       <Default Format="HH:MM:SS:ss" DPS="3"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Internal States Address">
+     <Props Type="u32" Value="170"/>
      <Comment/>
     </Component>
    </List>
@@ -6770,23 +6791,18 @@
        <Component Name="BSPD"/>
       </Component>
       <Component Name="State">
-       <Component Name="Value"/>
-       <Component Name="Update"/>
        <Component Name="Timer">
         <Component Name="Total">
-         <Component Name="Stall Time"/>
          <Component Name="Run Time"/>
          <Component Name="Startup Time"/>
         </Component>
         <Component Name="Value"/>
        </Component>
-       <Component Name="Running VSM"/>
-       <Component Name="Off VSM"/>
-       <Component Name="Ready VSM"/>
-       <Component Name="Wait VSM"/>
+       <Component Name="Value"/>
+       <Component Name="Rx CAN To Update"/>
       </Component>
       <Component Name="ESC">
-       <Component Name="CAN Receive VSM">
+       <Component Name="CAN Receive">
         <Component Name="CAN Bus"/>
         <Component Name="Base Address"/>
         <Component Name="Message Offset"/>
@@ -6809,6 +6825,12 @@
       <Component Name="PAir"/>
       <Component Name="TAir"/>
       <Component Name="mAir"/>
+      <Component Name="Internal States Address"/>
+      <Component Name="Fault Codes Address"/>
+      <Component Name="Diagnostic Data Address"/>
+      <Component Name="Command Message Address"/>
+      <Component Name="IGBT Temps Address"/>
+      <Component Name="ESC Temps Address"/>
      </Component>
      <Component Name="ECU">
       <Component Name="Battery Voltage">
