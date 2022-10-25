@@ -1,2 +1,2 @@
 Value = Sensor;
-Warning.Update(Sensor, false, Sensor.Diagnostic eq Sensor.Diagnostic.OK);
+Warning.Update(Sensor, false, Sensor.Diagnostic eq Sensor.Diagnostic.OK, false);

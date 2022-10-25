@@ -1,0 +1,10 @@
+// Internal States (IS) Can PID = 0x0AA, VSM = Byte 0
+local IS Handle = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.Internal States Address,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(IS Handle)) {
+	Value = CanComms.GetInteger(IS Handle, 0, 8);
+}

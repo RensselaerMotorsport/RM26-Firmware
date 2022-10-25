@@ -1,2 +1,3 @@
 Value = Calculate.Average(Front.Left, Front.Right);
-Drive Ratio = Engine.Gearbox.Current Gear.Drive Ratio.Estimated.GetUnscheduled();
+// Needs to change, just putting this here for now
+Drive Ratio = Constants.Drive Ratio;

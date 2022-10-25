@@ -1,13 +1,13 @@
-local handle = CanComms.RxOpenExtended(
-				CAN Bus.AsInteger()-1,
-				Base Address + Message Offset,
+local hMotorTmp = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.ESC Temps Address + 32,
 				0xFFFFF,
 				false);
-/*				
-if (CanComms.RxMessage(VSM handle)) {
-	Motor.State.Startup = CanComms.GetUnsignedInteger(VSM handle, 0, 8);
+				
+if (CanComms.RxMessage(hMotorTmp)) {
+	Motor Temp = CanComms.GetUnsignedInteger(hMotorTmp, 0, 16) / 10.0;
 }
-*/
+
 
 /*local h = CanComms.RxOpenExtended(
 	CAN Bus.AsInteger() - 1,

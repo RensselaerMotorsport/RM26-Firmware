@@ -151,36 +151,18 @@
    </Type>
    <Type Name="Motor State Enumeration" Storage="enum" Default="Off">
     <Enum Name="Off" ContainerOrder="0">
-     <Help/>
+     <Help>
+<![CDATA[
+]]>
+     </Help>
     </Enum>
-    <Enum Name="Running" ContainerOrder="4">
+    <Enum Name="Running" ContainerOrder="2">
      <Help/>
     </Enum>
     <Enum Name="Startup" ContainerOrder="1">
      <Help/>
     </Enum>
-    <Enum Name="Ready" ContainerOrder="2">
-     <Help/>
-    </Enum>
-    <Enum Name="Wait" ContainerOrder="3">
-     <Help/>
-    </Enum>
-    <Enum Name="PreChrg Init" ContainerOrder="5">
-     <Help/>
-    </Enum>
-    <Enum Name="PreChrg Active" ContainerOrder="6">
-     <Help/>
-    </Enum>
-    <Enum Name="PreChrg Complete" ContainerOrder="7">
-     <Help/>
-    </Enum>
-    <Enum Name="Shutdown In Progress" ContainerOrder="8">
-     <Help/>
-    </Enum>
-    <Enum Name="Recycle Power" ContainerOrder="9">
-     <Help/>
-    </Enum>
-    <Enum Name="Blink Fault Code" ContainerOrder="10">
+    <Enum Name="PreChrg Init" ContainerOrder="3">
      <Help/>
     </Enum>
    </Type>
@@ -1397,7 +1379,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Dyno.Keg.Temperature.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Parent.Parent.Engine.State.Timer.Total.Run Time" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Parent.Parent.Motor.State.Timer.Total.Run Time" MaxSites="5"/>
       </Axis>
      </Props>
     </Component>
@@ -2107,7 +2089,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Dyno.Flow Meter.Temperature.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Parent.Parent.Engine.State.Timer.Total.Run Time" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Parent.Parent.Motor.State.Timer.Total.Run Time" MaxSites="5"/>
       </Axis>
      </Props>
     </Component>
@@ -5895,23 +5877,13 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Diagnostic"/>
     <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Resource"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Release"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive Temps">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.Base Address">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.Message Offset">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive.Receive">
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive Temps.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive Temps.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.Strain Gauges">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Receive.CAN Bus">
-     <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer.Total">
@@ -5935,17 +5907,6 @@
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.Fault Codes Address">
      <Props Type="u32" Value="171"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Value">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Format="MM:SS:ss" DPS="3"/>
-      </Locale>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC Temps Address">
@@ -5978,9 +5939,41 @@
      <Props Type="u32" Value="170"/>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.VSM CAN Receive.Value">
+     <Props Type="s32">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.VSM CAN Receive">
+     <Props UseDefValue="true" DefValue="This.Value"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Drive Ratio">
+     <Props Qty="ratio" Value="2.00000000000000000e+00"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Receive Temps.Motor Temp">
+     <Props Qty="K"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Bus">
+     <Props Type="MoTeC Types.CAN Bus Enumeration 2">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.PreChrg Time">
      <Props Qty="s"/>
      <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.VSM CAN Receive.Receive.m1scr" Name="Root.Motor.State.VSM CAN Receive.Receive">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
    </List>
    <Organisation>
@@ -6795,22 +6788,24 @@
        <Component Name="BSPD"/>
       </Component>
       <Component Name="State">
+       <Component Name="VSM CAN Receive">
+        <Component Name="Value"/>
+        <Component Name="Receive"/>
+       </Component>
        <Component Name="Timer">
         <Component Name="Total">
          <Component Name="Run Time"/>
          <Component Name="Startup Time"/>
          <Component Name="PreChrg Time"/>
         </Component>
-        <Component Name="Value"/>
        </Component>
        <Component Name="Value"/>
        <Component Name="Update"/>
       </Component>
       <Component Name="ESC">
-       <Component Name="CAN Receive">
-        <Component Name="CAN Bus"/>
-        <Component Name="Base Address"/>
-        <Component Name="Message Offset"/>
+       <Component Name="CAN Bus"/>
+       <Component Name="CAN Receive Temps">
+        <Component Name="Motor Temp"/>
         <Component Name="Receive"/>
        </Component>
       </Component>
@@ -6826,6 +6821,7 @@
       <Component Name="On 1000Hz"/>
      </Component>
      <Component Name="Constants">
+      <Component Name="Drive Ratio"/>
       <Component Name="rAir"/>
       <Component Name="PAir"/>
       <Component Name="TAir"/>
