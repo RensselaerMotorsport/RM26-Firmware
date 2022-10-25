@@ -1212,7 +1212,10 @@
        <Default Format="MM:SS:ss" DPS="3"/>
       </Locale>
      </Props>
-     <Comment/>
+     <Comment>
+<![CDATA[
+]]>
+     </Comment>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Engine.State.Value">
      <Props Type="MoTeC Types.Engine State Enumeration">

@@ -6,7 +6,7 @@
    <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="58"/>
    <File Name="MoTeC Types" VersionMajor="1" VersionMinor="6" VersionBuild="0"/>
    <File Name="MoTeC Comms" VersionMajor="1" VersionMinor="10" VersionBuild="8"/>
-   <File Name="MoTeC Control" VersionMajor="1" VersionMinor="12" VersionBuild="122"/>
+   <File Name="MoTeC Control" VersionMajor="1" VersionMinor="13" VersionBuild="3"/>
    <File Name="MoTeC Coolant Fan" VersionMajor="1" VersionMinor="6" VersionBuild="7"/>
    <File Name="MoTeC Lap Time" VersionMajor="1" VersionMinor="9" VersionBuild="8"/>
    <File Name="MoTeC Launch" VersionMajor="1" VersionMinor="6" VersionBuild="11"/>
@@ -151,10 +151,7 @@
    </Type>
    <Type Name="Motor State Enumeration" Storage="enum" Default="Off">
     <Enum Name="Off" ContainerOrder="0">
-     <Help>
-<![CDATA[
-]]>
-     </Help>
+     <Help/>
     </Enum>
     <Enum Name="Running" ContainerOrder="2">
      <Help/>
@@ -163,6 +160,27 @@
      <Help/>
     </Enum>
     <Enum Name="PreChrg Init" ContainerOrder="3">
+     <Help/>
+    </Enum>
+    <Enum Name="PreChrg Active" ContainerOrder="4">
+     <Help/>
+    </Enum>
+    <Enum Name="PreChrg Complete" ContainerOrder="5">
+     <Help/>
+    </Enum>
+    <Enum Name="Wait" ContainerOrder="6">
+     <Help/>
+    </Enum>
+    <Enum Name="Ready" ContainerOrder="7">
+     <Help/>
+    </Enum>
+    <Enum Name="Blink Fault Code" ContainerOrder="8">
+     <Help/>
+    </Enum>
+    <Enum Name="Shutdown In Progress" ContainerOrder="9">
+     <Help/>
+    </Enum>
+    <Enum Name="Recycle Power" ContainerOrder="10">
      <Help/>
     </Enum>
    </Type>
@@ -4788,6 +4806,7 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure">
      <Props UseDefValue="true" DefValue="This.Value">
       <List.UserTags>
+       <Entry Value="Engine"/>
        <Entry Value="Input"/>
       </List.UserTags>
      </Props>
@@ -4883,6 +4902,12 @@
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Driver Tune.Switch.Startup"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Input"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Shutoff Temperature">
@@ -5073,6 +5098,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pump">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Inlet.Temperature.Update.m1scr" Name="Root.Motor.Water.Inlet.Temperature.Update">
@@ -5169,7 +5199,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Temperature">
-     <Props UseDefValue="true" DefValue="This.Value"/>
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet">
@@ -5315,7 +5349,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Temperature">
-     <Props UseDefValue="true" DefValue="This.Value"/>
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet">
@@ -5329,6 +5367,11 @@
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Init"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Driver Tune">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Vehicle"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="MoTeC Input.Nine Position Switch" Name="Root.Motor.Driver Tune.Switch">
@@ -5532,6 +5575,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Radiator Fan">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Pressure.Update.m1scr" Name="Root.Motor.Water.Pressure.Update">
@@ -5665,7 +5713,6 @@
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS2.Value">
      <Props>
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Advanced"/>
       </List.UserTags>
      </Props>
@@ -5722,6 +5769,11 @@
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic High"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic Low"/>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="_CalibrationSchema.Throttle_Position_1" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1"/>
@@ -5732,7 +5784,6 @@
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS1.Value">
      <Props>
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Advanced"/>
       </List.UserTags>
      </Props>
@@ -5741,6 +5792,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Difference">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.APPS2.Diagnostic.Time"/>
@@ -5777,16 +5833,22 @@
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.APPS.APPS2.Startup"/>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.APPS.Update.m1scr" Name="Root.Motor.APPS.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 200Hz">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 200Hz"/>
     </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.APPS1 Parameter">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.APPS2 Parameter">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS.BSPD">
@@ -5877,10 +5939,10 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Diagnostic"/>
     <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Resource"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Release"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Receive Temps">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Temps">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Receive Temps.Receive.m1scr" Name="Root.Motor.ESC.CAN Receive Temps.Receive">
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Rx Temps.Receive.m1scr" Name="Root.Motor.ESC.CAN Rx Temps.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.Strain Gauges">
@@ -5955,8 +6017,13 @@
      <Props Qty="ratio" Value="2.00000000000000000e+00"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Receive Temps.Motor Temp">
-     <Props Qty="K"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Temps.Motor Temp">
+     <Props Qty="K">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Bus">
@@ -5969,11 +6036,66 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.PreChrg Time">
-     <Props Qty="s"/>
+     <Props Qty="s">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.VSM CAN Receive.Receive.m1scr" Name="Root.Motor.State.VSM CAN Receive.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Faults.Post Fault Hi">
+     <Props Type="u32">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.State.Timer.Total.Wait Time">
+     <Props Qty="s">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Rx Faults.Receive.m1scr" Name="Root.Motor.ESC.CAN Rx Faults.Receive">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Faults.Run Fault Hi">
+     <Props Type="u32">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Faults.Run Fault Lo">
+     <Props Type="u32">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Faults.Post Fault Lo">
+     <Props Type="u32">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Faults">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
     </Component>
    </List>
    <Organisation>
@@ -6797,6 +6919,7 @@
          <Component Name="Run Time"/>
          <Component Name="Startup Time"/>
          <Component Name="PreChrg Time"/>
+         <Component Name="Wait Time"/>
         </Component>
        </Component>
        <Component Name="Value"/>
@@ -6804,8 +6927,15 @@
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>
-       <Component Name="CAN Receive Temps">
+       <Component Name="CAN Rx Temps">
         <Component Name="Motor Temp"/>
+        <Component Name="Receive"/>
+       </Component>
+       <Component Name="CAN Rx Faults">
+        <Component Name="Post Fault Lo"/>
+        <Component Name="Post Fault Hi"/>
+        <Component Name="Run Fault Lo"/>
+        <Component Name="Run Fault Hi"/>
         <Component Name="Receive"/>
        </Component>
       </Component>

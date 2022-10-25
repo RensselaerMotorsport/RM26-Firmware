@@ -1,44 +1,47 @@
 local et = System.ElapsedTime();
-/*
-if (VSM eq 0) {
+
+if (VSM CAN Receive eq 0) {
 	Value.Set(Value.Startup);
 	Timer.Total.Startup Time += et;
-	Timer.Total.Run Time = 0;
 }
-else if (VSM eq 4) {
+else if (VSM CAN Receive eq 4) {
 	Value.Set(Value.Wait);
+	Timer.Total.Wait Time += et;
 }
-else if (VSM eq 5) {
+else if (VSM CAN Receive eq 5) {
 	Value.Set(Value.Ready);
 }
-else if (VSM eq 6) {
+else if (VSM CAN Receive eq 6) {
 	Value.Set(Value.Running);
 	Timer.Total.Run Time += et;
-	Timer.Total.Startup Time = 0;
 }
-else if (VSM eq 1) {
+else if (VSM CAN Receive eq 1) {
 	Value.Set(Value.PreChrg Init);
+	Timer.Total.PreChrg Time += et;
 }
-else if (VSM eq 2) {
+else if (VSM CAN Receive eq 2) {
 	Value.Set(Value.PreChrg Active);
+	Timer.Total.PreChrg Time += et;
 }
-else if (VSM eq 3) {
+else if (VSM CAN Receive eq 3) {
 	Value.Set(Value.PreChrg Complete);
+	Timer.Total.PreChrg Time += et;
 }
-else if (VSM eq 7) {
+else if (VSM CAN Receive eq 7) {
 	Value.Set(Value.Blink Fault Code);
 }
-else if (VSM eq 14) {
+else if (VSM CAN Receive eq 14) {
 	Value.Set(Value.Shutdown In Progress);
 }
-else if (VSM eq 15) {
+else if (VSM CAN Receive eq 15) {
 	Value.Set(Value.Recycle Power);
 }
 else {
 	Value.Set(Value.Off);
 }
-*/
 
+
+/*
 when (Value) {
 	is (Off) {
 		if (VSM CAN Receive eq 0) {
@@ -102,3 +105,4 @@ when (Value) {
 		}
 	}
 }
+*

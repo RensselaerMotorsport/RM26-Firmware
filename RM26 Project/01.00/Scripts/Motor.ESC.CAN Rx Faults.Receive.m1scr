@@ -1,0 +1,13 @@
+local hFault = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.Fault Codes Address,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(hFault)) {
+	Post Fault Lo = CanComms.GetUnsignedInteger(hFault, 0, 16);
+	Post Fault Hi = CanComms.GetUnsignedInteger(hFault, 16, 16);
+	Run Fault Lo = CanComms.GetUnsignedInteger(hFault, 32, 16);
+	Run Fault Hi = CanComms.GetUnsignedInteger(hFault, 48, 16);
+}
+
