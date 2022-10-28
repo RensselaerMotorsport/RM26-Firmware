@@ -4,5 +4,7 @@
 
 * Should I just make parameters to hold the CAN information for things like vehicle states?
 
+* May be worth looking into DBC files for easier control over CAN information.
+
 
 
