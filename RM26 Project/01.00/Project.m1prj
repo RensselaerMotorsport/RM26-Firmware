@@ -6113,6 +6113,12 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BMS.CAN Bus">
+     <Props Type="MoTeC Types.CAN Bus Enumeration 2">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.BSPD.BSPD Parameter">
@@ -6122,7 +6128,11 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.BSPD.Value">
-     <Props Type="::This.BSPD Enumeration"/>
+     <Props Type="::This.BSPD Enumeration">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Debounce.Value"/>
