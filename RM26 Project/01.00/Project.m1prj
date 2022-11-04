@@ -6171,6 +6171,16 @@
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Release"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Reserve"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Initialise"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Tx Command">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Tx Command.Transmit 200Hz.m1scr" Name="Root.Motor.ESC.CAN Tx Command.Transmit 200Hz">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7041,6 +7051,9 @@
         <Component Name="Run Fault Lo"/>
         <Component Name="Run Fault Hi"/>
         <Component Name="Receive"/>
+       </Component>
+       <Component Name="CAN Tx Command">
+        <Component Name="Transmit 200Hz"/>
        </Component>
       </Component>
       <Component Name="BMS">
