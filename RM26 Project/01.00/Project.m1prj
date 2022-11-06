@@ -6181,10 +6181,56 @@
       </List.UserTags>
      </Props>
     </Component>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Speed.Translation Table">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Init"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Update"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Value">
+     <Props Qty="N.m"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Value"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Init"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Speed.Value">
+     <Props Qty="rad/s">
+      <Locale>
+       <Default Unit="rpm"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Value"/>
    </List>
    <Organisation>
     <Component Name="Root">
      <Component Name="Motor">
+      <Component Name="State">
+       <Component Name="VSM CAN Receive">
+        <Component Name="Value"/>
+        <Component Name="Receive"/>
+       </Component>
+       <Component Name="Timer">
+        <Component Name="Total">
+         <Component Name="Run Time"/>
+         <Component Name="Startup Time"/>
+         <Component Name="PreChrg Time"/>
+         <Component Name="Wait Time"/>
+        </Component>
+       </Component>
+       <Component Name="Value"/>
+       <Component Name="Update"/>
+      </Component>
       <Component Name="Water">
        <Component Name="Outlet">
         <Component Name="Temperature">
@@ -7023,21 +7069,21 @@
         </Component>
        </Component>
       </Component>
-      <Component Name="State">
-       <Component Name="VSM CAN Receive">
-        <Component Name="Value"/>
-        <Component Name="Receive"/>
-       </Component>
-       <Component Name="Timer">
-        <Component Name="Total">
-         <Component Name="Run Time"/>
-         <Component Name="Startup Time"/>
-         <Component Name="PreChrg Time"/>
-         <Component Name="Wait Time"/>
-        </Component>
-       </Component>
+      <Component Name="Speed">
        <Component Name="Value"/>
-       <Component Name="Update"/>
+       <Component Name="Translation Table">
+        <Component Name="Value"/>
+        <Component Name="Init"/>
+        <Component Name="Update"/>
+       </Component>
+      </Component>
+      <Component Name="Torque">
+       <Component Name="Value"/>
+       <Component Name="Translation Table">
+        <Component Name="Value"/>
+        <Component Name="Init"/>
+        <Component Name="Update"/>
+       </Component>
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>

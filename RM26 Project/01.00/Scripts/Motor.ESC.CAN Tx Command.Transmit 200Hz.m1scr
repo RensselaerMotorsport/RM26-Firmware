@@ -7,47 +7,24 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 
 	CanComms.TxInitialise(handle, 8);
 	// Torque Mode - Send desired torque
-	//CanComms.SetUnsignedInteger	(handle,  0, 16, Convert.ToUnsignedInteger( /* desired torque */ )); 
+	CanComms.SetUnsignedInteger	(handle,  0, 16, Convert.ToUnsignedInteger( /* desired torque as Nm * 10*/ )); 
 	// Speed Mode - Send desired speed
-	//CanComms.SetUnsignedInteger	(handle, 16, 16, Convert.ToUnsignedInteger( /* desired speed */ ));
+	CanComms.SetUnsignedInteger	(handle, 16, 16, Convert.ToUnsignedInteger( /* desired speed as RPM */ ));
 	// Desired Direction - 0 = Reverse, 1 = Forward
-	//CanComms.SetUnsignedInteger	(handle, 32, 16, Convert.ToUnsignedInteger( /* desired direction */ ));
+	CanComms.SetUnsignedInteger	(handle, 32, 8, Convert.ToUnsignedInteger( /* desired direction */ ));
 	
 	// Byte 5
 	// Inverter Enable (bit 0) - 0 = off, 1 = on
-	
+	CanComms.SetBit(handle, 40, /* enable boolean */)
 	// Inverter Discharge (bit 1) - 0 = disable discharge, 1 = enable discharge
-	
+	CanComms.SetBit(handle, 41, /* enable boolean */);
 	// Speed Mode Enable (bit 2) - 0 = Do not override, 1 = if controller is in torque mode->override
-	
+	CanComms.SetBit(handle, 42, /* override boolean */);
 	
 	// Commanded Torque Limit - 0 = sets to default
-	//CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger( /* torque limit */ ));
+	CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger( /* torque limit */ ));
 	
-/*
-	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Motor.APPS.Value * 1.0e3));
-	ok = CanComms.TxStandard(h, bus, 0x640);
-
-	CanComms.TxInitialise(h, 8);
-	CanComms.SetUnsignedInteger	(h,  0,  8, Convert.ToUnsignedInteger(Vehicle.Speed * 3.6));
-	//CanComms.SetUnsignedInteger	(h, 16,  8, Convert.ToUnsignedInteger(Engine.Exhaust.Lambda.Group 1 * 1.0e2));
-	//CanComms.SetUnsignedInteger	(h, 24,  8, Convert.ToUnsignedInteger(Engine.Exhaust.Lambda.Group 2 * 1.0e2));
-	ok = CanComms.TxStandard(h, bus, 0x643);
-
-	CanComms.TxInitialise(h, 8);
-	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Front Left * 1.0e5));
-	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Front Right * 1.0e5));
-	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Rear Left * 1.0e5));
-	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Vehicle.Suspension.Position.Rear Right * 1.0e5));
-	ok = CanComms.TxStandard(h, bus, 0x645);
+	ok = CanComms.TxStandard(handle, bus, Constants.Command Message Address);
 	
-	CanComms.TxInitialise(h, 8);
-	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Front.Left * 36));
-	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Front.Right * 36));
-	CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Rear.Left * 36));
-	CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Vehicle.Speed.Rear.Right * 36));
-	ok = CanComms.TxStandard(h, bus, 0x646);
-*/
-
 	ok = ok;
 }
