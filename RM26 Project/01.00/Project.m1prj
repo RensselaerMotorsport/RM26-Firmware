@@ -6181,12 +6181,55 @@
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Speed.Translation Table">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.Traction Control">
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.GPS">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Speed.Value">
+     <Props Qty="rad/s">
+      <Locale>
+       <Default Unit="rpm"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Speed.Translation Table">
+     <Props NumAxes="2">
+      <Axis>
+       <X Source="Parent.Parent.APPS.Value"/>
+       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Speed Limit"/>
+      </Axis>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Init"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Update"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Update"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Speed Limit">
+     <Props Qty="rad/s">
+      <Locale>
+       <Default Unit="rpm"/>
+      </Locale>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Value">
@@ -6198,19 +6241,6 @@
     </Component>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Init"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Speed.Value">
-     <Props Qty="rad/s">
-      <Locale>
-       <Default Unit="rpm"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Value"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -9791,6 +9821,10 @@
        <Component Name="Value"/>
        <Component Name="Update"/>
        <Component Name="Startup"/>
+      </Component>
+      <Component Name="GPS"/>
+      <Component Name="Traction Control">
+       <Component Name="Speed Limit"/>
       </Component>
      </Component>
      <Component Name="Dyno">
