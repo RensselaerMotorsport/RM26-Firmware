@@ -11,7 +11,7 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 	// Speed Mode - Send desired speed
 	CanComms.SetUnsignedInteger	(handle, 16, 16, Convert.ToUnsignedInteger( Motor.Speed ));
 	// Desired Direction - 0 = Reverse, 1 = Forward
-	CanComms.SetUnsignedInteger	(handle, 32, 8, Convert.ToUnsignedInteger( /* desired direction */ ));
+	CanComms.SetUnsignedInteger	(handle, 32, 8, Motor.ESC.Motor Direction);
 	
 	// Byte 5
 	// Inverter Enable (bit 0) - 0 = off, 1 = on
@@ -19,7 +19,7 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 	// Inverter Discharge (bit 1) - 0 = disable discharge, 1 = enable discharge
 	CanComms.SetBit(handle, 41, /* enable boolean */);
 	// Speed Mode Enable (bit 2) - 0 = Do not override, 1 = if controller is in torque mode->override
-	CanComms.SetBit(handle, 42, /* override boolean */);
+	CanComms.SetBit(handle, 42, Motor.ESC.Force Speed Mode);
 	
 	// Commanded Torque Limit - 0 = sets to default
 	CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger( /* torque limit */ ));

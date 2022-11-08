@@ -192,6 +192,14 @@
      <Help/>
     </Enum>
    </Type>
+   <Type Name="Inverter Enable Enumeration" Storage="enum" Default="Disabled">
+    <Enum Name="Disabled" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Enabled" ContainerOrder="1">
+     <Help/>
+    </Enum>
+   </Type>
   </DataTypes>
   <PkgUpgrades>
    <Project Name="Rensselaer Motorsport" Version="RM25" Major="1" Minor="2" Build="1"/>
@@ -6189,18 +6197,10 @@
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
-     <Props UseDefValue="true" DefValue="This.Value">
+     <Props UseDefValue="true" DefValue="This.Translation Table">
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Speed.Value">
-     <Props Qty="rad/s">
-      <Locale>
-       <Default Unit="rpm"/>
-      </Locale>
      </Props>
      <Comment/>
     </Component>
@@ -6213,10 +6213,16 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Value">
+     <Props Qty="rad/s">
+      <Locale>
+       <Default Unit="rpm"/>
+      </Locale>
+     </Props>
+    </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Init"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
-     <Props UseDefValue="true" DefValue="This.Value">
+     <Props UseDefValue="true" DefValue="This.Translation Table">
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
@@ -6232,15 +6238,54 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Value">
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
+     <Props NumAxes="2">
+      <Axis>
+       <X Source="Parent.Parent.APPS.Value"/>
+       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Torque Limit"/>
+      </Axis>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Value">
+     <Props Qty="N.m"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Init"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Force Speed Mode">
+     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Motor Direction">
+     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Inverter Control.Inverter State">
+     <Props Type="::This.Inverter Enable Enumeration"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.Inverter Control.Update.m1scr" Name="Root.Motor.ESC.Inverter Control.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.Inverter Control">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Torque Limit">
      <Props Qty="N.m"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Value"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Init"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7100,7 +7145,6 @@
        </Component>
       </Component>
       <Component Name="Speed">
-       <Component Name="Value"/>
        <Component Name="Translation Table">
         <Component Name="Value"/>
         <Component Name="Init"/>
@@ -7108,7 +7152,6 @@
        </Component>
       </Component>
       <Component Name="Torque">
-       <Component Name="Value"/>
        <Component Name="Translation Table">
         <Component Name="Value"/>
         <Component Name="Init"/>
@@ -7117,6 +7160,12 @@
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>
+       <Component Name="Motor Direction"/>
+       <Component Name="Force Speed Mode"/>
+       <Component Name="Inverter Control">
+        <Component Name="Inverter State"/>
+        <Component Name="Update"/>
+       </Component>
        <Component Name="CAN Rx Temps">
         <Component Name="Motor Temp"/>
         <Component Name="Receive"/>
@@ -9825,6 +9874,7 @@
       <Component Name="GPS"/>
       <Component Name="Traction Control">
        <Component Name="Speed Limit"/>
+       <Component Name="Torque Limit"/>
       </Component>
      </Component>
      <Component Name="Dyno">
