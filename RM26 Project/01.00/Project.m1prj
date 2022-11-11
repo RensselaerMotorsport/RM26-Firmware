@@ -6195,7 +6195,9 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.GPS">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
      <Props UseDefValue="true" DefValue="This.Translation Table">
       <List.UserTags>
@@ -6229,7 +6231,9 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Speed.Translation Table.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Speed Limit">
      <Props Qty="rad/s">
       <Locale>
