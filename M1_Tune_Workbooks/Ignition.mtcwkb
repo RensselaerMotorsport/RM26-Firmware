@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<Workbook Locale="English_United States.1252" DefaultLocale="C" Version="200" Name="Ignition" Profile="Tune" Active="Worksheets">
+ <Worksheets Version="100" Name="Worksheets" PosPC="0,0,1000,1000" Active="Master">
+  <Worksheet Version="200" Name="Master" LinkTo="Default" LockByGPSTime="0">
+   <Controls Active="Calibrate">
+    <MoTeC.Calibrate Version="100" Name="Calibrate" Caption="Trim" PosPC="217,0,1000,239" AutoCaption="0" HelpOrientation="1" HelpSplitter="5000" HelpShow="0" ShowSearch="0" ShowTags="1" UseDefaultTags="0" DefaultTags="" GroupMode="0" ColorAxisBody="1" ShowColorLegend="1" LayoutMode="0" SelectedTable="" SplitOrientation="1" DataPanelWidth="381" DataPanelWidthRatio="0.688969" ShowChannels="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Ignition.Timing.Trim.Overall"/>
+       <DataRef Name="Ignition.Cylinder 1.Trim.Main.Value"/>
+       <DataRef Name="Ignition.Cylinder 1.Trim.Main.Value.Value"/>
+       <DataRef Name="Ignition.Cylinder 2.Trim.Main.Value"/>
+       <DataRef Name="Ignition.Cylinder 2.Trim.Main.Value.Value"/>
+       <DataRef Name="Ignition.Cylinder 3.Trim.Main.Value"/>
+       <DataRef Name="Ignition.Cylinder 3.Trim.Main.Value.Value"/>
+       <DataRef Name="Ignition.Cylinder 4.Trim.Main.Value"/>
+       <DataRef Name="Ignition.Cylinder 4.Trim.Main.Value.Value"/>
+      </DataRefs>
+     </Data>
+     <View>
+      <ColorData>
+       <EvenWidthBandAxis PaletteMode="1" GradientMode="1" BandChanColor="255,0,0" AxisChanColor="255,0,0" Color1="64,64,255" Color2="255,64,64" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="1" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.2" BandCount="10">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="64,64,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.8" Color="64,136,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.8" Max="-0.6" Color="64,203,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.6" Max="-0.4" Color="64,255,236" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.4" Max="-0.2" Color="64,255,169" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.2" Max="0" Color="64,255,98" Visible="1"/>
+        <ColorBand Flags="7" Min="0" Max="0.2" Color="98,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="0.2" Max="0.4" Color="169,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="0.4" Max="0.6" Color="236,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="0.6" Max="0.8" Color="255,203,64" Visible="1"/>
+        <ColorBand Flags="15" Min="0.8" Max="1" Color="255,136,64" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="255,64,64" Visible="1"/>
+       </EvenWidthBandAxis>
+      </ColorData>
+      <ColorDelta.1>
+       <DifferentialBandAxis PaletteMode="3" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="204,255,204" Color2="255,204,204" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="0" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.181818" BandCount="11">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="0,128,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.818182" Color="0,185,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.818182" Max="-0.636364" Color="0,240,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.636364" Max="-0.454545" Color="43,255,43" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.454545" Max="-0.272727" Color="100,255,100" Visible="1"/>
+        <ColorBand Flags="3" Min="-0.272727" Max="0" Color="155,255,155" Visible="1"/>
+        <ColorBand Flags="15" Min="0" Max="0" Color="255,14,14" Visible="0"/>
+        <ColorBand Flags="3" Min="0" Max="0.272727" Color="255,213,213" Visible="1"/>
+        <ColorBand Flags="7" Min="0.272727" Max="0.454545" Color="255,155,155" Visible="1"/>
+        <ColorBand Flags="7" Min="0.454545" Max="0.636364" Color="255,100,100" Visible="1"/>
+        <ColorBand Flags="7" Min="0.636364" Max="0.818182" Color="255,43,43" Visible="1"/>
+        <ColorBand Flags="15" Min="0.818182" Max="1" Color="240,0,0" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="185,0,0" Visible="1"/>
+       </DifferentialBandAxis>
+      </ColorDelta.1>
+     </View>
+     <Headers/>
+    </MoTeC.Calibrate>
+    <MoTeC.TimeDistance Version="100" Name="Time Graph" PosPC="216,239,700,1000" AutoCaption="0" LinkZoom="1" ModeId="" ShowColorLegend="1" TelemetryZoom="0" TraceLineWidth="1" TracePointSize="3" TraceStyle="0" LinkCursor="1" LinkDatum="1" ShowKeyValues="1" ShowKeyStats="0" KeyMode="0" KeyPos="1" ShowGridLines="1" ShowXAxis="1" ShowXAxisScrollBar="0" ShowYAxis="1" ShowYAxisScrollBar="1" ShowMarkers="0" ShowBands="0" BandGroup="" BandMode="0" OverlapMode="0" VariancePos="0.25" VarianceAutoScale="1">
+     <Graphs ActivateChild="Group 2">
+      <Graph Name="Group 1" ScaleMode="2" ScaleMin="0" ScaleMax="1">
+       <Edges Mode="0" TopEdge="0" BottomEdge="117"/>
+       <Edges Mode="1" TopEdge="0" BottomEdge="1000"/>
+       <Lines>
+        <Line Index="0" Enabled="1" Value="0" Color="210,210,210"/>
+        <Line Index="1" Enabled="0" Value="0" Color="0,0,248"/>
+        <Line Index="2" Enabled="0" Value="0" Color="248,0,0"/>
+       </Lines>
+       <Traces ActiveTrace="Ignition.Timing.Value">
+        <Trace Id="Ignition.Timing.Value" DisplayUnit="dBTDC" DisplayDPS="1" Visible="1"/>
+       </Traces>
+      </Graph>
+      <Graph Name="Group 2" ScaleMode="2" ScaleMin="0" ScaleMax="1">
+       <Edges Mode="0" TopEdge="117" BottomEdge="546"/>
+       <Edges Mode="1" TopEdge="0" BottomEdge="1000"/>
+       <Lines>
+        <Line Index="0" Enabled="1" Value="0" Color="210,210,210"/>
+        <Line Index="1" Enabled="0" Value="0" Color="0,0,248"/>
+        <Line Index="2" Enabled="0" Value="0" Color="248,0,0"/>
+       </Lines>
+       <Traces ActiveTrace="Ignition.Cylinder 3.Timing">
+        <Trace Id="Ignition.Cylinder 1.Timing" DisplayUnit="dBTDC" DisplayDPS="1" Visible="1"/>
+        <Trace Id="Ignition.Cylinder 2.Timing" DisplayUnit="dBTDC" DisplayDPS="1" Visible="1"/>
+        <Trace Id="Ignition.Cylinder 3.Timing" DisplayUnit="dBTDC" DisplayDPS="1" Visible="1"/>
+        <Trace Id="Ignition.Cylinder 4.Timing" DisplayUnit="dBTDC" DisplayDPS="1" Visible="1"/>
+       </Traces>
+      </Graph>
+      <Graph Name="Group 3" ScaleMode="2" ScaleMin="0" ScaleMax="1">
+       <Edges Mode="0" TopEdge="546" BottomEdge="750"/>
+       <Edges Mode="1" TopEdge="0" BottomEdge="1000"/>
+       <Lines>
+        <Line Index="0" Enabled="1" Value="0" Color="210,210,210"/>
+        <Line Index="1" Enabled="0" Value="0" Color="0,0,248"/>
+        <Line Index="2" Enabled="0" Value="0" Color="248,0,0"/>
+       </Lines>
+       <Traces ActiveTrace="Engine.Speed.Reference.Engine Speed">
+        <Trace Id="Engine.Speed.Reference.Engine Speed" DisplayUnit="rpm" DisplayDPS="1" Visible="1"/>
+       </Traces>
+      </Graph>
+      <Graph Name="Group 4" ScaleMode="2" ScaleMin="0" ScaleMax="1">
+       <Edges Mode="0" TopEdge="750" BottomEdge="1000"/>
+       <Edges Mode="1" TopEdge="0" BottomEdge="1000"/>
+       <Lines>
+        <Line Index="0" Enabled="1" Value="0" Color="210,210,210"/>
+        <Line Index="1" Enabled="0" Value="0" Color="0,0,248"/>
+        <Line Index="2" Enabled="0" Value="0" Color="248,0,0"/>
+       </Lines>
+       <Traces ActiveTrace="Exhaust.Lambda.Value">
+        <Trace Id="Exhaust.Lambda.Value" DisplayUnit="G A/F" DisplayDPS="3" Visible="1"/>
+       </Traces>
+      </Graph>
+     </Graphs>
+     <Cursor Version="1" Style="1" Snap="1"/>
+    </MoTeC.TimeDistance>
+    <MoTeC.Bar Version="100" Name="Bar" Caption="MAP" PosPC="156,0,217,597" AutoCaption="0" UseDefaultFont="1" ScaleMode="1" MinimumValue="0" MaximumValue="300" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Inlet.Manifold.Pressure.Value" DisplayUnit="kPa" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (4)" Caption="TPS" PosPC="161,597,217,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="100" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Throttle.Position.Value" DisplayUnit="%" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (3)" Caption="Oil T" PosPC="108,597,161,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="150" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="1">
+     <GaugeData Id="Engine.Oil.Temperature Block.Value" DisplayUnit="C" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (2)" Caption="Oil P" PosPC="53,597,108,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="1000" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Engine.Oil.Pressure.Value" DisplayUnit="psi a" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (1)" Caption="Pump" PosPC="0,597,53,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="-100" MaximumValue="100" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="1">
+     <GaugeData Id="Coolant.Pump.Duty Cycle" DisplayUnit="%" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Dial Version="100" Name="Dial (1)" Caption="Coolant Temperature Outlet" PosPC="0,300,156,597" AutoCaption="1" ColorBandingFromChannel="0" UseDefaultFont="1" ScaleMode="1" MinimumValue="0" MaximumValue="120" IndicatorColor="43,255,255" OverrideColor="0" IndicatorColorBands="0" IndicatorStyle="0" DialColorBands="1" ColorBandStyle="1">
+     <GaugeData Id="Coolant.Temperature Outlet.Value" DisplayUnit="C" DisplayDPS="1" Visible="1"/>
+     <ColorBandGroup>
+      <ColorBand Flags="7" Min="0" Max="40" Color="17,17,255" Visible="1"/>
+      <ColorBand Flags="7" Min="95" Max="120" Color="255,0,0" Visible="1"/>
+     </ColorBandGroup>
+    </MoTeC.Dial>
+    <MoTeC.Dial Version="100" Name="Dial" Caption="Engine Speed" PosPC="0,0,156,300" AutoCaption="1" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="16000" IndicatorColor="43,255,255" OverrideColor="0" IndicatorColorBands="0" IndicatorStyle="0" DialColorBands="1" ColorBandStyle="1" ScaleExponent="3">
+     <GaugeData Id="Engine.Speed.Reference.Engine Speed" DisplayUnit="rpm" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Dial>
+    <MoTeC.ChannelList Version="100" Name="Channels" Caption="Diagnostics" PosPC="700,239,1000,596" AutoCaption="0" ShowSearch="0" ShowTags="0" UseDefaultTags="0" DefaultTags="" GroupMode="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Ignition.Diagnostic"/>
+       <DataRef Name="Ignition.Cylinder 1.Output.Diagnostic"/>
+       <DataRef Name="Ignition.Cylinder 2.Output.Diagnostic"/>
+       <DataRef Name="Ignition.Cylinder 3.Output.Diagnostic"/>
+       <DataRef Name="Ignition.Cylinder 4.Output.Diagnostic"/>
+       <DataRef Name="Ignition.Output.Diagnostic"/>
+       <DataRef Name="Ignition.State"/>
+       <DataRef Name="Ignition.Timing.State"/>
+      </DataRefs>
+     </Data>
+     <Headers/>
+    </MoTeC.ChannelList>
+    <MoTeC.ChannelList Version="100" Name="Channels (1)" PosPC="700,610,1000,1000" AutoCaption="0" ShowSearch="0" ShowTags="0" UseDefaultTags="0" DefaultTags="" GroupMode="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Ignition.Timing.Request"/>
+       <DataRef Name="Ignition.Timing.Compensation"/>
+       <DataRef Name="Ignition.Timing.Trim.Value"/>
+       <DataRef Name="Ignition.Charge.Time.Main.Value"/>
+       <DataRef Name="Ignition.Output.Cut Average"/>
+       <DataRef Name="Ignition.Output.Cut Count"/>
+       <DataRef Name="Ignition.Timing.Main.Value"/>
+      </DataRefs>
+     </Data>
+     <Headers/>
+    </MoTeC.ChannelList>
+   </Controls>
+  </Worksheet>
+  <Worksheet Version="200" Name="Main" LinkTo="Default" LockByGPSTime="0">
+   <Controls Active="Calibrate">
+    <MoTeC.Calibrate Version="100" Name="Calibrate" PosPC="216,0,1000,1000" AutoCaption="0" HelpOrientation="1" HelpSplitter="5000" HelpShow="0" ShowSearch="1" ShowTags="1" UseDefaultTags="0" DefaultTags="" GroupMode="2" ColorAxisBody="1" ShowColorLegend="1" LayoutMode="2" SelectedTable="Ignition.Timing.Main" SplitOrientation="0" DataPanelWidthRatio="0.25" ShowChannels="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Ignition.Timing.Main"/>
+       <DataRef Name="Ignition.Timing.Main.Value"/>
+      </DataRefs>
+     </Data>
+     <View>
+      <ColorData>
+       <EvenWidthBandAxis PaletteMode="1" GradientMode="1" BandChanColor="64,255,64" AxisChanColor="64,255,64" Color1="0,0,255" Color2="255,64,64" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="1" BandMode="1" DataMin="-10" DataMax="60" BandWidth="7" BandCount="10">
+        <ColorBand Flags="2" Min="-10" Max="-10" Color="0,0,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-10" Max="-3" Color="6,100,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-3" Max="4" Color="11,188,255" Visible="1"/>
+        <ColorBand Flags="7" Min="4" Max="11" Color="17,255,232" Visible="1"/>
+        <ColorBand Flags="7" Min="11" Max="18" Color="23,255,151" Visible="1"/>
+        <ColorBand Flags="7" Min="18" Max="25" Color="30,255,69" Visible="1"/>
+        <ColorBand Flags="7" Min="25" Max="32" Color="72,255,34" Visible="1"/>
+        <ColorBand Flags="7" Min="32" Max="39" Color="158,255,40" Visible="1"/>
+        <ColorBand Flags="7" Min="39" Max="46" Color="234,255,47" Visible="1"/>
+        <ColorBand Flags="7" Min="46" Max="53" Color="255,200,53" Visible="1"/>
+        <ColorBand Flags="15" Min="53" Max="60" Color="255,132,57" Visible="1"/>
+        <ColorBand Flags="1" Min="60" Max="60" Color="255,64,64" Visible="1"/>
+       </EvenWidthBandAxis>
+      </ColorData>
+      <ColorDelta.1>
+       <DifferentialBandAxis PaletteMode="3" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="204,255,204" Color2="255,204,204" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="0" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.181818" BandCount="11">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="0,128,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.818182" Color="0,185,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.818182" Max="-0.636364" Color="0,240,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.636364" Max="-0.454545" Color="43,255,43" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.454545" Max="-0.272727" Color="100,255,100" Visible="1"/>
+        <ColorBand Flags="3" Min="-0.272727" Max="0" Color="155,255,155" Visible="1"/>
+        <ColorBand Flags="15" Min="0" Max="0" Color="255,14,14" Visible="0"/>
+        <ColorBand Flags="3" Min="0" Max="0.272727" Color="255,213,213" Visible="1"/>
+        <ColorBand Flags="7" Min="0.272727" Max="0.454545" Color="255,155,155" Visible="1"/>
+        <ColorBand Flags="7" Min="0.454545" Max="0.636364" Color="255,100,100" Visible="1"/>
+        <ColorBand Flags="7" Min="0.636364" Max="0.818182" Color="255,43,43" Visible="1"/>
+        <ColorBand Flags="15" Min="0.818182" Max="1" Color="240,0,0" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="185,0,0" Visible="1"/>
+       </DifferentialBandAxis>
+      </ColorDelta.1>
+     </View>
+     <Headers/>
+    </MoTeC.Calibrate>
+    <MoTeC.Dial Version="100" Name="Dial" Caption="Engine Speed" PosPC="0,0,156,302" AutoCaption="1" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="16000" IndicatorColor="43,255,255" OverrideColor="0" IndicatorColorBands="0" IndicatorStyle="0" DialColorBands="1" ColorBandStyle="1" ScaleExponent="3">
+     <GaugeData Id="Engine.Speed.Reference.Engine Speed" DisplayUnit="rpm" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Dial>
+    <MoTeC.Bar Version="100" Name="Bar (1)" Caption="MAP" PosPC="156,0,217,597" AutoCaption="0" UseDefaultFont="1" ScaleMode="1" MinimumValue="0" MaximumValue="300" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Inlet.Manifold.Pressure.Value" DisplayUnit="kPa" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (5)" Caption="TPS" PosPC="162,596,217,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="100" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Throttle.Position.Value" DisplayUnit="%" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (4)" Caption="Oil T" PosPC="108,596,162,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="150" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="1">
+     <GaugeData Id="Engine.Oil.Temperature Block.Value" DisplayUnit="C" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (3)" Caption="Oil P" PosPC="53,596,108,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="0" MaximumValue="1000" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Engine.Oil.Pressure.Value" DisplayUnit="psi a" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Bar Version="100" Name="Bar (2)" Caption="Pump" PosPC="0,596,53,1000" AutoCaption="0" UseDefaultFont="1" ScaleMode="0" MinimumValue="-100" MaximumValue="100" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="1">
+     <GaugeData Id="Coolant.Pump.Duty Cycle" DisplayUnit="%" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+    <MoTeC.Dial Version="100" Name="Dial (1)" Caption="Coolant Temp" PosPC="0,302,156,600" AutoCaption="0" ColorBandingFromChannel="0" UseDefaultFont="1" ScaleMode="1" MinimumValue="0" MaximumValue="120" IndicatorColor="43,255,255" OverrideColor="0" IndicatorColorBands="0" IndicatorStyle="0" DialColorBands="1" ColorBandStyle="1">
+     <GaugeData Id="Coolant.Temperature Outlet.Value" DisplayUnit="C" DisplayDPS="1" Visible="1"/>
+     <ColorBandGroup>
+      <ColorBand Flags="7" Min="0" Max="40" Color="17,17,255" Visible="1"/>
+      <ColorBand Flags="7" Min="95" Max="120" Color="255,0,0" Visible="1"/>
+     </ColorBandGroup>
+    </MoTeC.Dial>
+    <MoTeC.Bar Version="100" Name="Bar" Caption="MAP" PosPC="156,0,216,597" AutoCaption="0" UseDefaultFont="1" ScaleMode="1" MinimumValue="0" MaximumValue="300" Style="2,0,0" OriginStyle="1,0,0" CustomOrigin="0" ColorBanding="1" ColorBandLines="1" ScaleDPS="0">
+     <GaugeData Id="Inlet.Manifold.Pressure.Value" DisplayUnit="kPa" DisplayDPS="1" Visible="1"/>
+    </MoTeC.Bar>
+   </Controls>
+  </Worksheet>
+  <Worksheet Version="200" Name="Compensation" LinkTo="Default" LockByGPSTime="0">
+   <Controls Active="Calibrate">
+    <MoTeC.Calibrate Version="100" Name="Calibrate" PosPC="0,0,750,242" AutoCaption="0" HelpOrientation="1" HelpSplitter="5000" HelpShow="0" ShowSearch="1" ShowTags="1" UseDefaultTags="0" DefaultTags="" GroupMode="2" ColorAxisBody="1" ShowColorLegend="1" LayoutMode="0" SelectedTable="" SplitOrientation="1" DataPanelWidthRatio="0.25" ShowChannels="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Coolant.Temperature.Ignition Timing Compensation"/>
+       <DataRef Name="Coolant.Temperature.Ignition Timing Compensation.Value"/>
+      </DataRefs>
+     </Data>
+     <View>
+      <ColorData>
+       <EvenWidthBandAxis PaletteMode="1" GradientMode="1" BandChanColor="244,244,0" AxisChanColor="244,244,0" Color1="64,64,255" Color2="255,64,64" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="1" BandMode="1" DataMin="-20" DataMax="20" BandWidth="4" BandCount="10">
+        <ColorBand Flags="2" Min="-20" Max="-20" Color="64,64,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-20" Max="-16" Color="64,136,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-16" Max="-12" Color="64,203,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-12" Max="-8" Color="64,255,236" Visible="1"/>
+        <ColorBand Flags="7" Min="-8" Max="-4" Color="64,255,169" Visible="1"/>
+        <ColorBand Flags="7" Min="-4" Max="0" Color="64,255,98" Visible="1"/>
+        <ColorBand Flags="7" Min="0" Max="4" Color="98,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="4" Max="8" Color="169,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="8" Max="12" Color="236,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="12" Max="16" Color="255,203,64" Visible="1"/>
+        <ColorBand Flags="15" Min="16" Max="20" Color="255,136,64" Visible="1"/>
+        <ColorBand Flags="1" Min="20" Max="20" Color="255,64,64" Visible="1"/>
+       </EvenWidthBandAxis>
+      </ColorData>
+      <ColorDelta.1>
+       <DifferentialBandAxis PaletteMode="3" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="204,255,204" Color2="255,204,204" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="0" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.181818" BandCount="11">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="0,128,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.818182" Color="0,185,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.818182" Max="-0.636364" Color="0,240,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.636364" Max="-0.454545" Color="43,255,43" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.454545" Max="-0.272727" Color="100,255,100" Visible="1"/>
+        <ColorBand Flags="3" Min="-0.272727" Max="0" Color="155,255,155" Visible="1"/>
+        <ColorBand Flags="15" Min="0" Max="0" Color="255,14,14" Visible="0"/>
+        <ColorBand Flags="3" Min="0" Max="0.272727" Color="255,213,213" Visible="1"/>
+        <ColorBand Flags="7" Min="0.272727" Max="0.454545" Color="255,155,155" Visible="1"/>
+        <ColorBand Flags="7" Min="0.454545" Max="0.636364" Color="255,100,100" Visible="1"/>
+        <ColorBand Flags="7" Min="0.636364" Max="0.818182" Color="255,43,43" Visible="1"/>
+        <ColorBand Flags="15" Min="0.818182" Max="1" Color="240,0,0" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="185,0,0" Visible="1"/>
+       </DifferentialBandAxis>
+      </ColorDelta.1>
+     </View>
+     <Headers/>
+    </MoTeC.Calibrate>
+    <MoTeC.Calibrate Version="100" Name="Calibrate (2)" PosPC="250,250,1000,1000" AutoCaption="0" HelpOrientation="1" HelpSplitter="5000" HelpShow="0" ShowSearch="1" ShowTags="1" UseDefaultTags="0" DefaultTags="" GroupMode="2" ColorAxisBody="1" ShowColorLegend="1" LayoutMode="0" SelectedTable="" SplitOrientation="1" DataPanelWidthRatio="0.25" ShowChannels="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs/>
+     </Data>
+     <View>
+      <ColorData>
+       <EvenWidthBandAxis PaletteMode="1" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="64,64,255" Color2="255,64,64" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="1" BandMode="1" DataMin="0" DataMax="0" BandWidth="0" BandCount="10"/>
+      </ColorData>
+      <ColorDelta.1>
+       <DifferentialBandAxis PaletteMode="3" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="204,255,204" Color2="255,204,204" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="0" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.181818" BandCount="11">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="0,128,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.818182" Color="0,185,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.818182" Max="-0.636364" Color="0,240,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.636364" Max="-0.454545" Color="43,255,43" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.454545" Max="-0.272727" Color="100,255,100" Visible="1"/>
+        <ColorBand Flags="3" Min="-0.272727" Max="0" Color="155,255,155" Visible="1"/>
+        <ColorBand Flags="15" Min="0" Max="0" Color="255,14,14" Visible="0"/>
+        <ColorBand Flags="3" Min="0" Max="0.272727" Color="255,213,213" Visible="1"/>
+        <ColorBand Flags="7" Min="0.272727" Max="0.454545" Color="255,155,155" Visible="1"/>
+        <ColorBand Flags="7" Min="0.454545" Max="0.636364" Color="255,100,100" Visible="1"/>
+        <ColorBand Flags="7" Min="0.636364" Max="0.818182" Color="255,43,43" Visible="1"/>
+        <ColorBand Flags="15" Min="0.818182" Max="1" Color="240,0,0" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="185,0,0" Visible="1"/>
+       </DifferentialBandAxis>
+      </ColorDelta.1>
+     </View>
+     <Headers/>
+    </MoTeC.Calibrate>
+    <MoTeC.ChannelList Version="100" Name="Channels" PosPC="0,468,750,1000" AutoCaption="0" ShowSearch="0" ShowTags="0" UseDefaultTags="0" DefaultTags="" GroupMode="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Coolant.Temperature.Ignition Timing Compensation.Value"/>
+       <DataRef Name="Ignition.Timing.Compensation"/>
+       <DataRef Name="Inlet.Manifold.Temperature.Ignition Timing Compensation.Value"/>
+      </DataRefs>
+     </Data>
+     <Headers/>
+    </MoTeC.ChannelList>
+    <MoTeC.Calibrate Version="100" Name="Calibrate (1)" PosPC="0,242,750,468" AutoCaption="0" HelpOrientation="1" HelpSplitter="5000" HelpShow="0" ShowSearch="1" ShowTags="1" UseDefaultTags="0" DefaultTags="" GroupMode="2" ColorAxisBody="1" ShowColorLegend="1" LayoutMode="0" SelectedTable="Inlet.Manifold.Temperature.Ignition Timing Compensation" SplitOrientation="1" DataPanelWidthRatio="0.25" ShowChannels="0">
+     <Data Method="2" Match="" Locked="1" Sorted="0">
+      <DataRefs>
+       <DataRef Name="Inlet.Manifold.Temperature.Ignition Timing Compensation"/>
+       <DataRef Name="Inlet.Manifold.Temperature.Ignition Timing Compensation.Value"/>
+      </DataRefs>
+     </Data>
+     <View>
+      <ColorData>
+       <EvenWidthBandAxis PaletteMode="1" GradientMode="1" BandChanColor="43,255,255" AxisChanColor="43,255,255" Color1="64,64,255" Color2="255,64,64" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="1" BandMode="1" DataMin="-20" DataMax="20" BandWidth="4" BandCount="10">
+        <ColorBand Flags="2" Min="-20" Max="-20" Color="64,64,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-20" Max="-16" Color="64,136,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-16" Max="-12" Color="64,203,255" Visible="1"/>
+        <ColorBand Flags="7" Min="-12" Max="-8" Color="64,255,236" Visible="1"/>
+        <ColorBand Flags="7" Min="-8" Max="-4" Color="64,255,169" Visible="1"/>
+        <ColorBand Flags="7" Min="-4" Max="0" Color="64,255,98" Visible="1"/>
+        <ColorBand Flags="7" Min="0" Max="4" Color="98,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="4" Max="8" Color="169,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="8" Max="12" Color="236,255,64" Visible="1"/>
+        <ColorBand Flags="7" Min="12" Max="16" Color="255,203,64" Visible="1"/>
+        <ColorBand Flags="15" Min="16" Max="20" Color="255,136,64" Visible="1"/>
+        <ColorBand Flags="1" Min="20" Max="20" Color="255,64,64" Visible="1"/>
+       </EvenWidthBandAxis>
+      </ColorData>
+      <ColorDelta.1>
+       <DifferentialBandAxis PaletteMode="3" GradientMode="1" BandChanColor="0,0,0" AxisChanColor="0,0,0" Color1="204,255,204" Color2="255,204,204" ReversGradient="0" CentredBands="0" GreaterMaxBand="1" LessMinBand="1" Continuous="0" BandMode="1" DataMin="-1" DataMax="1" BandWidth="0.181818" BandCount="11">
+        <ColorBand Flags="2" Min="-1" Max="-1" Color="0,128,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-1" Max="-0.818182" Color="0,185,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.818182" Max="-0.636364" Color="0,240,0" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.636364" Max="-0.454545" Color="43,255,43" Visible="1"/>
+        <ColorBand Flags="7" Min="-0.454545" Max="-0.272727" Color="100,255,100" Visible="1"/>
+        <ColorBand Flags="3" Min="-0.272727" Max="0" Color="155,255,155" Visible="1"/>
+        <ColorBand Flags="15" Min="0" Max="0" Color="255,14,14" Visible="0"/>
+        <ColorBand Flags="3" Min="0" Max="0.272727" Color="255,213,213" Visible="1"/>
+        <ColorBand Flags="7" Min="0.272727" Max="0.454545" Color="255,155,155" Visible="1"/>
+        <ColorBand Flags="7" Min="0.454545" Max="0.636364" Color="255,100,100" Visible="1"/>
+        <ColorBand Flags="7" Min="0.636364" Max="0.818182" Color="255,43,43" Visible="1"/>
+        <ColorBand Flags="15" Min="0.818182" Max="1" Color="240,0,0" Visible="1"/>
+        <ColorBand Flags="1" Min="1" Max="1" Color="185,0,0" Visible="1"/>
+       </DifferentialBandAxis>
+      </ColorDelta.1>
+     </View>
+     <Headers/>
+    </MoTeC.Calibrate>
+   </Controls>
+  </Worksheet>
+ </Worksheets>
+</Workbook>

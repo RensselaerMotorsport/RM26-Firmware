@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<Maths Locale="English_United States.1252" DefaultLocale="C" Id="User">
+ <MathConstants>
+  <MathConstant Name="Driver Mass" Value="60" Unit="kg"/>
+  <MathConstant Name="Oil Density" Value="0.9" Unit="kg/l"/>
+  <MathConstant Name="Oil Volume" Value="5" Unit="l"/>
+  <MathConstant Name="Vehicle Mass" Value="195" Unit="kg"/>
+ </MathConstants>
+ <MathItems>
+  <MathTable3D Id="Engine Power" DisplayUnit="hp" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Interpolation="1" Rate="0">
+   <XDim Count="16" Id="Engine Speed" Units="rpm" Data="1000.0000 2000.0000 3000.0000 4000.0000 5000.0000 6000.0000 7000.0000 8000.0000 9000.0000 10000.0000 11000.0000 12000.0000 13000.0000 14000.0000 15000.0000 16000.0000"/>
+   <YDim Count="10" Id="Engine Intake Manifold Pressure" Units="kPa" Data="100.0000 90.0000 80.0000 70.0000 60.0000 50.0000 40.0000 30.0000 20.0000 10.0000"/>
+   <Values Units="hp" Data="15.9923 22.4066 28.4626 34.0782 40.0800 47.6607 56.4706 64.6982 71.4266 75.7811 77.5010 76.6466 73.5397 69.0374 64.0234 58.8981 16.0720 21.9249 27.6916 33.2576 39.2539 46.5258 54.8568 62.4610 68.4790 72.1334 73.1892 71.7835 68.3106 63.5726 58.2938 52.5250 16.0528 21.4339 26.8403 32.1112 37.7505 44.7247 52.3858 59.1336 64.2375 66.9259 67.1611 65.0600 61.0869 56.1504 50.6696 44.5421 15.9221 20.6792 25.4974 30.3342 35.4630 41.6098 48.3287 53.9227 57.7307 59.1963 58.3429 55.4046 50.9351 45.7569 40.3611 34.4706 15.5547 19.4950 23.4089 27.5623 32.0064 37.1036 42.4638 46.5466 48.8108 48.8305 46.7187 42.8080 37.8704 32.8370 27.8128 22.5140 14.7643 17.8778 20.8236 23.8740 27.3392 31.1951 34.9201 37.2581 37.8528 36.4188 33.0856 28.3082 23.2232 18.7896 14.3067 9.6983 13.3909 15.5617 17.4504 19.4570 21.8553 24.2952 26.2625 26.7935 25.7224 22.9620 18.7492 13.7331 8.9918 4.6946 0.4608 -3.7959 11.2911 12.4903 13.5154 14.6845 15.9961 17.0369 17.2951 16.1840 13.5917 9.7142 4.9771 0.0012 -4.7557 -9.2250 -13.5242 -17.7667 8.4923 8.8771 9.1890 9.6100 9.9421 9.6576 8.3997 5.8102 1.8492 -2.9935 -8.2007 -13.3782 -18.3338 -23.0404 -27.5570 -31.9893 5.1938 4.6768 4.4618 4.3544 3.7224 2.1276 -0.6748 -4.7488 -9.8573 -15.4925 -21.1825 -26.6640 -31.8701 -36.8270 -41.6032 -46.2957"/>
+  </MathTable3D>
+  <MathExpression Id="Brake Mu" DisplayUnit="ratio" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="'Vehicle Acceleration Longitudinal' [G]" SampleRate="0" Unit="ratio"/>
+  <MathExpression Id="Rear Axle Speed" DisplayUnit="km/h" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Vehicle Speed Rear Left' [km/h] + 'Vehicle Speed Rear Right' [km/h] / 2" SampleRate="0" Unit="km/h"/>
+  <MathExpression Id="Long Acc / Front Brake Pressure" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="'Vehicle Acceleration Longitudinal' [G]  / 'Vehicle Brake Pressure Front' [psi]" SampleRate="0" Unit=""/>
+  <MathExpression Id="Brake Acceleration" DisplayUnit="m/s/s" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="derivative('Corr Speed' [km/h])" SampleRate="0" Unit="m/s/s"/>
+  <MathExpression Id="Normalized Suspension FL" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Vehicle Suspension Position Front Left' [mm] / 'Vehicle Acceleration Lateral' [G]" SampleRate="0" Unit=""/>
+  <MathExpression Id="Normalized Suspension FR" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Vehicle Suspension Position Front Right' [mm] / 'Vehicle Acceleration Lateral' [G]" SampleRate="0" Unit=""/>
+  <MathExpression Id="Normalized Suspension RR" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Vehicle Suspension Position Rear Right' [mm] / 'Vehicle Acceleration Lateral' [G]" SampleRate="0" Unit=""/>
+  <MathExpression Id="Normalized Suspension RL" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Vehicle Suspension Position Rear Left' [mm] / 'Vehicle Acceleration Lateral' [G]" SampleRate="0" Unit=""/>
+  <MathExpression Id="Acceleration Magnitude" DisplayUnit="m/s/s" DisplayDPS="2" DisplayColorIndex="5" Interpolate="1" Script="sqrt('Vehicle Acceleration Lateral' [G]^2 + 'Vehicle Acceleration Longitudinal' [G]^2)" SampleRate="0" Unit="m/s/s"/>
+  <MathExpression Id="Water Temp Rate of Change" DisplayUnit="C/s" DisplayDPS="2" DisplayColorIndex="6" Interpolate="1" Script="derivative('Engine Water Outlet Temperature' [C])" SampleRate="0" Unit="C/s"/>
+  <MathExpression Id="Engine Work" DisplayUnit="kJ" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="integrate('Engine Power' [kW])" SampleRate="0" Unit="kJ"/>
+  <MathExpression Id="Vehicle KE" DisplayUnit="kJ" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="(1/2 )*('Vehicle Mass' [kg] + 'Driver Mass' [kg]) *('Corr Speed' [m/s])^2" SampleRate="0" Unit="J"/>
+  <MathExpression Id="Rate of Change of Vehicle KE" DisplayUnit="kW" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="smooth(derivative('Vehicle KE' [kJ]),0.2)" SampleRate="0" Unit="kW"/>
+  <MathExpression Id="Brake Temp Smoothed" DisplayUnit="C" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="smooth('Vehicle Brake Temperature Front Left' [C],0.5)" SampleRate="0" Unit="C"/>
+  <MathExpression Id="Brake Temp Rate" DisplayUnit="C/s" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="smooth(derivative('Brake Temp Smoothed' [C]),0.3)" SampleRate="0" Unit="C/s"/>
+  <MathExpression Id="Braking Energy" DisplayUnit="kJ" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="-(integrate('Rate of Change of Vehicle KE' [kW],'Rate of Change of Vehicle KE' [kW]  &lt;  0))" SampleRate="0" Unit="kJ"/>
+  <MathExpression Id="Brake Temperature Rate" DisplayUnit="C/s" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="derivative('Brake Temp Smoothed' [C])" SampleRate="0" Unit="C/s"/>
+  <MathExpression Id="Brake Cooling" DisplayUnit="C/s" DisplayDPS="2" DisplayColorIndex="5" Interpolate="1" Script="smooth(-('Brake Temp Rate' [C/s]),0.3)" SampleRate="0" Unit="C/s"/>
+  <MathExpression Id="Rear Axle RPM" DisplayUnit="rpm" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="( 'Rear Axle Speed' [in/s]*60/50.265)" SampleRate="0" Unit="rpm"/>
+  <MathExpression Id="Rear Axle Torque" DisplayUnit="ft.lbf" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="'Engine Power' [hp] * 5252 /'Rear Axle RPM' [rpm]" SampleRate="0" Unit="ft.lbf"/>
+  <MathExpression Id="Predicted Acceleration" DisplayUnit="G" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="(('Rear Axle Torque'[N.m]/0.203)/('Vehicle Mass' [kg]+'Driver Mass' [kg]))-(9.81*1)" SampleRate="0" Unit="m/s/s"/>
+  <MathExpression Id="Long Acc Flipped" DisplayUnit="G" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="'Vehicle Acceleration Longitudinal' [G]*-1" SampleRate="0" Unit="G"/>
+  <MathExpression Id="Suspension Position Centered FL" DisplayUnit="mm" DisplayDPS="2" DisplayColorIndex="5" Interpolate="1" Script="'Vehicle Suspension Position Front Left' [mm] - 29.0" SampleRate="0" Unit="mm"/>
+  <MathExpression Id="Suspension Position Centered FR" DisplayUnit="mm" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="'Vehicle Suspension Position Front Right' [mm] - 30.9" SampleRate="0" Unit="mm"/>
+  <MathExpression Id="Suspension Position Centered RL" DisplayUnit="mm" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="'Vehicle Suspension Position Rear Left' [mm] - 36.3" SampleRate="0" Unit="mm"/>
+  <MathExpression Id="Suspension Position Centered RR" DisplayUnit="mm" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="'Vehicle Suspension Position Rear Right' [mm] - 33.3" SampleRate="0" Unit="mm"/>
+  <MathExpression Id="Electrical System Power Usage" DisplayUnit="W" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="'ECU Communication PDM Receive Battery Voltage' [V] * 'ECU Communication PDM Receive Total Current' [A]" SampleRate="0" Unit="W"/>
+  <MathTable2D Id="Lightened Alternator Charging Power" DisplayUnit="W" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Interpolation="1" Rate="0">
+   <XDim Count="4" Id="Ideal Engine Speed 1st Hold" Units="rpm" Data="0.0000 8000.0000 10000.0000 15000.0000"/>
+   <Values Units="W" Data="0.0000 37.0000 266.0000 479.0000"/>
+  </MathTable2D>
+  <MathExpression Id="Ideal Engine Speed 1st Hold" DisplayUnit="rpm" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="'Rear Axle Speed' [mph] * 443" SampleRate="0" Unit="rpm"/>
+  <MathExpression Id="Average 1-4 EGT" DisplayUnit="C" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="('Engine Exhaust Temperature Cylinder 1' [C] + 'Engine Exhaust Temperature Cylinder 4' [C]) / 2" SampleRate="0" Unit="C"/>
+  <MathExpression Id="Average 2-3 EGT" DisplayUnit="C" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="('Engine Exhaust Temperature Cylinder 2' [C] + 'Engine Exhaust Temperature Cylinder 3' [C]) / 2" SampleRate="0" Unit="C"/>
+  <MathExpression Id="Bank EGT Difference" DisplayUnit="C" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="'Average 1-4 EGT' [C] - 'Average 2-3 EGT' [C]" SampleRate="0" Unit="C"/>
+  <MathExpression Id="Engine Speed Derivative" DisplayUnit="rpm/s" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="derivative('Engine Speed' [rpm])" SampleRate="0" Unit="rpm/s"/>
+  <MathExpression Id="Oil Temp Rate" DisplayUnit="K/s" DisplayDPS="5" DisplayColorIndex="0" Interpolate="1" EnumerationName="" Script="derivative('Oil Temp Smoothed' [K])" SampleRate="0" Unit="C/s"/>
+  <MathExpression Id="Oil Temp Smoothed" DisplayUnit="K" DisplayDPS="5" DisplayColorIndex="1" Interpolate="1" EnumerationName="" Script="smooth('Engine Oil Block Temperature' [C],5.0)" SampleRate="0" Unit="K"/>
+  <MathExpression Id="Oil Heat" DisplayUnit="W" DisplayDPS="5" DisplayColorIndex="6" Interpolate="1" EnumerationName="" Script="3500*'Oil Volume' [l]*'Oil Density' [kg/l]*'Oil Temp Rate' [K/s]" SampleRate="0" Unit="W"/>
+  <MathExpression Id="Engine Power Smoothed" DisplayUnit="hp" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" EnumerationName="" Script="smooth('Engine Power' [hp],10.0)" SampleRate="0" Unit="hp"/>
+ </MathItems>
+</Maths>
