@@ -6270,7 +6270,9 @@
      <Props Qty="N.m"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Speed.Calculate Speed.m1scr" Name="Root.Motor.Speed.Calculate Speed"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Speed.Calculate Speed.m1scr" Name="Root.Motor.Speed.Calculate Speed">
+     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Acceleration Max.Translation Table.Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
     </Component>
@@ -6286,6 +6288,7 @@
      <Props NumAxes="2">
       <Axis>
        <X Source="Parent.Parent.APPS.Value"/>
+       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Acceleration Limit"/>
       </Axis>
      </Props>
      <Comment/>
@@ -6298,6 +6301,14 @@
      <Props Qty="rad/s">
       <Locale>
        <Default Unit="rpm"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Acceleration Limit">
+     <Props Qty="rad/s/s">
+      <Locale>
+       <Default Unit="rpm/s"/>
       </Locale>
      </Props>
      <Comment/>
@@ -9893,6 +9904,7 @@
       </Component>
       <Component Name="GPS"/>
       <Component Name="Traction Control">
+       <Component Name="Acceleration Limit"/>
        <Component Name="Speed Limit"/>
        <Component Name="Torque Limit"/>
       </Component>
