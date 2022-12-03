@@ -6313,6 +6313,16 @@
      </Props>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.IMD">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.IMD.CAN Bus">
+     <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.IMD.CAN Rx">
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7216,6 +7226,10 @@
        <Component Name="CAN Bus"/>
        <Component Name="CAN Rx Temps"/>
        <Component Name="CAN Rx V"/>
+      </Component>
+      <Component Name="IMD">
+       <Component Name="CAN Bus"/>
+       <Component Name="CAN Rx"/>
       </Component>
      </Component>
      <Component Name="Events">
