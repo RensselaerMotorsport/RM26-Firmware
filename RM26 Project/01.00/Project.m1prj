@@ -5884,9 +5884,6 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.BMS">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.APPS2.Voltage.Filter"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.APPS1.Scale"/>
     <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 2.Transform"/>
@@ -6114,21 +6111,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.BMS.CAN Rx V">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.BMS.CAN Rx Temps">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BMS.CAN Bus">
-     <Props Type="MoTeC Types.CAN Bus Enumeration 2">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.BSPD.BSPD Parameter">
      <Comment/>
     </Component>
@@ -6313,19 +6295,51 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.IMD">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.IMD.CAN Bus">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Rx">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx V">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Temps">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Accumulator.BMS.CAN Bus">
+     <Props Type="MoTeC Types.CAN Bus Enumeration 2">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Accumulator.IMD.CAN Bus">
      <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.IMD.CAN Rx">
      <Comment/>
     </Component>
    </List>
    <Organisation>
     <Component Name="Root">
+     <Component Name="Accumulator">
+      <Component Name="BMS">
+       <Component Name="CAN Bus"/>
+       <Component Name="CAN Rx Temps"/>
+       <Component Name="CAN Rx V"/>
+      </Component>
+      <Component Name="IMD">
+       <Component Name="CAN Bus"/>
+       <Component Name="CAN Rx"/>
+      </Component>
+     </Component>
      <Component Name="Motor">
       <Component Name="State">
        <Component Name="VSM CAN Receive">
@@ -7221,15 +7235,6 @@
        <Component Name="CAN Tx Command">
         <Component Name="Transmit 200Hz"/>
        </Component>
-      </Component>
-      <Component Name="BMS">
-       <Component Name="CAN Bus"/>
-       <Component Name="CAN Rx Temps"/>
-       <Component Name="CAN Rx V"/>
-      </Component>
-      <Component Name="IMD">
-       <Component Name="CAN Bus"/>
-       <Component Name="CAN Rx"/>
       </Component>
      </Component>
      <Component Name="Events">
