@@ -26,8 +26,10 @@ Important Connections
 * 12V power to all devices (from current 12V batteries we have)
   * Hot connection of 12V battery goes to the PDM
 * GND connections should go back to a small star ground which connects to the GND of the battery.
+* Need to have RJ45/Ethernet Connector for the ECU made
 
 
+More needs to be done but this is a good start.
 
 
 
