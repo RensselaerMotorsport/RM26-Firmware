@@ -6326,6 +6326,12 @@
      <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.Cooling Fans">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.TC Tune">
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6339,6 +6345,7 @@
        <Component Name="CAN Bus"/>
        <Component Name="CAN Rx"/>
       </Component>
+      <Component Name="Cooling Fans"/>
      </Component>
      <Component Name="Motor">
       <Component Name="State">
@@ -7031,6 +7038,7 @@
         <Component Name="Startup"/>
        </Component>
       </Component>
+      <Component Name="TC Tune"/>
       <Component Name="APPS">
        <Component Name="Value"/>
        <Component Name="Difference"/>
