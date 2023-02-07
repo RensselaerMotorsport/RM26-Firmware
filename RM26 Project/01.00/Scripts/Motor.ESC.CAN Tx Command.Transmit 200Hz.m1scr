@@ -9,7 +9,7 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 	// Torque Mode - Send desired torque
 	CanComms.SetUnsignedInteger	(handle,  0, 16, Convert.ToUnsignedInteger( Motor.Torque*10 )); 
 	// Speed Mode - Send desired speed
-	CanComms.SetUnsignedInteger	(handle, 16, 16, Convert.ToUnsignedInteger( Motor.Speed ));
+	//CanComms.SetUnsignedInteger	(handle, 16, 16, Convert.ToUnsignedInteger( Motor.Speed ));
 	// Desired Direction - 0 = Reverse, 1 = Forward
 	CanComms.SetUnsignedInteger	(handle, 32, 8, Motor.ESC.Motor Direction);
 	

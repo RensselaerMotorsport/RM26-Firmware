@@ -6180,14 +6180,6 @@
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Speed">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
      <Props UseDefValue="true" DefValue="This.Translation Table">
       <List.UserTags>
@@ -6205,10 +6197,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
-     <Props NumAxes="2">
+     <Props NumAxes="3">
       <Axis>
-       <X Source="Parent.Parent.APPS.Value"/>
-       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Torque Limit"/>
+       <X Source="Parent.Parent.APPS.Value" MaxSites="20" MandatoryTune="true"/>
+       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Torque Limit" MandatoryTune="true"/>
+       <Z Source="Parent.Parent.Driver Tune.Switch" MandatoryTune="true"/>
       </Axis>
      </Props>
      <Comment/>
@@ -6252,49 +6245,6 @@
      <Props Qty="N.m"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Speed.Calculate Speed.m1scr" Name="Root.Motor.Speed.Calculate Speed">
-     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 200Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Acceleration Max.Translation Table.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Acceleration Max.Translation Table.Init"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Acceleration Max.Translation Table.Value">
-     <Props Qty="rad/s/s">
-      <Locale>
-       <Default Unit="rpm/s"/>
-      </Locale>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Acceleration Max.Translation Table">
-     <Props NumAxes="2">
-      <Axis>
-       <X Source="Parent.Parent.APPS.Value"/>
-       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Acceleration Limit"/>
-      </Axis>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Acceleration Max">
-     <Props UseDefValue="true" DefValue="This.Translation Table"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Speed.Value">
-     <Props Qty="rad/s">
-      <Locale>
-       <Default Unit="rpm"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Acceleration Limit">
-     <Props Qty="rad/s/s">
-      <Locale>
-       <Default Unit="rpm/s"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
      <Comment/>
     </Component>
@@ -6330,6 +6280,12 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.TC Tune">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Enable">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Testing">
      <Comment/>
     </Component>
    </List>
@@ -7203,17 +7159,6 @@
         </Component>
        </Component>
       </Component>
-      <Component Name="Acceleration Max">
-       <Component Name="Translation Table">
-        <Component Name="Value"/>
-        <Component Name="Init"/>
-        <Component Name="Update"/>
-       </Component>
-      </Component>
-      <Component Name="Speed">
-       <Component Name="Value"/>
-       <Component Name="Calculate Speed"/>
-      </Component>
       <Component Name="Torque">
        <Component Name="Translation Table">
         <Component Name="Value"/>
@@ -7243,6 +7188,9 @@
        <Component Name="CAN Tx Command">
         <Component Name="Transmit 200Hz"/>
        </Component>
+      </Component>
+      <Component Name="Testing">
+       <Component Name="Enable"/>
       </Component>
      </Component>
      <Component Name="Events">
@@ -9931,7 +9879,6 @@
       </Component>
       <Component Name="GPS"/>
       <Component Name="Traction Control">
-       <Component Name="Acceleration Limit"/>
        <Component Name="Speed Limit"/>
        <Component Name="Torque Limit"/>
       </Component>
