@@ -5785,7 +5785,7 @@
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic High"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Diagnostic Low"/>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Value">
-     <Props>
+     <Props Qty="ratio">
       <List.UserTags>
        <Entry Value="Normal"/>
       </List.UserTags>
@@ -5808,7 +5808,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.Difference">
-     <Props>
+     <Props Qty="ratio">
       <List.UserTags>
        <Entry Value="Normal"/>
       </List.UserTags>
@@ -6197,11 +6197,11 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
-     <Props NumAxes="3">
+     <Props>
       <Axis>
-       <X Source="Parent.Parent.APPS.Value" MaxSites="20" MandatoryTune="true"/>
-       <Y Source="Parent.Parent.Parent.Vehicle.Traction Control.Torque Limit" MandatoryTune="true"/>
-       <Z Source="Parent.Parent.Driver Tune.Switch" MandatoryTune="true"/>
+       <X Source="Parent.TC Tune" MaxSites="16" MandatoryTune="true"/>
+       <Y MandatoryTune="true"/>
+       <Z MandatoryTune="true"/>
       </Axis>
      </Props>
      <Comment/>
@@ -6254,7 +6254,7 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx V">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Voltages">
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator">
@@ -6279,7 +6279,8 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.Cooling Fans">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.TC Tune">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque.TC Tune">
+     <Props UseDefValue="true" DefValue="This.TC Strength Table"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Enable">
@@ -6288,6 +6289,144 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Testing">
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Translation Table.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 500Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Margin"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.TC Strength Table.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="MoTeC Input.Nine Position Switch" Name="Root.Motor.Torque.TC Tune.Switch">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.TC Tune.Switch.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Vehicle"/>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Torque.TC Tune.Switch.Resource"/>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Torque.TC Tune.Switch.Resource.Value"/>
+    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.Torque.TC Tune.Switch.Calibration"/>
+    <Component Classname="_CalibrationSchema.Nine_Position_Switch_1" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Zero"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position One"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Two"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Three"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Four"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Five"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Six"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Seven"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Eight"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Nine"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Position Tolerance"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 1.Transform"/>
+    <Component Classname="_CalibrationSchema.Nine_Position_Switch_2" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Zero"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position One"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Two"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Three"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Four.Set"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Five"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Six"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Seven"/>
+    <Component Classname="_IOMethod.abs" Name="Root.Motor.Torque.TC Tune.Switch.Voltage"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Eight"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Nine"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.TC Strength Table.Init"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Sensor Output"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Transform"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Value"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Time"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Low"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.High"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Delay.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.TC Strength Table.Value">
+     <Props Qty="N.m"/>
+    </Component>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.TC Tune.TC Strength Table">
+     <Props NumAxes="2">
+      <Axis>
+       <X Source="Parent.Parent.Parent.Driver Tune.Translation Table" MaxSites="16"/>
+       <Y Source="Parent.Switch"/>
+      </Axis>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Torque.TC Tune.Switch.Startup"/>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Torque.TC Tune.Switch.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Tolerance"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Nine.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Nine"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Eight.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Eight"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Seven.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Seven"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Six.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Six"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Five.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Five"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Four"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Three.Set"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Tolerance"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Three"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Two.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Two"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.One.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.One"/>
+    <Component Classname="BuiltIn.CalFuncUser" Name="Root.Motor.Torque.TC Tune.Switch.Position.Zero.Set"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Position.Zero"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque.TC Tune.Switch.Position"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Absolute Filtered"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Voltage.Resource"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Driver Tune.Translation Table">
+     <Props NumAxes="2">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+       <Entry Value="Tune"/>
+      </List.UserTags>
+      <Axis>
+       <X Source="Parent.Parent.APPS.Value" MaxSites="16" MandatoryTune="true"/>
+       <Y Source="Parent.Switch" MandatoryTune="true"/>
+      </Axis>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Translation Table.Value">
+     <Props Qty="ratio">
+      <Locale>
+       <Default Unit="%"/>
+      </Locale>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Translation Table.Init"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Four"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6295,7 +6434,7 @@
       <Component Name="BMS">
        <Component Name="CAN Bus"/>
        <Component Name="CAN Rx Temps"/>
-       <Component Name="CAN Rx V"/>
+       <Component Name="CAN Rx Voltages"/>
       </Component>
       <Component Name="IMD">
        <Component Name="CAN Bus"/>
@@ -6887,114 +7026,6 @@
         </Component>
        </Component>
       </Component>
-      <Component Name="Driver Tune">
-       <Component Name="Switch">
-        <Component Name="Value"/>
-        <Component Name="Resource">
-         <Component Name="Value"/>
-        </Component>
-        <Component Name="Calibration">
-         <Component Name="Nine Position Switch 1">
-          <Component Name="Diagnostic Low"/>
-          <Component Name="Diagnostic High"/>
-          <Component Name="Position Zero"/>
-          <Component Name="Position One"/>
-          <Component Name="Position Two"/>
-          <Component Name="Position Three"/>
-          <Component Name="Position Four"/>
-          <Component Name="Position Five"/>
-          <Component Name="Position Six"/>
-          <Component Name="Position Seven"/>
-          <Component Name="Position Eight"/>
-          <Component Name="Position Nine"/>
-          <Component Name="Position Tolerance"/>
-          <Component Name="Sensor Output"/>
-          <Component Name="Transform"/>
-         </Component>
-         <Component Name="Nine Position Switch 2">
-          <Component Name="Diagnostic Low"/>
-          <Component Name="Diagnostic High"/>
-          <Component Name="Position Zero"/>
-          <Component Name="Position One"/>
-          <Component Name="Position Two"/>
-          <Component Name="Position Three"/>
-          <Component Name="Position Four"/>
-          <Component Name="Position Five"/>
-          <Component Name="Position Six"/>
-          <Component Name="Position Seven"/>
-          <Component Name="Position Eight"/>
-          <Component Name="Position Nine"/>
-          <Component Name="Position Tolerance"/>
-          <Component Name="Sensor Output"/>
-          <Component Name="Transform"/>
-         </Component>
-        </Component>
-        <Component Name="Diagnostic">
-         <Component Name="Value"/>
-         <Component Name="Time"/>
-         <Component Name="Low"/>
-         <Component Name="High"/>
-         <Component Name="Delay">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Margin"/>
-        </Component>
-        <Component Name="Voltage">
-         <Component Name="Resource"/>
-         <Component Name="Absolute Filtered"/>
-         <Component Name="Absolute"/>
-         <Component Name="Filter">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Initialise"/>
-         <Component Name="Update"/>
-         <Component Name="Input Impedance"/>
-         <Component Name="Input Source"/>
-         <Component Name="Input Bandwidth"/>
-         <Component Name="Input Minimum"/>
-         <Component Name="Input Maximum"/>
-         <Component Name="Input Resolution"/>
-        </Component>
-        <Component Name="Position">
-         <Component Name="Zero">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="One">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Two">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Three">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Four">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Five">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Six">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Seven">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Eight">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Nine">
-          <Component Name="Set"/>
-         </Component>
-         <Component Name="Tolerance"/>
-        </Component>
-        <Component Name="Update"/>
-        <Component Name="Startup"/>
-       </Component>
-      </Component>
-      <Component Name="TC Tune"/>
       <Component Name="APPS">
        <Component Name="Value"/>
        <Component Name="Difference"/>
@@ -7159,7 +7190,231 @@
         </Component>
        </Component>
       </Component>
+      <Component Name="Driver Tune">
+       <Component Name="Switch">
+        <Component Name="Value"/>
+        <Component Name="Resource">
+         <Component Name="Value"/>
+        </Component>
+        <Component Name="Calibration">
+         <Component Name="Nine Position Switch 1">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Position Zero"/>
+          <Component Name="Position One"/>
+          <Component Name="Position Two"/>
+          <Component Name="Position Three"/>
+          <Component Name="Position Four"/>
+          <Component Name="Position Five"/>
+          <Component Name="Position Six"/>
+          <Component Name="Position Seven"/>
+          <Component Name="Position Eight"/>
+          <Component Name="Position Nine"/>
+          <Component Name="Position Tolerance"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+         <Component Name="Nine Position Switch 2">
+          <Component Name="Diagnostic Low"/>
+          <Component Name="Diagnostic High"/>
+          <Component Name="Position Zero"/>
+          <Component Name="Position One"/>
+          <Component Name="Position Two"/>
+          <Component Name="Position Three"/>
+          <Component Name="Position Four"/>
+          <Component Name="Position Five"/>
+          <Component Name="Position Six"/>
+          <Component Name="Position Seven"/>
+          <Component Name="Position Eight"/>
+          <Component Name="Position Nine"/>
+          <Component Name="Position Tolerance"/>
+          <Component Name="Sensor Output"/>
+          <Component Name="Transform"/>
+         </Component>
+        </Component>
+        <Component Name="Diagnostic">
+         <Component Name="Value"/>
+         <Component Name="Time"/>
+         <Component Name="Low"/>
+         <Component Name="High"/>
+         <Component Name="Delay">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Margin"/>
+        </Component>
+        <Component Name="Voltage">
+         <Component Name="Resource"/>
+         <Component Name="Absolute Filtered"/>
+         <Component Name="Absolute"/>
+         <Component Name="Filter">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reserve"/>
+         <Component Name="Release"/>
+         <Component Name="Initialise"/>
+         <Component Name="Update"/>
+         <Component Name="Input Impedance"/>
+         <Component Name="Input Source"/>
+         <Component Name="Input Bandwidth"/>
+         <Component Name="Input Minimum"/>
+         <Component Name="Input Maximum"/>
+         <Component Name="Input Resolution"/>
+        </Component>
+        <Component Name="Position">
+         <Component Name="Zero">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="One">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Two">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Three">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Four">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Five">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Six">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Seven">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Eight">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Nine">
+          <Component Name="Set"/>
+         </Component>
+         <Component Name="Tolerance"/>
+        </Component>
+        <Component Name="Update"/>
+        <Component Name="Startup"/>
+       </Component>
+       <Component Name="Translation Table">
+        <Component Name="Value"/>
+        <Component Name="Init"/>
+        <Component Name="Update"/>
+       </Component>
+      </Component>
       <Component Name="Torque">
+       <Component Name="TC Tune">
+        <Component Name="Switch">
+         <Component Name="Value"/>
+         <Component Name="Resource">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Calibration">
+          <Component Name="Nine Position Switch 1">
+           <Component Name="Diagnostic Low"/>
+           <Component Name="Diagnostic High"/>
+           <Component Name="Position Zero"/>
+           <Component Name="Position One"/>
+           <Component Name="Position Two"/>
+           <Component Name="Position Three"/>
+           <Component Name="Position Four"/>
+           <Component Name="Position Five"/>
+           <Component Name="Position Six"/>
+           <Component Name="Position Seven"/>
+           <Component Name="Position Eight"/>
+           <Component Name="Position Nine"/>
+           <Component Name="Position Tolerance"/>
+           <Component Name="Sensor Output"/>
+           <Component Name="Transform"/>
+          </Component>
+          <Component Name="Nine Position Switch 2">
+           <Component Name="Diagnostic Low"/>
+           <Component Name="Diagnostic High"/>
+           <Component Name="Position Zero"/>
+           <Component Name="Position One"/>
+           <Component Name="Position Two"/>
+           <Component Name="Position Three"/>
+           <Component Name="Position Four"/>
+           <Component Name="Position Five"/>
+           <Component Name="Position Six"/>
+           <Component Name="Position Seven"/>
+           <Component Name="Position Eight"/>
+           <Component Name="Position Nine"/>
+           <Component Name="Position Tolerance"/>
+           <Component Name="Sensor Output"/>
+           <Component Name="Transform"/>
+          </Component>
+         </Component>
+         <Component Name="Diagnostic">
+          <Component Name="Value"/>
+          <Component Name="Time"/>
+          <Component Name="Low"/>
+          <Component Name="High"/>
+          <Component Name="Delay">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Margin"/>
+         </Component>
+         <Component Name="Voltage">
+          <Component Name="Resource"/>
+          <Component Name="Absolute Filtered"/>
+          <Component Name="Absolute"/>
+          <Component Name="Filter">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Reserve"/>
+          <Component Name="Release"/>
+          <Component Name="Initialise"/>
+          <Component Name="Update"/>
+          <Component Name="Input Impedance"/>
+          <Component Name="Input Source"/>
+          <Component Name="Input Bandwidth"/>
+          <Component Name="Input Minimum"/>
+          <Component Name="Input Maximum"/>
+          <Component Name="Input Resolution"/>
+         </Component>
+         <Component Name="Position">
+          <Component Name="Zero">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="One">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Two">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Three">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Four">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Five">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Six">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Seven">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Eight">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Nine">
+           <Component Name="Set"/>
+          </Component>
+          <Component Name="Tolerance"/>
+         </Component>
+         <Component Name="Update"/>
+         <Component Name="Startup"/>
+        </Component>
+        <Component Name="TC Strength Table">
+         <Component Name="Value"/>
+         <Component Name="Init"/>
+         <Component Name="Update"/>
+        </Component>
+       </Component>
        <Component Name="Translation Table">
         <Component Name="Value"/>
         <Component Name="Init"/>
