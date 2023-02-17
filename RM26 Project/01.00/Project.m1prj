@@ -5383,9 +5383,9 @@
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Init"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Driver Tune">
-     <Props>
+     <Props UseDefValue="true" DefValue="This.Translation Table">
       <List.UserTags>
-       <Entry Value="Vehicle"/>
+       <Entry Value="Driver"/>
       </List.UserTags>
      </Props>
      <Comment/>
@@ -6197,10 +6197,10 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
-     <Props>
+     <Props NumAxes="2">
       <Axis>
        <X Source="Parent.TC Tune" MaxSites="16" MandatoryTune="true"/>
-       <Y MandatoryTune="true"/>
+       <Y Source="Parent.Dynamic Torque" MandatoryTune="true"/>
        <Z MandatoryTune="true"/>
       </Axis>
      </Props>
@@ -6302,7 +6302,6 @@
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.TC Tune.Switch.Value">
      <Props>
       <List.UserTags>
-       <Entry Value="Vehicle"/>
        <Entry Value="Normal"/>
       </List.UserTags>
      </Props>
@@ -6356,7 +6355,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.TC Tune.TC Strength Table">
      <Props NumAxes="2">
       <Axis>
-       <X Source="Parent.Parent.Parent.Driver Tune.Translation Table" MaxSites="16"/>
+       <X Source="Parent.Parent.Parent.Driver Tune" MaxSites="16"/>
        <Y Source="Parent.Switch"/>
       </Axis>
      </Props>
@@ -6427,6 +6426,17 @@
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Translation Table.Init"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Four"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Dynamic Torque">
+     <Props Qty="N.m"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.Percent Dynamic">
+     <Props Qty="ratio"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Torque.Dynamic TC Update.m1scr" Name="Root.Motor.Torque.Dynamic TC Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 500Hz"/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7420,6 +7430,9 @@
         <Component Name="Init"/>
         <Component Name="Update"/>
        </Component>
+       <Component Name="Dynamic Torque"/>
+       <Component Name="Percent Dynamic"/>
+       <Component Name="Dynamic TC Update"/>
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>

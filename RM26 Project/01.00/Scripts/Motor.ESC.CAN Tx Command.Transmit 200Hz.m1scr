@@ -26,5 +26,5 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 	
 	ok = CanComms.TxStandard(handle, bus, Constants.Command Message Address);
 	
-	ok = ok;
+	ok = ok; // Done to make MoTeC Build Happy
 }

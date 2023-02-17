@@ -1,0 +1,7 @@
+// Update dynamic TC value based on slip of wheels
+// Compare rear wheel speed to front wheel speed -> determine slip rate
+// Based on slip rate (need to determine based on inner wheel in turn?)
+
+Dynamic Torque = ((Vehicle.Speed.Rear - Vehicle.Speed.Front) / Vehicle.Speed.Front) * TC Tune;
+
+
