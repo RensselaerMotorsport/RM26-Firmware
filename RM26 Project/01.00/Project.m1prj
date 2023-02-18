@@ -6177,11 +6177,8 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.GPS">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
-     <Props UseDefValue="true" DefValue="This.Translation Table">
+     <Props UseDefValue="true" DefValue="This.Dynamic Torque">
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
@@ -6196,20 +6193,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Translation Table">
-     <Props NumAxes="2">
-      <Axis>
-       <X Source="Parent.TC Tune" MaxSites="16" MandatoryTune="true"/>
-       <Y Source="Parent.Dynamic Torque" MandatoryTune="true"/>
-       <Z MandatoryTune="true"/>
-      </Axis>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Value">
-     <Props Qty="N.m"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Translation Table.Init"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Force Speed Mode">
      <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1">
       <List.UserTags>
@@ -6294,7 +6277,7 @@
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Motor.Torque.TC Tune.Switch.Diagnostic.Margin"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.TC Strength Table.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 500Hz"/>
     </Component>
     <Component Classname="MoTeC Input.Nine Position Switch" Name="Root.Motor.Torque.TC Tune.Switch">
      <Comment/>
@@ -6430,13 +6413,28 @@
      <Props Qty="N.m"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Torque.Percent Dynamic">
-     <Props Qty="ratio"/>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Torque.Dynamic TC Update.m1scr" Name="Root.Motor.Torque.Dynamic TC Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Events.On 500Hz"/>
     </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Slip Ratio">
+     <Props Qty="ratio"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Dynamic Translation">
+     <Props>
+      <Axis>
+       <X Source="Parent.Slip Ratio" MaxSites="20" MandatoryTune="true"/>
+      </Axis>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Torque.Dynamic Translation.Value">
+     <Props Qty="ratio"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Torque.Dynamic Translation.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 1000Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Dynamic Translation.Init"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7425,13 +7423,13 @@
          <Component Name="Update"/>
         </Component>
        </Component>
-       <Component Name="Translation Table">
+       <Component Name="Dynamic Torque"/>
+       <Component Name="Slip Ratio"/>
+       <Component Name="Dynamic Translation">
         <Component Name="Value"/>
         <Component Name="Init"/>
         <Component Name="Update"/>
        </Component>
-       <Component Name="Dynamic Torque"/>
-       <Component Name="Percent Dynamic"/>
        <Component Name="Dynamic TC Update"/>
       </Component>
       <Component Name="ESC">
