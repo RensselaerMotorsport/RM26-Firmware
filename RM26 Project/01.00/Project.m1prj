@@ -192,14 +192,56 @@
      <Help/>
     </Enum>
    </Type>
-   <Type Name="Inverter Enable Enumeration" Storage="enum" Default="Disabled">
-    <Enum Name="Disabled" ContainerOrder="0">
+   <Type Name="Inverter State Enumeration" Storage="enum" Default="Power on State">
+    <Enum Name="Power on State" ContainerOrder="0">
      <Help/>
     </Enum>
-    <Enum Name="Enabled" ContainerOrder="1">
+    <Enum Name="Stop State" ContainerOrder="1">
+     <Help/>
+    </Enum>
+    <Enum Name="Open Loop State" ContainerOrder="2">
+     <Help/>
+    </Enum>
+    <Enum Name="Closed Loop State" ContainerOrder="3">
+     <Help/>
+    </Enum>
+    <Enum Name="Wait State" ContainerOrder="4">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 5" ContainerOrder="5">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 6" ContainerOrder="6">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 7" ContainerOrder="7">
+     <Help/>
+    </Enum>
+    <Enum Name="Idle Run State" ContainerOrder="8">
+     <Help/>
+    </Enum>
+    <Enum Name="Idle Stop State" ContainerOrder="9">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 10" ContainerOrder="10">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 11" ContainerOrder="11">
+     <Help/>
+    </Enum>
+    <Enum Name="Internal State 12" ContainerOrder="12">
      <Help/>
     </Enum>
    </Type>
+   <Type Name="Motor Direction Enumeration" Storage="enum" Default="Reverse">
+    <Enum Name="Reverse" ContainerOrder="0" Tags="Information">
+     <Help/>
+    </Enum>
+    <Enum Name="Forward" ContainerOrder="1" Tags="Information">
+     <Help/>
+    </Enum>
+   </Type>
+   <Type Name="IMD State Enumeration" Storage="enum"/>
   </DataTypes>
   <PkgUpgrades>
    <Project Name="Rensselaer Motorsport" Version="RM25" Major="1" Minor="2" Build="1"/>
@@ -4022,9 +4064,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.GPS">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.ECU.Logging.Request">
      <Props DiagnosticLog="true" DiagnosticLogRate="100MS" Type="::Builtin.Logging Mode">
       <List.UserTags>
@@ -6171,25 +6210,11 @@
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.Traction Control">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Vehicle.GPS">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
      <Props UseDefValue="true" DefValue="This.Dynamic Torque">
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Speed Limit">
-     <Props Qty="rad/s">
-      <Locale>
-       <Default Unit="rpm"/>
-      </Locale>
      </Props>
      <Comment/>
     </Component>
@@ -6201,31 +6226,19 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Motor Direction">
-     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Internal States.Inverter State">
+     <Props Type="::This.Inverter State Enumeration"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Inverter Control.Inverter State">
-     <Props Type="::This.Inverter Enable Enumeration"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.Inverter Control.Update.m1scr" Name="Root.Motor.ESC.Inverter Control.Update">
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Rx Internal States.Receive.m1scr" Name="Root.Motor.ESC.CAN Rx Internal States.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.Inverter Control">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Internal States">
      <Props>
       <List.UserTags>
        <Entry Value="Engine"/>
       </List.UserTags>
      </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Traction Control.Torque Limit">
-     <Props Qty="N.m"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
@@ -6423,7 +6436,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Dynamic Translation">
      <Props>
       <Axis>
-       <X Source="Parent.Slip Ratio" MaxSites="20" MandatoryTune="true"/>
+       <X Source="Parent.Slip Ratio" MaxSites="20" Extrapolate="AboveMax" MandatoryTune="true"/>
       </Axis>
      </Props>
      <Comment/>
@@ -6435,6 +6448,41 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 1000Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Torque.Dynamic Translation.Init"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Speed.Front Avg">
+     <Props Qty="m/s" Validation="MinMax" ValMin="0.00000000000000000e+00" ValMax="5.00000000000000000e+01">
+      <Locale>
+       <Default Unit="mph"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.IMD.CAN Rx.Receive.m1scr" Name="Root.Accumulator.IMD.CAN Rx.Receive">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz">
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.IMD.CAN Rx.IMD State">
+     <Props Type="::This.IMD State Enumeration"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Speed.Rear Avg">
+     <Props Qty="m/s" Validation="MinMax" ValMin="0.00000000000000000e+00" ValMax="5.00000000000000000e+01">
+      <Locale>
+       <Default Unit="mph"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.IMD State Address">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Motor Direction">
+     <Props Type="::This.Motor Direction Enumeration"/>
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6446,7 +6494,10 @@
       </Component>
       <Component Name="IMD">
        <Component Name="CAN Bus"/>
-       <Component Name="CAN Rx"/>
+       <Component Name="CAN Rx">
+        <Component Name="IMD State"/>
+        <Component Name="Receive"/>
+       </Component>
       </Component>
       <Component Name="Cooling Fans"/>
      </Component>
@@ -7434,11 +7485,11 @@
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>
-       <Component Name="Motor Direction"/>
        <Component Name="Force Speed Mode"/>
-       <Component Name="Inverter Control">
+       <Component Name="Motor Direction"/>
+       <Component Name="CAN Rx Internal States">
         <Component Name="Inverter State"/>
-        <Component Name="Update"/>
+        <Component Name="Receive"/>
        </Component>
        <Component Name="CAN Rx Temps">
         <Component Name="Motor Temp"/>
@@ -7480,6 +7531,7 @@
       <Component Name="Command Message Address"/>
       <Component Name="IGBT Temps Address"/>
       <Component Name="ESC Temps Address"/>
+      <Component Name="IMD State Address"/>
      </Component>
      <Component Name="ECU">
       <Component Name="Battery Voltage">
@@ -8511,13 +8563,14 @@
         <Component Name="Channel 3"/>
         <Component Name="Channel 4"/>
        </Component>
-       <Component Name="GPS"/>
        <Component Name="Strain Gauges"/>
       </Component>
      </Component>
      <Component Name="Vehicle">
       <Component Name="Speed">
        <Component Name="Value"/>
+       <Component Name="Front Avg"/>
+       <Component Name="Rear Avg"/>
        <Component Name="Update"/>
        <Component Name="Rear">
         <Component Name="Circumference">
@@ -10142,11 +10195,6 @@
        <Component Name="Value"/>
        <Component Name="Update"/>
        <Component Name="Startup"/>
-      </Component>
-      <Component Name="GPS"/>
-      <Component Name="Traction Control">
-       <Component Name="Speed Limit"/>
-       <Component Name="Torque Limit"/>
       </Component>
      </Component>
      <Component Name="Dyno">

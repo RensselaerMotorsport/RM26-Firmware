@@ -1,0 +1,10 @@
+// Receive IMD State and Update
+local hIMD = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.IMD State Address,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(hIMD)) {
+	IMD State = CanComms.GetUnsignedInteger(hIMD, 0, 8);
+}

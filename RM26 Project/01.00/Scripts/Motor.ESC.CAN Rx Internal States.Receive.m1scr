@@ -1,0 +1,10 @@
+local hInvState = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.Internal States Address + 16,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(hInvState)) {
+	Inverter State = CanComms.GetUnsignedInteger(hInvState, 0, 8);
+}
+

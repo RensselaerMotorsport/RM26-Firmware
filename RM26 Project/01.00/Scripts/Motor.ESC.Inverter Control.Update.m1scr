@@ -1,7 +1,0 @@
-local enable = Motor.State eq Motor.State.Running;
-
-if (enable) {
-	Inverter State = Inverter State.Enabled;
-} else {
-	Inverter State = Inverter State.Disabled;
-}
