@@ -6483,6 +6483,41 @@
      <Props Type="::This.Motor Direction Enumeration"/>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.Module Temp Low">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.Faults">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.Module Temp High">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.EEPROM Checksum Invalid">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.EEPROM Data Out of Range">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.EEPROM Update Required">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.Inverter Overtemp">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.Motor Overtemp">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.PreCharge Voltage Failure">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7487,6 +7522,16 @@
        <Component Name="CAN Bus"/>
        <Component Name="Force Speed Mode"/>
        <Component Name="Motor Direction"/>
+       <Component Name="Faults">
+        <Component Name="Module Temp Low"/>
+        <Component Name="Module Temp High"/>
+        <Component Name="EEPROM Checksum Invalid"/>
+        <Component Name="EEPROM Data Out of Range"/>
+        <Component Name="EEPROM Update Required"/>
+        <Component Name="PreCharge Voltage Failure"/>
+        <Component Name="Inverter Overtemp"/>
+        <Component Name="Motor Overtemp"/>
+       </Component>
        <Component Name="CAN Rx Internal States">
         <Component Name="Inverter State"/>
         <Component Name="Receive"/>
