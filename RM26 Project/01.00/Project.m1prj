@@ -242,6 +242,22 @@
     </Enum>
    </Type>
    <Type Name="IMD State Enumeration" Storage="enum"/>
+   <Type Name="Motor Test Enumeration" Storage="enum" Default="Disabled">
+    <Enum Name="Disabled" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Enabled" ContainerOrder="1">
+     <Help/>
+    </Enum>
+   </Type>
+   <Type Name="Force Torque Limit Enumeration" Storage="enum" Default="Disabled">
+    <Enum Name="Disabled" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Enabled" ContainerOrder="1">
+     <Help/>
+    </Enum>
+   </Type>
   </DataTypes>
   <PkgUpgrades>
    <Project Name="Rensselaer Motorsport" Version="RM25" Major="1" Minor="2" Build="1"/>
@@ -4861,7 +4877,6 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure">
      <Props UseDefValue="true" DefValue="This.Value">
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Input"/>
       </List.UserTags>
      </Props>
@@ -4959,7 +4974,6 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS">
      <Props>
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Input"/>
       </List.UserTags>
      </Props>
@@ -5153,11 +5167,6 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pump">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Inlet.Temperature.Update.m1scr" Name="Root.Motor.Water.Inlet.Temperature.Update">
@@ -5254,11 +5263,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Temperature">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet">
@@ -5404,11 +5409,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Temperature">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet">
@@ -5418,15 +5419,16 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Engine"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Init"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Driver Tune">
-     <Props UseDefValue="true" DefValue="This.Translation Table">
-      <List.UserTags>
-       <Entry Value="Driver"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Translation Table"/>
      <Comment/>
     </Component>
     <Component Classname="MoTeC Input.Nine Position Switch" Name="Root.Motor.Driver Tune.Switch">
@@ -5630,11 +5632,6 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Radiator Fan">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Pressure.Update.m1scr" Name="Root.Motor.Water.Pressure.Update">
@@ -5747,11 +5744,7 @@
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Seven"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Filter.Value"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.State.Update.m1scr" Name="Root.Motor.State.Update">
@@ -6073,7 +6066,6 @@
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Temps.Motor Temp">
      <Props Qty="K">
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Normal"/>
       </List.UserTags>
      </Props>
@@ -6082,7 +6074,6 @@
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.CAN Bus">
      <Props Type="MoTeC Types.CAN Bus Enumeration 2">
       <List.UserTags>
-       <Entry Value="Engine"/>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
@@ -6143,11 +6134,6 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Faults">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.BSPD.BSPD Parameter">
@@ -6174,29 +6160,67 @@
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.UpdateDiagnostic"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Hysteresis.Value"/>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Hysteresis">
-     <Props TargetCreation="AutoParam" Target="This.Value"/>
+     <Props TargetCreation="AutoParam" Target="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Threshold.Value"/>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Debounce">
-     <Props TargetCreation="AutoParam" Target="This.Value"/>
+     <Props TargetCreation="AutoParam" Target="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Threshold">
-     <Props TargetCreation="AutoParam" Target="This.Value"/>
+     <Props TargetCreation="AutoParam" Target="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Active Edge.Value"/>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Active Edge">
-     <Props TargetCreation="AutoParam" Target="This.Value"/>
+     <Props TargetCreation="AutoParam" Target="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Pullup Control.Value"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Diagnostic"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Pullup Control">
-     <Props TargetCreation="AutoParam" Target="This.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Diagnostic">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
     </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Voltage"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.State"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Pullup Control">
+     <Props TargetCreation="AutoParam" Target="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Voltage">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Pin"/>
+      </List.UserTags>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.State">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Advanced"/>
+      </List.UserTags>
+     </Props>
+    </Component>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Release"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Reserve"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Initialise"/>
@@ -6204,26 +6228,14 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Tx Command.Transmit 200Hz.m1scr" Name="Root.Motor.ESC.CAN Tx Command.Transmit 200Hz">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
-     <Props UseDefValue="true" DefValue="This.Dynamic Torque">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Dynamic Torque"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Force Speed Mode">
-     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1">
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
+     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Internal States.Inverter State">
@@ -6234,11 +6246,6 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Internal States">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
@@ -6279,7 +6286,12 @@
      <Props UseDefValue="true" DefValue="This.TC Strength Table"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Enable">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Enable Testing">
+     <Props Type="::This.Motor State Enumeration">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Testing">
@@ -6516,6 +6528,33 @@
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Faults.PreCharge Voltage Failure">
      <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Force Torque Limit">
+     <Props Type="::This.Force Torque Limit Enumeration">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Torque Limit">
+     <Props Qty="N.m" Validation="MinMax" ValMin="0.00000000000000000e+00" ValMax="2.50000000000000000e+01">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Test Speed">
+     <Props Qty="rad/s" Validation="MinMax" ValMin="0.00000000000000000e+00" ValMax="5.00000000000000000e+01">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+      <Locale>
+       <Default Unit="rpm"/>
+      </Locale>
+     </Props>
      <Comment/>
     </Component>
    </List>
@@ -7552,7 +7591,10 @@
        </Component>
       </Component>
       <Component Name="Testing">
-       <Component Name="Enable"/>
+       <Component Name="Enable Testing"/>
+       <Component Name="Test Speed"/>
+       <Component Name="Force Torque Limit"/>
+       <Component Name="Torque Limit"/>
       </Component>
      </Component>
      <Component Name="Events">
