@@ -3,27 +3,20 @@ local offTempRange = Calculate.Hysteresis(
 		Shutoff Temperature,
 		Shutoff Temperature + Shutoff Temperature Hysteresis,
 		Shutoff Filter);
-local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
+local on = (Duty Cycle - 0.0) > 0
 		and (Motor.State eq Motor.State.Running or offTempRange)
 		and Motor.State neq Motor.State.Startup;
 
 if (not Output.IsActive()) {
 	State = State.Disabled;
-	Output.Duty Cycle = Off Duty Cycle;
-} else if (Motor.State eq Motor.State.Startup) {
-	State = State.Startup;
-	Startup Procedure.Start(Startup On Time);
-} else if (State eq State.Startup and Motor.State eq Motor.State.Running
-		and Startup Procedure.Remaining() > 0.0) {
-	State = State.Startup;
-	Output.Duty Cycle = Startup Duty;
+	Output.Duty Cycle = 0.0;
 } else if (Test eq Test.Enabled) {
 	State = State.Test;
 	Output.Duty Cycle = Test Duty Cycle;
-} else if (on and State neq State.Startup) {
+} else if (on) {
 	State = State.Enabled;
 	Output.Duty Cycle = Duty Cycle;
-} else if (not on and State neq State.Startup and Test eq Test.Disabled) {
+} else if (not on and Test eq Test.Disabled) {
 	State = State.Disabled;
-	Output.Duty Cycle = Off Duty Cycle;
+	Output.Duty Cycle = 0.0;
 }

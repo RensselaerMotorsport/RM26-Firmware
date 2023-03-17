@@ -90,12 +90,6 @@
     <Enum Name="Test" ContainerOrder="2">
      <Help/>
     </Enum>
-    <Enum Name="Crank" ContainerOrder="3">
-     <Help/>
-    </Enum>
-    <Enum Name="Startup" ContainerOrder="4">
-     <Help/>
-    </Enum>
    </Type>
    <Type Name="Brake State" Storage="enum" Default="Not Braking">
     <Enum Name="Not Braking" ContainerOrder="0">
@@ -241,7 +235,17 @@
      <Help/>
     </Enum>
    </Type>
-   <Type Name="IMD State Enumeration" Storage="enum"/>
+   <Type Name="IMD State Enumeration" Storage="enum" Default="Error">
+    <Enum Name="Error" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Warning" ContainerOrder="1">
+     <Help/>
+    </Enum>
+    <Enum Name="Okay" ContainerOrder="2">
+     <Help/>
+    </Enum>
+   </Type>
    <Type Name="Motor Test Enumeration" Storage="enum" Default="Disabled">
     <Enum Name="Disabled" ContainerOrder="0">
      <Help/>
@@ -4668,274 +4672,7 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Voltage.Input Minimum"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Voltage.Input Maximum"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Voltage.Input Resolution"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Hysteresis"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Maximum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Maximum.Value.Init"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Maximum.Value.Value"/>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Pressure.Warning.Maximum.Value">
-     <Props>
-      <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
-       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
-      </Axis>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Maximum"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Minimum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Minimum.Value.Init"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Warning.Minimum.Value.Value"/>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Pressure.Warning.Minimum.Value">
-     <Props>
-      <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
-       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
-      </Axis>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Minimum">
-     <Props Qty="Pa" Validation="MinMax" ValMin="0.00000000000000000e+000" ValClampMax="false">
-      <Locale>
-       <Default Unit="psi"/>
-      </Locale>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Warning.Count.Limit"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Warning.Count.Value"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure.Warning.Count"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Warning.Mode.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Mode"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Warning.Value"/>
-    <Component Classname="MoTeC Warning.Minimum Maximum Warning" Name="Root.Motor.Water.Pressure.Warning">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Pressure.Sensor Resource">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Pressure.Sensor.Startup"/>
-    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Pressure.Sensor.Calculation">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Minimum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Bandwidth"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Source"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Input Impedance"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.GetStatistics"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Update"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Reserve"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Maximum"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Minimum"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Absolute"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage.Resource"/>
-    <Component Classname="_IOMethod.udig_adc" Name="Root.Motor.Water.Pressure.Sensor.Digital.Voltage"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Update"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Initialise"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Reserve"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Debounce.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Debounce"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Hysteresis.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Hysteresis"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Threshold.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Threshold"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Active Edge.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Active Edge"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Pullup Control.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Pullup Control"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Diagnostic"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin.Resource"/>
-    <Component Classname="_IOMethod.UDIG_IO" Name="Root.Motor.Water.Pressure.Sensor.Digital.Pin"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Update"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Initialise"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Reserve"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Type.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Type"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Diagnostic"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode.Resource"/>
-    <Component Classname="_IOMethod.decode" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode"/>
-    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode Resource.Value"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Pressure.Sensor.Digital.Decode Resource"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure.Sensor.Digital"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Translation.Update"/>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Translation.Init"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Translation.Value"/>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Pressure.Sensor.Translation"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Resolution"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Maximum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Minimum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Bandwidth"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Source"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Input Impedance"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Initialise"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Reserve"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Reference.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Reference"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Filter.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Filter"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Absolute"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Normalised Filtered"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Voltage.Resource"/>
-    <Component Classname="_IOMethod.ratio" Name="Root.Motor.Water.Pressure.Sensor.Voltage"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.Delay.Value"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Driver Tune.Switch.Position"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.Delay"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.High"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.Low"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.Time"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic.Value"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure.Sensor.Diagnostic"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Sensor.Mode"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Transform"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation"/>
-    <Component Classname="_CalibrationSchema.Gauge_Pressure_Resistive_1" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Transform"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Sensor Output"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic High"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic Low"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1.Translation"/>
-    <Component Classname="_CalibrationSchema.Differential_Pressure_1" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Differential Pressure 1"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Transform"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Sensor Output"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic High"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic Low"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation"/>
-    <Component Classname="_CalibrationSchema.Sealed_Gauge_Pressure_1" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Transform"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Sensor Output"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic High"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic Low"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation"/>
-    <Component Classname="_CalibrationSchema.Gauge_Pressure_1" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Gauge Pressure 1"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Transform"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Sensor Output"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic High"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic Low"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation"/>
-    <Component Classname="_CalibrationSchema.Absolute_Pressure_2" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 2"/>
-    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Transform"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Sensor Output"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic High"/>
-    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic Low"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.X"/>
-    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.Value"/>
-    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation"/>
-    <Component Classname="_CalibrationSchema.Absolute_Pressure_1" Name="Root.Motor.Water.Pressure.Sensor.Calibration.Absolute Pressure 1"/>
-    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.Water.Pressure.Sensor.Calibration"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Pressure.Sensor.Resource">
-     <Props NameCreation="Manual" NameTarget="Parent.Parent.Sensor Resource"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Sensor.Value">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Advanced"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.00000000000000000e+006"/>
-      </Locale>
-     </Props>
-    </Component>
-    <Component Classname="MoTeC Input.Pressure" Name="Root.Motor.Water.Pressure.Sensor">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Pressure.Value">
-     <Props Qty="Pa">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.37895200000000000e+006"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Input"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Startup Duty">
-     <Props Qty="ratio" Validation="MinMax" ValMin="0.00000000000000000e+000" ValMax="1.00000000000000000e+000">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Startup On Time">
-     <Props Qty="s" Validation="Positive Gain">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Timer.Remaining" Caps="AutoCreated" Name="Root.Motor.Water.Pump.Startup Procedure.Remaining">
-     <Signature Name="" ReturnType="f32">
-      <Params/>
-      <Description>
-<![CDATA[]]>
-      </Description>
-      <DescriptionFull>
-<![CDATA[]]>
-      </DescriptionFull>
-      <ReturnDescription>
-<![CDATA[]]>
-      </ReturnDescription>
-     </Signature>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Timer.Set" Caps="AutoCreated" Name="Root.Motor.Water.Pump.Startup Procedure.Start">
-     <Signature Name="" ReturnType="">
-      <Params>
-       <Param Name="Timeout" Type="f32" Attrs="0">
-        <Description>
-<![CDATA[]]>
-        </Description>
-       </Param>
-      </Params>
-      <Description>
-<![CDATA[]]>
-      </Description>
-      <DescriptionFull>
-<![CDATA[]]>
-      </DescriptionFull>
-      <ReturnDescription>
-<![CDATA[]]>
-      </ReturnDescription>
-     </Signature>
-    </Component>
-    <Component Classname="BuiltIn.Timer" Name="Root.Motor.Water.Pump.Startup Procedure"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Driver Tune.Switch.Position.Zero"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Shutoff Temperature Hysteresis">
      <Props Qty="K">
@@ -4997,19 +4734,6 @@
      </Props>
      <Comment>
 <![CDATA[The water pump shuts off once the engine temp is below shutoff temperature for this long]]>
-     </Comment>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Off Duty Cycle">
-     <Props Qty="ratio" Validation="MinMax" ValMin="-1.00000000000000000e+000" ValMax="1.00000000000000000e+000">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment>
-<![CDATA[Duty cycle that turns off the pump]]>
      </Comment>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pump.Test Duty Cycle">
@@ -5349,7 +5073,6 @@
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Reserve"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Reference.Value"/>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Reference"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Initialise"/>
     <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Filter"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Absolute"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Normalised Filtered"/>
@@ -5426,7 +5149,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Init"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Driver Tune">
      <Props UseDefValue="true" DefValue="This.Translation Table"/>
      <Comment/>
@@ -5458,289 +5180,16 @@
     <Component Classname="_CalibrationSchema.Nine_Position_Switch_2" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Diagnostic Low"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Diagnostic High"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Reserve"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Voltage.Filter.Value">
-     <Props Value="0.00000000000000000e+000"/>
-    </Component>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Filter">
-     <Props TargetCreation="AutoConst" Target="This.Value"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Absolute">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Absolute Filtered">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Resource">
-     <Props NameTarget="Parent.Parent.Output Resource">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="_IOMethod.abs" Name="Root.Motor.Water.Radiator Fan.Voltage">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Duty Cycle.Value">
-     <Props Qty="ratio" Validation="MinMax" ValMin="-1.00000000000000000e+000" ValMax="1.00000000000000000e+000">
-      <Locale>
-       <Default Unit="%" Min="-1.00000000000000000e+000" Max="1.00000000000000000e+000"/>
-      </Locale>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Radiator Fan.Duty Cycle">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Tune"/>
-      </List.UserTags>
-      <Axis>
-       <X Source="Parent.Parent.Outlet.Temperature" MaxSites="21" MandatoryTune="true"/>
-       <Y Source="Parent.Parent.Parent.Load.Average" MaxSites="16"/>
-      </Axis>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Timer.Remaining" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Timer.Remaining">
-     <Signature Name="" ReturnType="f32">
-      <Params/>
-      <Description>
-<![CDATA[]]>
-      </Description>
-      <DescriptionFull>
-<![CDATA[]]>
-      </DescriptionFull>
-      <ReturnDescription>
-<![CDATA[]]>
-      </ReturnDescription>
-     </Signature>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.Timer.Set" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Timer.Start">
-     <Signature Name="" ReturnType="">
-      <Params>
-       <Param Name="Timeout" Type="f32" Attrs="0">
-        <Description>
-<![CDATA[]]>
-        </Description>
-       </Param>
-      </Params>
-      <Description>
-<![CDATA[]]>
-      </Description>
-      <DescriptionFull>
-<![CDATA[]]>
-      </DescriptionFull>
-      <ReturnDescription>
-<![CDATA[]]>
-      </ReturnDescription>
-     </Signature>
-    </Component>
-    <Component Classname="BuiltIn.Timer" Name="Root.Motor.Water.Radiator Fan.Timer"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Test">
-     <Props Type="MoTeC Types.Mode Enumeration">
-      <List.UserTags>
-       <Entry Value="Tune"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Frequency">
-     <Props Qty="Hz" Validation="MinMax" ValMin="0.00000000000000000e+000" ValMax="2.00000000000000000e+004">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.State">
-     <Props Type="::This.Motor Radiator Fan State Enumeration">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Zero"/>
-    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Radiator Fan.Relay Enable Output Resource">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Setup"/>
-       <Entry Value="Output"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Radiator Fan.Output Resource">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Setup"/>
-       <Entry Value="Output"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 50Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Reserve"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Output.Duty Cycle.Value">
-     <Props>
-      <Locale>
-       <Default Min="-1.00000000000000000e+000" Max="1.00000000000000000e+000"/>
-      </Locale>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Duty Cycle">
-     <Props TargetCreation="AutoChannel" Target="This.Value">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Frequency">
-     <Props Target="Parent.Parent.Frequency">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Output.Resource">
-     <Props NameTarget="Parent.Parent.Output Resource">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-    </Component>
-    <Component Classname="_IOMethod.pwm" Name="Root.Motor.Water.Radiator Fan.Output">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Output"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Radiator Fan">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Pressure.Update.m1scr" Name="Root.Motor.Water.Pressure.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position One"/>
-    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Pressure.Warning.IsActive"/>
-    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Pressure.Warning.GetEngineSpeedLimit"/>
-    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Pressure.Warning.Update"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Warning.Delay.Limit.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Delay.Limit"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Two"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Three"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Four"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Pressure.Warning.Delay.Reset.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Delay.Reset"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Pressure.Warning.Delay.Activate.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Delay.Activate"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Pressure.Warning.Delay.Enable.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Delay.Enable"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Impedance">
-     <Props Qty="ohm"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Source">
-     <Props Qty="V"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Bandwidth">
-     <Props Qty="Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Minimum">
-     <Props Qty="V"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Maximum">
-     <Props Qty="V"/>
-    </Component>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Voltage.Input Resolution">
-     <Props Qty="V"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Radiator Fan.Update.m1scr" Name="Root.Motor.Water.Radiator Fan.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Test Duty Cycle">
-     <Props Qty="ratio" Validation="MinMax" ValMin="-1.00000000000000000e+000" ValMax="1.00000000000000000e+000">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Off Duty Cycle">
-     <Props Qty="ratio" Validation="MinMax" ValMin="-1.00000000000000000e+000" ValMax="1.00000000000000000e+000">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Shutoff Filter">
-     <Props Qty="s">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Shutoff Temperature">
-     <Props Qty="K">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Shutoff Temperature Hysteresis">
-     <Props Qty="K">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Increment">
-     <Props Qty="ratio" Validation="MinMax" ValMin="0.00000000000000000e+000" ValMax="3.00000000000000000e+000">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Five"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Pressure.Warning.Delay"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Six"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Warning.Engine Speed Limit.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Pressure.Warning.Engine Speed Limit">
-     <Props TargetCreation="AutoParam"/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Pressure.Warning.Hysteresis.Value"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Switch.Calibration.Nine Position Switch 2.Position Seven"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Temperature.Sensor.Voltage.Filter.Value"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State">
@@ -5928,63 +5377,6 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.APPS.APPS1.Calibration.Throttle Position 1.Offset"/>
-    <Component Classname="_IOMethod.INJ_PH_IO" Name="Root.Motor.Water.Radiator Fan.Relay.Pin"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Resolution"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Maximum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Minimum"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Bandwidth"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Source"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 50Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Initialise"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Resource"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Reserve"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Filter"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Absolute"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Absolute Filtered"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Resource"/>
-    <Component Classname="_IOMethod.abs" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage"/>
-    <Component Classname="MoTeC Output.Switched Output" Name="Root.Motor.Water.Radiator Fan.Relay">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Reserve"/>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Duty Cycle.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Duty Cycle"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Frequency.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Output.Frequency"/>
-    <Component Classname="_IOMethod.pwm" Name="Root.Motor.Water.Radiator Fan.Relay.Output"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Relay.Open Current.Value"/>
-    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Radiator Fan.Relay.SetState"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Update"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Filter.Value"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Radiator Fan.Relay.Resource">
-     <Props NameCreation="Manual" NameTarget="Parent.Parent.Relay Enable Output Resource"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Relay.State"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Relay.Drive"/>
-    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Voltage.Input Impedance"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Reserve"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Relay.Drive.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Relay.Test"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Relay.Test.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Relay.Polarity"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Hold Current"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Relay.Polarity.Value"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Relay.Open Current"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Initialise"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Peak Current.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Peak Current"/>
-    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Drive.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Drive"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Diagnostic"/>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Resource"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Relay.Pin.Release"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Temps">
      <Comment/>
     </Component>
@@ -6557,6 +5949,551 @@
      </Props>
      <Comment/>
     </Component>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Resource"/>
+    <Component Classname="_IOMethod.abs" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Reserve"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Hold Current"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Peak Current.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Peak Current"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Drive.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Drive"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Diagnostic"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin.Resource"/>
+    <Component Classname="_IOMethod.INJ_PH_IO" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Pin"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Reserve"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Duty Cycle.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Duty Cycle"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Frequency"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output.Resource"/>
+    <Component Classname="_IOMethod.pwm" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Duty Cycle.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Duty Cycle.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Duty Cycle.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Duty Cycle"/>
+    <Component Classname="BuiltIn.FuncUser" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Enable.Update"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Enable.Temperature Hysteresis"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Enable.Temperature Threshold"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Enable.Value"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Enable"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Test.Duty Cycle"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Test.Value"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Test"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Open Current.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Open Current"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Frequency.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Polarity.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Polarity"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Drive.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Drive"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Temperature Sensor Diagnostic"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Temperature">
+     <Props Target="Parent.Parent.Temp Difference"/>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output Resource.Value"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output Resource"/>
+    <Component Classname="MoTeC Coolant Fan.Generic Fan" Name="Root.Motor.Water.Radiator Fan.Generic Fan">
+     <Comment>
+<![CDATA[
+]]>
+     </Comment>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Radiator Fan.Update.m1scr" Name="Root.Motor.Water.Radiator Fan.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Temp Difference">
+     <Props Qty="K"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Sealed_Gauge_Pressure_1" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Gauge_Pressure_1" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation"/>
+    <Component Classname="_CalibrationSchema.Absolute_Pressure_2" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 2"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Absolute_Pressure_1" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Absolute Pressure 1"/>
+    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Resource">
+     <Props NameCreation="Manual" NameTarget="Parent.Parent.Sensor Resource"/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Advanced"/>
+      </List.UserTags>
+      <Locale>
+       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.00000000000000000e+006"/>
+      </Locale>
+     </Props>
+    </Component>
+    <Component Classname="MoTeC Input.Pressure" Name="Root.Motor.Water.Outlet.Pressure.Sensor">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Value">
+     <Props Qty="Pa">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+      <Locale>
+       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.37895200000000000e+006"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Pressure">
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Frequency"/>
+    <Component Classname="_IOMethod.UDIG_IO" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Inlet.Pressure.Update.m1scr" Name="Root.Motor.Water.Inlet.Pressure.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Inlet.Pressure.Warning.IsActive"/>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Inlet.Pressure.Warning.GetEngineSpeedLimit"/>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Inlet.Pressure.Warning.Update"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Limit.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Limit"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Reset.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Reset"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Activate.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Activate"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Enable.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay.Enable"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Pressure.Warning.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Warning.Engine Speed Limit.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Engine Speed Limit">
+     <Props TargetCreation="AutoParam"/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Warning.Hysteresis.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Hysteresis"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Maximum.Value.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Maximum.Value.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Maximum.Value.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Inlet.Pressure.Warning.Maximum.Value">
+     <Props>
+      <Axis>
+       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
+      </Axis>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Maximum"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Minimum.Value.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Minimum.Value.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Warning.Minimum.Value.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Inlet.Pressure.Warning.Minimum.Value">
+     <Props>
+      <Axis>
+       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
+      </Axis>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Minimum">
+     <Props Qty="Pa" Validation="MinMax" ValMin="0.00000000000000000e+000" ValClampMax="false">
+      <Locale>
+       <Default Unit="psi"/>
+      </Locale>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Warning.Count.Limit"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Warning.Count.Value"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Pressure.Warning.Count"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Warning.Mode.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Warning.Mode"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Warning.Value"/>
+    <Component Classname="MoTeC Warning.Minimum Maximum Warning" Name="Root.Motor.Water.Inlet.Pressure.Warning">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor Resource">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Startup"/>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calculation">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.GetStatistics"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Maximum"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Absolute Filtered"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Resource"/>
+    <Component Classname="_IOMethod.udig_adc" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Debounce.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Debounce"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Hysteresis.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Hysteresis"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Threshold.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Threshold"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Active Edge.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Active Edge"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Pullup Control.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Pullup Control"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Diagnostic"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Pin.Resource"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Type.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Type"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Diagnostic"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode.Resource"/>
+    <Component Classname="_IOMethod.decode" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode"/>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode Resource.Value"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Decode Resource"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Translation.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Translation.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Translation.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Translation"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Reference.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Reference"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Normalised Filtered"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage.Resource"/>
+    <Component Classname="_IOMethod.ratio" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Voltage"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.Delay.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.High"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.Low"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.Time"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic.Value"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Diagnostic"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Mode"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Gauge_Pressure_Resistive_1" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Differential_Pressure_1" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Differential Pressure 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Sealed_Gauge_Pressure_1" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Gauge_Pressure_1" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Gauge Pressure 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2.Translation"/>
+    <Component Classname="_CalibrationSchema.Absolute_Pressure_2" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 2"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Absolute_Pressure_1" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration.Absolute Pressure 1"/>
+    <Component Classname="BuiltIn.Calibration" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Calibration"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Resource">
+     <Props NameCreation="Manual" NameTarget="Parent.Parent.Sensor Resource"/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Value">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Advanced"/>
+      </List.UserTags>
+      <Locale>
+       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.00000000000000000e+006"/>
+      </Locale>
+     </Props>
+    </Component>
+    <Component Classname="MoTeC Input.Pressure" Name="Root.Motor.Water.Inlet.Pressure.Sensor">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Inlet.Pressure.Value">
+     <Props Qty="Pa">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+      <Locale>
+       <Default Unit="psi" Min="0.00000000000000000e+000" Max="1.37895200000000000e+006"/>
+      </Locale>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Inlet.Pressure">
+     <Props UseDefValue="true" DefValue="This.Value">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="_CalibrationSchema.Gauge_Pressure_Resistive_1" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Sensor Output"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic High"/>
+    <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Diagnostic Low"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation.Value"/>
+    <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation"/>
+    <Component Classname="_CalibrationSchema.Differential_Pressure_1" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Differential Pressure 1"/>
+    <Component Classname="BuiltIn.FuncUser" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Radiator Fan.Generic Fan.SetDuty"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Warning.Mode.Value"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Pressure.Warning.Count"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Mode"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Warning.Value"/>
+    <Component Classname="MoTeC Warning.Minimum Maximum Warning" Name="Root.Motor.Water.Outlet.Pressure.Warning">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor Resource">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Setup"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Startup"/>
+    <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calculation">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.GetStatistics"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Maximum"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Minimum"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage.Resource"/>
+    <Component Classname="_IOMethod.udig_adc" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Voltage"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Debounce.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Debounce"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Hysteresis.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Hysteresis"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Threshold.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Threshold"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Active Edge.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Active Edge"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Pullup Control.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Pullup Control"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Diagnostic"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin.Resource"/>
+    <Component Classname="_IOMethod.UDIG_IO" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Pin"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Release"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Outlet.Pressure.Update.m1scr" Name="Root.Motor.Water.Outlet.Pressure.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Outlet.Pressure.Warning.IsActive"/>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Outlet.Pressure.Warning.GetEngineSpeedLimit"/>
+    <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Outlet.Pressure.Warning.Update"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Limit.Value"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Type.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Type"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Limit"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Reset.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Reset"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Activate.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Activate"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Enable.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay.Enable"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Pressure.Warning.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Warning.Engine Speed Limit.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Engine Speed Limit">
+     <Props TargetCreation="AutoParam"/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Warning.Hysteresis.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Hysteresis"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Maximum.Value.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Maximum.Value.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Maximum.Value.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Outlet.Pressure.Warning.Maximum.Value">
+     <Props>
+      <Axis>
+       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
+      </Axis>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Maximum"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Minimum.Value.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Minimum.Value.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Warning.Minimum.Value.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Outlet.Pressure.Warning.Minimum.Value">
+     <Props>
+      <Axis>
+       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
+      </Axis>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Warning.Minimum">
+     <Props Qty="Pa" Validation="MinMax" ValMin="0.00000000000000000e+000" ValClampMax="false">
+      <Locale>
+       <Default Unit="psi"/>
+      </Locale>
+     </Props>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Warning.Count.Limit"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Warning.Count.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Diagnostic"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode.Resource"/>
+    <Component Classname="_IOMethod.decode" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode"/>
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode Resource.Value"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital.Decode Resource"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Digital"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Translation.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Translation.Init"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Translation.Value"/>
+    <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Translation"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Resolution"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Maximum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Minimum"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Bandwidth"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Source"/>
+    <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Input Impedance"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+    </Component>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Reserve"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Reference.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Reference"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Filter.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Filter"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Absolute"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Normalised Filtered"/>
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage.Resource"/>
+    <Component Classname="_IOMethod.ratio" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Voltage"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.Delay.Value"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.Delay"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.High"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.Low"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.Time"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic.Value"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Diagnostic"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Mode"/>
+    <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Transform"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.X"/>
+    <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Minimum"/>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -6710,6 +6647,214 @@
          </Component>
          <Component Name="Update"/>
         </Component>
+        <Component Name="Pressure">
+         <Component Name="Value"/>
+         <Component Name="Sensor">
+          <Component Name="Value"/>
+          <Component Name="Resource"/>
+          <Component Name="Calibration">
+           <Component Name="Absolute Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Absolute Pressure 2">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Gauge Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Sealed Gauge Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Differential Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Gauge Pressure Resistive 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Transform"/>
+           </Component>
+          </Component>
+          <Component Name="Mode"/>
+          <Component Name="Diagnostic">
+           <Component Name="Value"/>
+           <Component Name="Time"/>
+           <Component Name="Low"/>
+           <Component Name="High"/>
+           <Component Name="Delay">
+            <Component Name="Value"/>
+           </Component>
+          </Component>
+          <Component Name="Voltage">
+           <Component Name="Resource"/>
+           <Component Name="Normalised Filtered"/>
+           <Component Name="Absolute"/>
+           <Component Name="Filter">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reference">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reserve"/>
+           <Component Name="Release"/>
+           <Component Name="Initialise"/>
+           <Component Name="Update"/>
+           <Component Name="Input Impedance"/>
+           <Component Name="Input Source"/>
+           <Component Name="Input Bandwidth"/>
+           <Component Name="Input Minimum"/>
+           <Component Name="Input Maximum"/>
+           <Component Name="Input Resolution"/>
+          </Component>
+          <Component Name="Translation">
+           <Component Name="Value"/>
+           <Component Name="Init"/>
+           <Component Name="Update"/>
+          </Component>
+          <Component Name="Digital">
+           <Component Name="Decode Resource">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Decode">
+            <Component Name="Resource"/>
+            <Component Name="Diagnostic"/>
+            <Component Name="Type">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Initialise"/>
+            <Component Name="Update"/>
+           </Component>
+           <Component Name="Pin">
+            <Component Name="Resource"/>
+            <Component Name="Diagnostic"/>
+            <Component Name="Pullup Control">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Active Edge">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Threshold">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Hysteresis">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Debounce">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Initialise"/>
+            <Component Name="Update"/>
+           </Component>
+           <Component Name="Voltage">
+            <Component Name="Resource"/>
+            <Component Name="Absolute"/>
+            <Component Name="Minimum"/>
+            <Component Name="Maximum"/>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Update"/>
+            <Component Name="GetStatistics"/>
+            <Component Name="Input Impedance"/>
+            <Component Name="Input Source"/>
+            <Component Name="Input Bandwidth"/>
+            <Component Name="Input Minimum"/>
+            <Component Name="Input Maximum"/>
+            <Component Name="Input Resolution"/>
+           </Component>
+          </Component>
+          <Component Name="Calculation"/>
+          <Component Name="Startup"/>
+         </Component>
+         <Component Name="Sensor Resource"/>
+         <Component Name="Warning">
+          <Component Name="Value"/>
+          <Component Name="Mode">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Count">
+           <Component Name="Value"/>
+           <Component Name="Limit"/>
+          </Component>
+          <Component Name="Minimum">
+           <Component Name="Value">
+            <Component Name="Value"/>
+            <Component Name="Init"/>
+            <Component Name="Update"/>
+           </Component>
+          </Component>
+          <Component Name="Maximum">
+           <Component Name="Value">
+            <Component Name="Value"/>
+            <Component Name="Init"/>
+            <Component Name="Update"/>
+           </Component>
+          </Component>
+          <Component Name="Hysteresis">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Engine Speed Limit">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Delay">
+           <Component Name="Enable">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Activate">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reset">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Limit">
+            <Component Name="Value"/>
+           </Component>
+          </Component>
+          <Component Name="Update"/>
+          <Component Name="GetEngineSpeedLimit"/>
+          <Component Name="IsActive"/>
+         </Component>
+         <Component Name="Update"/>
+        </Component>
        </Component>
        <Component Name="Inlet">
         <Component Name="Temperature">
@@ -6785,6 +6930,214 @@
          <Component Name="Sensor Resource"/>
          <Component Name="Update"/>
         </Component>
+        <Component Name="Pressure">
+         <Component Name="Value"/>
+         <Component Name="Sensor">
+          <Component Name="Value"/>
+          <Component Name="Resource"/>
+          <Component Name="Calibration">
+           <Component Name="Absolute Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Absolute Pressure 2">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Gauge Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Sealed Gauge Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Differential Pressure 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Diagnostic Low"/>
+            <Component Name="Diagnostic High"/>
+            <Component Name="Sensor Output"/>
+            <Component Name="Transform"/>
+           </Component>
+           <Component Name="Gauge Pressure Resistive 1">
+            <Component Name="Translation">
+             <Component Name="Value"/>
+             <Component Name="X"/>
+            </Component>
+            <Component Name="Transform"/>
+           </Component>
+          </Component>
+          <Component Name="Mode"/>
+          <Component Name="Diagnostic">
+           <Component Name="Value"/>
+           <Component Name="Time"/>
+           <Component Name="Low"/>
+           <Component Name="High"/>
+           <Component Name="Delay">
+            <Component Name="Value"/>
+           </Component>
+          </Component>
+          <Component Name="Voltage">
+           <Component Name="Resource"/>
+           <Component Name="Normalised Filtered"/>
+           <Component Name="Absolute"/>
+           <Component Name="Filter">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reference">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reserve"/>
+           <Component Name="Release"/>
+           <Component Name="Initialise"/>
+           <Component Name="Update"/>
+           <Component Name="Input Impedance"/>
+           <Component Name="Input Source"/>
+           <Component Name="Input Bandwidth"/>
+           <Component Name="Input Minimum"/>
+           <Component Name="Input Maximum"/>
+           <Component Name="Input Resolution"/>
+          </Component>
+          <Component Name="Translation">
+           <Component Name="Value"/>
+           <Component Name="Init"/>
+           <Component Name="Update"/>
+          </Component>
+          <Component Name="Digital">
+           <Component Name="Decode Resource">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Decode">
+            <Component Name="Resource"/>
+            <Component Name="Diagnostic"/>
+            <Component Name="Type">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Initialise"/>
+            <Component Name="Update"/>
+           </Component>
+           <Component Name="Pin">
+            <Component Name="Resource"/>
+            <Component Name="Diagnostic"/>
+            <Component Name="Pullup Control">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Active Edge">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Threshold">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Hysteresis">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Debounce">
+             <Component Name="Value"/>
+            </Component>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Initialise"/>
+            <Component Name="Update"/>
+           </Component>
+           <Component Name="Voltage">
+            <Component Name="Resource"/>
+            <Component Name="Absolute"/>
+            <Component Name="Minimum"/>
+            <Component Name="Maximum"/>
+            <Component Name="Reserve"/>
+            <Component Name="Release"/>
+            <Component Name="Update"/>
+            <Component Name="GetStatistics"/>
+            <Component Name="Input Impedance"/>
+            <Component Name="Input Source"/>
+            <Component Name="Input Bandwidth"/>
+            <Component Name="Input Minimum"/>
+            <Component Name="Input Maximum"/>
+            <Component Name="Input Resolution"/>
+           </Component>
+          </Component>
+          <Component Name="Calculation"/>
+          <Component Name="Startup"/>
+         </Component>
+         <Component Name="Sensor Resource"/>
+         <Component Name="Warning">
+          <Component Name="Value"/>
+          <Component Name="Mode">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Count">
+           <Component Name="Value"/>
+           <Component Name="Limit"/>
+          </Component>
+          <Component Name="Minimum">
+           <Component Name="Value">
+            <Component Name="Value"/>
+            <Component Name="Init"/>
+            <Component Name="Update"/>
+           </Component>
+          </Component>
+          <Component Name="Maximum">
+           <Component Name="Value">
+            <Component Name="Value"/>
+            <Component Name="Init"/>
+            <Component Name="Update"/>
+           </Component>
+          </Component>
+          <Component Name="Hysteresis">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Engine Speed Limit">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Delay">
+           <Component Name="Enable">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Activate">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Reset">
+            <Component Name="Value"/>
+           </Component>
+           <Component Name="Limit">
+            <Component Name="Value"/>
+           </Component>
+          </Component>
+          <Component Name="Update"/>
+          <Component Name="GetEngineSpeedLimit"/>
+          <Component Name="IsActive"/>
+         </Component>
+         <Component Name="Update"/>
+        </Component>
        </Component>
        <Component Name="Pump">
         <Component Name="Output">
@@ -6826,300 +7179,69 @@
         </Component>
         <Component Name="Update"/>
         <Component Name="Test Duty Cycle"/>
-        <Component Name="Off Duty Cycle"/>
         <Component Name="Shutoff Filter"/>
         <Component Name="Shutoff Temperature"/>
         <Component Name="Shutoff Temperature Hysteresis"/>
-        <Component Name="Startup Procedure">
-         <Component Name="Start"/>
-         <Component Name="Remaining"/>
-        </Component>
-        <Component Name="Startup On Time"/>
-        <Component Name="Startup Duty"/>
-       </Component>
-       <Component Name="Pressure">
-        <Component Name="Value"/>
-        <Component Name="Sensor">
-         <Component Name="Value"/>
-         <Component Name="Resource"/>
-         <Component Name="Calibration">
-          <Component Name="Absolute Pressure 1">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Diagnostic Low"/>
-           <Component Name="Diagnostic High"/>
-           <Component Name="Sensor Output"/>
-           <Component Name="Transform"/>
-          </Component>
-          <Component Name="Absolute Pressure 2">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Diagnostic Low"/>
-           <Component Name="Diagnostic High"/>
-           <Component Name="Sensor Output"/>
-           <Component Name="Transform"/>
-          </Component>
-          <Component Name="Gauge Pressure 1">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Diagnostic Low"/>
-           <Component Name="Diagnostic High"/>
-           <Component Name="Sensor Output"/>
-           <Component Name="Transform"/>
-          </Component>
-          <Component Name="Sealed Gauge Pressure 1">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Diagnostic Low"/>
-           <Component Name="Diagnostic High"/>
-           <Component Name="Sensor Output"/>
-           <Component Name="Transform"/>
-          </Component>
-          <Component Name="Differential Pressure 1">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Diagnostic Low"/>
-           <Component Name="Diagnostic High"/>
-           <Component Name="Sensor Output"/>
-           <Component Name="Transform"/>
-          </Component>
-          <Component Name="Gauge Pressure Resistive 1">
-           <Component Name="Translation">
-            <Component Name="Value"/>
-            <Component Name="X"/>
-           </Component>
-           <Component Name="Transform"/>
-          </Component>
-         </Component>
-         <Component Name="Mode"/>
-         <Component Name="Diagnostic">
-          <Component Name="Value"/>
-          <Component Name="Time"/>
-          <Component Name="Low"/>
-          <Component Name="High"/>
-          <Component Name="Delay">
-           <Component Name="Value"/>
-          </Component>
-         </Component>
-         <Component Name="Voltage">
-          <Component Name="Resource"/>
-          <Component Name="Normalised Filtered"/>
-          <Component Name="Absolute"/>
-          <Component Name="Filter">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Reference">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Reserve"/>
-          <Component Name="Release"/>
-          <Component Name="Initialise"/>
-          <Component Name="Update"/>
-          <Component Name="Input Impedance"/>
-          <Component Name="Input Source"/>
-          <Component Name="Input Bandwidth"/>
-          <Component Name="Input Minimum"/>
-          <Component Name="Input Maximum"/>
-          <Component Name="Input Resolution"/>
-         </Component>
-         <Component Name="Translation">
-          <Component Name="Value"/>
-          <Component Name="Init"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="Digital">
-          <Component Name="Decode Resource">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Decode">
-           <Component Name="Resource"/>
-           <Component Name="Diagnostic"/>
-           <Component Name="Type">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Reserve"/>
-           <Component Name="Release"/>
-           <Component Name="Initialise"/>
-           <Component Name="Update"/>
-          </Component>
-          <Component Name="Pin">
-           <Component Name="Resource"/>
-           <Component Name="Diagnostic"/>
-           <Component Name="Pullup Control">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Active Edge">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Threshold">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Hysteresis">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Debounce">
-            <Component Name="Value"/>
-           </Component>
-           <Component Name="Reserve"/>
-           <Component Name="Release"/>
-           <Component Name="Initialise"/>
-           <Component Name="Update"/>
-          </Component>
-          <Component Name="Voltage">
-           <Component Name="Resource"/>
-           <Component Name="Absolute"/>
-           <Component Name="Minimum"/>
-           <Component Name="Maximum"/>
-           <Component Name="Reserve"/>
-           <Component Name="Release"/>
-           <Component Name="Update"/>
-           <Component Name="GetStatistics"/>
-           <Component Name="Input Impedance"/>
-           <Component Name="Input Source"/>
-           <Component Name="Input Bandwidth"/>
-           <Component Name="Input Minimum"/>
-           <Component Name="Input Maximum"/>
-           <Component Name="Input Resolution"/>
-          </Component>
-         </Component>
-         <Component Name="Calculation"/>
-         <Component Name="Startup"/>
-        </Component>
-        <Component Name="Sensor Resource"/>
-        <Component Name="Warning">
-         <Component Name="Value"/>
-         <Component Name="Mode">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Count">
-          <Component Name="Value"/>
-          <Component Name="Limit"/>
-         </Component>
-         <Component Name="Minimum">
-          <Component Name="Value">
-           <Component Name="Value"/>
-           <Component Name="Init"/>
-           <Component Name="Update"/>
-          </Component>
-         </Component>
-         <Component Name="Maximum">
-          <Component Name="Value">
-           <Component Name="Value"/>
-           <Component Name="Init"/>
-           <Component Name="Update"/>
-          </Component>
-         </Component>
-         <Component Name="Hysteresis">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Engine Speed Limit">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Delay">
-          <Component Name="Enable">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Activate">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Reset">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Limit">
-           <Component Name="Value"/>
-          </Component>
-         </Component>
-         <Component Name="Update"/>
-         <Component Name="GetEngineSpeedLimit"/>
-         <Component Name="IsActive"/>
-        </Component>
-        <Component Name="Update"/>
        </Component>
        <Component Name="Radiator Fan">
-        <Component Name="Output">
-         <Component Name="Resource"/>
-         <Component Name="Frequency"/>
-         <Component Name="Duty Cycle">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Update"/>
-        </Component>
-        <Component Name="Output Resource"/>
-        <Component Name="Relay Enable Output Resource"/>
-        <Component Name="State"/>
-        <Component Name="Frequency"/>
-        <Component Name="Test"/>
-        <Component Name="Timer">
-         <Component Name="Start"/>
-         <Component Name="Remaining"/>
-        </Component>
-        <Component Name="Duty Cycle">
-         <Component Name="Value"/>
-         <Component Name="Init"/>
-         <Component Name="Update"/>
-        </Component>
-        <Component Name="Voltage">
-         <Component Name="Resource"/>
-         <Component Name="Absolute Filtered"/>
-         <Component Name="Absolute"/>
-         <Component Name="Filter">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Initialise"/>
-         <Component Name="Update"/>
-         <Component Name="Input Impedance"/>
-         <Component Name="Input Source"/>
-         <Component Name="Input Bandwidth"/>
-         <Component Name="Input Minimum"/>
-         <Component Name="Input Maximum"/>
-         <Component Name="Input Resolution"/>
-        </Component>
+        <Component Name="Temp Difference"/>
         <Component Name="Update"/>
-        <Component Name="Test Duty Cycle"/>
-        <Component Name="Off Duty Cycle"/>
-        <Component Name="Shutoff Filter"/>
-        <Component Name="Shutoff Temperature"/>
-        <Component Name="Shutoff Temperature Hysteresis"/>
-        <Component Name="Increment"/>
-        <Component Name="Relay">
-         <Component Name="Resource"/>
-         <Component Name="State"/>
-         <Component Name="Drive">
+        <Component Name="Generic Fan">
+         <Component Name="Output Resource">
           <Component Name="Value"/>
          </Component>
-         <Component Name="Test">
+         <Component Name="Temperature"/>
+         <Component Name="Temperature Sensor Diagnostic"/>
+         <Component Name="Drive">
           <Component Name="Value"/>
          </Component>
          <Component Name="Polarity">
           <Component Name="Value"/>
          </Component>
+         <Component Name="Frequency">
+          <Component Name="Value"/>
+         </Component>
          <Component Name="Open Current">
           <Component Name="Value"/>
          </Component>
+         <Component Name="Test">
+          <Component Name="Value"/>
+          <Component Name="Duty Cycle"/>
+         </Component>
+         <Component Name="Enable">
+          <Component Name="Value"/>
+          <Component Name="Temperature Threshold"/>
+          <Component Name="Temperature Hysteresis"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Duty Cycle">
+          <Component Name="Value"/>
+          <Component Name="Init"/>
+          <Component Name="Update"/>
+         </Component>
          <Component Name="Output">
           <Component Name="Resource"/>
-          <Component Name="Frequency">
-           <Component Name="Value"/>
-          </Component>
+          <Component Name="Frequency"/>
           <Component Name="Duty Cycle">
            <Component Name="Value"/>
           </Component>
           <Component Name="Reserve"/>
           <Component Name="Release"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Pin">
+          <Component Name="Resource"/>
+          <Component Name="Diagnostic"/>
+          <Component Name="Drive">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Peak Current">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Hold Current"/>
+          <Component Name="Reserve"/>
+          <Component Name="Release"/>
+          <Component Name="Initialise"/>
           <Component Name="Update"/>
          </Component>
          <Component Name="Voltage">
@@ -7140,22 +7262,8 @@
           <Component Name="Input Maximum"/>
           <Component Name="Input Resolution"/>
          </Component>
-         <Component Name="Pin">
-          <Component Name="Resource"/>
-          <Component Name="Diagnostic"/>
-          <Component Name="Drive">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Peak Current">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Hold Current"/>
-          <Component Name="Reserve"/>
-          <Component Name="Release"/>
-          <Component Name="Initialise"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="SetState"/>
+         <Component Name="SetDuty"/>
+         <Component Name="Update"/>
         </Component>
        </Component>
       </Component>

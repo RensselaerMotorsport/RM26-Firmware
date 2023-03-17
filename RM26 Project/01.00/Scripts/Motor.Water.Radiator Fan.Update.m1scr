@@ -1,37 +1,3 @@
-local offTempRange = Calculate.Hysteresis(
-		Motor.Water.Outlet.Temperature,
-		Shutoff Temperature,
-		Shutoff Temperature + Shutoff Temperature Hysteresis,
-		Shutoff Filter);
-local on = Calculate.Absolute(Duty Cycle - Off Duty Cycle) > 0
-		and (Motor.State eq Motor.State.Running or offTempRange)
-		and Motor.State neq Motor.State.Startup;
+// Update the temperature difference between inlet and outlet
 
-Relay.SetState(on or Test eq Test.Enabled);
-
-if (not Output.IsActive()) {
-	State = State.Disabled;
-	Output.Duty Cycle = Off Duty Cycle; 
-	//if (Timer.Remaining() <= 0.0) {
-	//	Timer.Start(1.0);
-	//}
-} else if (Test eq Test.Enabled and Timer.Remaining() <= 0.0 and Output.Duty Cycle > Test Duty Cycle) {
-	State = State.Test;
-	Output.Duty Cycle -= Increment;
-	Timer.Start(1.0);
-} else if (Test eq Test.Enabled and Timer.Remaining() <= 0.0 and Output.Duty Cycle < Test Duty Cycle) {
-	State = State.Test;
-	Output.Duty Cycle = Test Duty Cycle;
-	Timer.Start(1.0);
-} else if (on and Timer.Remaining() <= 0.0 and Output.Duty Cycle > Duty Cycle) {
-	State = State.Enabled;
-	Output.Duty Cycle -= Increment;
-	Timer.Start(1.0);
-} else if (on and Timer.Remaining() <= 0.0 and Output.Duty Cycle < Duty Cycle) {
-	State = State.Enabled;
-	Output.Duty Cycle = Duty Cycle;
-	Timer.Start(1.0);
-} else if (not on and Test eq Test.Disabled) {
-	State = State.Disabled;
-	Output.Duty Cycle = Off Duty Cycle;
-}
+Temp Difference = Calculate.Absolute( Motor.Water.Outlet.Temperature - Motor.Water.Inlet.Temperature );
