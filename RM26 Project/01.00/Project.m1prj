@@ -5671,9 +5671,6 @@
      <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.Cooling Fans">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque.TC Tune">
      <Props UseDefValue="true" DefValue="This.TC Strength Table"/>
      <Comment/>
@@ -6008,10 +6005,7 @@
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output Resource.Value"/>
     <Component Classname="BuiltIn.IOResourceValueInput" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Output Resource"/>
     <Component Classname="MoTeC Coolant Fan.Generic Fan" Name="Root.Motor.Water.Radiator Fan.Generic Fan">
-     <Comment>
-<![CDATA[
-]]>
-     </Comment>
+     <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Radiator Fan.Update.m1scr" Name="Root.Motor.Water.Radiator Fan.Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
@@ -6494,14 +6488,40 @@
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.X"/>
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.Value"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Inlet.Pressure.Sensor.Digital.Voltage.Minimum"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.IMD.CAN Tx.Transmit.m1scr" Name="Root.Accumulator.IMD.CAN Tx.Transmit"/>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Tx">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS Temps Address">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Voltages.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Voltages.Receive"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Avg Voltage">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Temps.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Temps.Receive"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Avg Temp">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS Voltage Address">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
      <Component Name="Accumulator">
       <Component Name="BMS">
        <Component Name="CAN Bus"/>
-       <Component Name="CAN Rx Temps"/>
-       <Component Name="CAN Rx Voltages"/>
+       <Component Name="CAN Rx Temps">
+        <Component Name="Avg Temp"/>
+        <Component Name="Receive"/>
+       </Component>
+       <Component Name="CAN Rx Voltages">
+        <Component Name="Avg Voltage"/>
+        <Component Name="Receive"/>
+       </Component>
       </Component>
       <Component Name="IMD">
        <Component Name="CAN Bus"/>
@@ -6509,8 +6529,10 @@
         <Component Name="IMD State"/>
         <Component Name="Receive"/>
        </Component>
+       <Component Name="CAN Tx">
+        <Component Name="Transmit"/>
+       </Component>
       </Component>
-      <Component Name="Cooling Fans"/>
      </Component>
      <Component Name="Motor">
       <Component Name="State">
@@ -7727,6 +7749,8 @@
       <Component Name="IGBT Temps Address"/>
       <Component Name="ESC Temps Address"/>
       <Component Name="IMD State Address"/>
+      <Component Name="BMS Temps Address"/>
+      <Component Name="BMS Voltage Address"/>
      </Component>
      <Component Name="ECU">
       <Component Name="Battery Voltage">
