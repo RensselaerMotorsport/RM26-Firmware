@@ -1,5 +1,5 @@
 local offTempRange = Calculate.Hysteresis(
-		Motor.Water.Outlet.Temperature,
+		Motor.Water.Motor Outlet.Temperature,
 		Shutoff Temperature,
 		Shutoff Temperature + Shutoff Temperature Hysteresis,
 		Shutoff Filter);

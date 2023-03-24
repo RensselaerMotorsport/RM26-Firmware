@@ -6,8 +6,8 @@ if (CAN Bus neq CAN Bus.Not in Use)
 	local bus = CAN Bus.AsInteger() - 1;
 
 	CanComms.TxInitialise(h, 8);
-	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Motor.Water.Outlet.Temperature + 40));
-	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Motor.Water.Inlet.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h,  0, 16, Convert.ToUnsignedInteger(Motor.Water.Motor Outlet.Temperature + 40));
+	CanComms.SetUnsignedInteger	(h, 16, 16, Convert.ToUnsignedInteger(Motor.Water.Motor Inlet.Temperature + 40));
 	//CanComms.SetUnsignedInteger	(h, 32, 16, Convert.ToUnsignedInteger(Engine.Oil.Block.Temperature + 40));
 	//CanComms.SetUnsignedInteger	(h, 48, 16, Convert.ToUnsignedInteger(Engine.Fuel.Temperature + 40));
 	ok = CanComms.TxStandard(h, bus, 0x641);
