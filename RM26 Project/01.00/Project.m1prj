@@ -6502,6 +6502,7 @@
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Temps.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Temps.Receive"/>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Avg Temp">
+     <Props Qty="K"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS Voltage Address">
@@ -7266,6 +7267,21 @@
     <Component Classname="_CalibrationSchema.Temperature_Custom_CAN_1" Name="Root.Motor.Water.Btw Rads.Temperature.Sensor.Calibration.Temperature Custom CAN 1"/>
     <Component Classname="BuiltIn.CalFuncUser" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Temperature.Sensor.Calibration.Temperature Voltage 1.Transform"/>
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Temperature.Sensor.Calibration.Temperature Voltage 1.Voltage Translation.X"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Faults.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Faults.Receive"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.Channel">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Faults">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Low Temp">
+     <Props Qty="K"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.High Temp">
+     <Props Qty="K"/>
+     <Comment/>
+    </Component>
    </List>
    <Organisation>
     <Component Name="Root">
@@ -7273,11 +7289,17 @@
       <Component Name="BMS">
        <Component Name="CAN Bus"/>
        <Component Name="CAN Rx Temps">
+        <Component Name="High Temp"/>
+        <Component Name="Low Temp"/>
         <Component Name="Avg Temp"/>
         <Component Name="Receive"/>
        </Component>
        <Component Name="CAN Rx Voltages">
         <Component Name="Avg Voltage"/>
+        <Component Name="Receive"/>
+       </Component>
+       <Component Name="CAN Rx Faults">
+        <Component Name="Channel"/>
         <Component Name="Receive"/>
        </Component>
       </Component>
@@ -7916,133 +7938,6 @@
           <Component Name="GetEngineSpeedLimit"/>
           <Component Name="IsActive"/>
          </Component>
-         <Component Name="Update"/>
-        </Component>
-       </Component>
-       <Component Name="Pump">
-        <Component Name="Output">
-         <Component Name="Resource"/>
-         <Component Name="Frequency"/>
-         <Component Name="Duty Cycle">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Update"/>
-        </Component>
-        <Component Name="Output Resource"/>
-        <Component Name="State"/>
-        <Component Name="Frequency"/>
-        <Component Name="Test"/>
-        <Component Name="Duty Cycle">
-         <Component Name="Value"/>
-         <Component Name="Init"/>
-         <Component Name="Update"/>
-        </Component>
-        <Component Name="Voltage">
-         <Component Name="Resource"/>
-         <Component Name="Absolute Filtered"/>
-         <Component Name="Absolute"/>
-         <Component Name="Filter">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Initialise"/>
-         <Component Name="Update"/>
-         <Component Name="Input Impedance"/>
-         <Component Name="Input Source"/>
-         <Component Name="Input Bandwidth"/>
-         <Component Name="Input Minimum"/>
-         <Component Name="Input Maximum"/>
-         <Component Name="Input Resolution"/>
-        </Component>
-        <Component Name="Update"/>
-        <Component Name="Test Duty Cycle"/>
-        <Component Name="Shutoff Filter"/>
-        <Component Name="Shutoff Temperature"/>
-        <Component Name="Shutoff Temperature Hysteresis"/>
-       </Component>
-       <Component Name="Radiator Fan">
-        <Component Name="Temp Difference"/>
-        <Component Name="Update"/>
-        <Component Name="Generic Fan">
-         <Component Name="Output Resource">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Temperature"/>
-         <Component Name="Temperature Sensor Diagnostic"/>
-         <Component Name="Drive">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Polarity">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Frequency">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Open Current">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Test">
-          <Component Name="Value"/>
-          <Component Name="Duty Cycle"/>
-         </Component>
-         <Component Name="Enable">
-          <Component Name="Value"/>
-          <Component Name="Temperature Threshold"/>
-          <Component Name="Temperature Hysteresis"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="Duty Cycle">
-          <Component Name="Value"/>
-          <Component Name="Init"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="Output">
-          <Component Name="Resource"/>
-          <Component Name="Frequency"/>
-          <Component Name="Duty Cycle">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Reserve"/>
-          <Component Name="Release"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="Pin">
-          <Component Name="Resource"/>
-          <Component Name="Diagnostic"/>
-          <Component Name="Drive">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Peak Current">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Hold Current"/>
-          <Component Name="Reserve"/>
-          <Component Name="Release"/>
-          <Component Name="Initialise"/>
-          <Component Name="Update"/>
-         </Component>
-         <Component Name="Voltage">
-          <Component Name="Resource"/>
-          <Component Name="Absolute Filtered"/>
-          <Component Name="Absolute"/>
-          <Component Name="Filter">
-           <Component Name="Value"/>
-          </Component>
-          <Component Name="Reserve"/>
-          <Component Name="Release"/>
-          <Component Name="Initialise"/>
-          <Component Name="Update"/>
-          <Component Name="Input Impedance"/>
-          <Component Name="Input Source"/>
-          <Component Name="Input Bandwidth"/>
-          <Component Name="Input Minimum"/>
-          <Component Name="Input Maximum"/>
-          <Component Name="Input Resolution"/>
-         </Component>
-         <Component Name="SetDuty"/>
          <Component Name="Update"/>
         </Component>
        </Component>
@@ -8695,6 +8590,133 @@
           <Component Name="GetEngineSpeedLimit"/>
           <Component Name="IsActive"/>
          </Component>
+         <Component Name="Update"/>
+        </Component>
+       </Component>
+       <Component Name="Pump">
+        <Component Name="Output">
+         <Component Name="Resource"/>
+         <Component Name="Frequency"/>
+         <Component Name="Duty Cycle">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reserve"/>
+         <Component Name="Release"/>
+         <Component Name="Update"/>
+        </Component>
+        <Component Name="Output Resource"/>
+        <Component Name="State"/>
+        <Component Name="Frequency"/>
+        <Component Name="Test"/>
+        <Component Name="Duty Cycle">
+         <Component Name="Value"/>
+         <Component Name="Init"/>
+         <Component Name="Update"/>
+        </Component>
+        <Component Name="Voltage">
+         <Component Name="Resource"/>
+         <Component Name="Absolute Filtered"/>
+         <Component Name="Absolute"/>
+         <Component Name="Filter">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Reserve"/>
+         <Component Name="Release"/>
+         <Component Name="Initialise"/>
+         <Component Name="Update"/>
+         <Component Name="Input Impedance"/>
+         <Component Name="Input Source"/>
+         <Component Name="Input Bandwidth"/>
+         <Component Name="Input Minimum"/>
+         <Component Name="Input Maximum"/>
+         <Component Name="Input Resolution"/>
+        </Component>
+        <Component Name="Update"/>
+        <Component Name="Test Duty Cycle"/>
+        <Component Name="Shutoff Filter"/>
+        <Component Name="Shutoff Temperature"/>
+        <Component Name="Shutoff Temperature Hysteresis"/>
+       </Component>
+       <Component Name="Radiator Fan">
+        <Component Name="Temp Difference"/>
+        <Component Name="Update"/>
+        <Component Name="Generic Fan">
+         <Component Name="Output Resource">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Temperature"/>
+         <Component Name="Temperature Sensor Diagnostic"/>
+         <Component Name="Drive">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Polarity">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Frequency">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Open Current">
+          <Component Name="Value"/>
+         </Component>
+         <Component Name="Test">
+          <Component Name="Value"/>
+          <Component Name="Duty Cycle"/>
+         </Component>
+         <Component Name="Enable">
+          <Component Name="Value"/>
+          <Component Name="Temperature Threshold"/>
+          <Component Name="Temperature Hysteresis"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Duty Cycle">
+          <Component Name="Value"/>
+          <Component Name="Init"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Output">
+          <Component Name="Resource"/>
+          <Component Name="Frequency"/>
+          <Component Name="Duty Cycle">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Reserve"/>
+          <Component Name="Release"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Pin">
+          <Component Name="Resource"/>
+          <Component Name="Diagnostic"/>
+          <Component Name="Drive">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Peak Current">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Hold Current"/>
+          <Component Name="Reserve"/>
+          <Component Name="Release"/>
+          <Component Name="Initialise"/>
+          <Component Name="Update"/>
+         </Component>
+         <Component Name="Voltage">
+          <Component Name="Resource"/>
+          <Component Name="Absolute Filtered"/>
+          <Component Name="Absolute"/>
+          <Component Name="Filter">
+           <Component Name="Value"/>
+          </Component>
+          <Component Name="Reserve"/>
+          <Component Name="Release"/>
+          <Component Name="Initialise"/>
+          <Component Name="Update"/>
+          <Component Name="Input Impedance"/>
+          <Component Name="Input Source"/>
+          <Component Name="Input Bandwidth"/>
+          <Component Name="Input Minimum"/>
+          <Component Name="Input Maximum"/>
+          <Component Name="Input Resolution"/>
+         </Component>
+         <Component Name="SetDuty"/>
          <Component Name="Update"/>
         </Component>
        </Component>
