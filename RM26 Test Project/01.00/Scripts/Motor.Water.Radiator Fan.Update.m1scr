@@ -1,0 +1,3 @@
+// Update the temperature difference between inlet and outlet
+
+Temp Difference = Calculate.Absolute( Motor.Water.Motor Outlet.Temperature - Motor.Water.Motor Inlet.Temperature );

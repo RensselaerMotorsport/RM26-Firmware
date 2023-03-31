@@ -1,6 +1,6 @@
 local hMotorTmp = CanComms.RxOpenExtended(
 				Motor.ESC.CAN Bus.AsInteger()-1,
-				Constants.ESC.Temps Address + 32,
+				Constants.ESC Temps Address + 32,
 				0xFFFFF,
 				false);
 				

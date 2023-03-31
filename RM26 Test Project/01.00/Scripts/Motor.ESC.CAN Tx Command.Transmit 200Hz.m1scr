@@ -33,7 +33,7 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 		CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger(250));
 	}
 	
-	ok = CanComms.TxStandard(handle, bus, Constants.ESC.Command Message Address);
+	ok = CanComms.TxStandard(handle, bus, Constants.Command Message Address);
 	
 	ok = ok; // Done to make MoTeC Build Happy
 }

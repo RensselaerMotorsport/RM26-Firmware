@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <MoTeCM1BuildSession Locale="English_United States.1252" DefaultLocale="C" ProductName="M1Build (x64)" ProductVersion="1.4.2.75">
- <Project FileFormat="10106" Name="RM26 Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
+ <Project FileFormat="10106" Name="RM26 Test Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
   <System VersionMajor="1" VersionMinor="4" VersionRelease="0" VersionBuild="0102" SelectedRelease="0" SelectedBuild="0102"/>
   <SelectedModuleSets>
    <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="58"/>
@@ -268,6 +268,7 @@
    <Project Name="Rensselaer Motorsport Project" Version="1" Major="1" Minor="0" Build="0"/>
    <Project Name="Rensselaer Motorsport Project Test" Version="1" Major="1" Minor="0" Build="4"/>
    <Project Name="RM25 Project" Version="2" Major="1" Minor="0" Build="34"/>
+   <Project Name="RM26 Project" Version="1" Major="1" Minor="0" Build="0"/>
   </PkgUpgrades>
   <Build PackageSignKey="Rensselaer Polytechnic Institute.M1.Package.Development 01.04.00"/>
   <ComponentStream>
@@ -5383,14 +5384,17 @@
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Rx Temps.Receive.m1scr" Name="Root.Motor.ESC.CAN Rx Temps.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.ECU.Communication.Strain Gauges">
+     <Comment/>
+    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.State.Timer.Total">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.IGBT Temps Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.IGBT Temps Address">
      <Props Type="u32" Value="160"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.Command Message Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Command Message Address">
      <Props Type="u32" Value="192"/>
      <Comment/>
     </Component>
@@ -5398,15 +5402,15 @@
      <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.Diagnostic Data Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Diagnostic Data Address">
      <Props Type="u32" Value="175"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.Fault Codes Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Fault Codes Address">
      <Props Type="u32" Value="171"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.Temps Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC Temps Address">
      <Props Type="u32" Value="162"/>
      <Comment/>
     </Component>
@@ -5432,7 +5436,7 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.ESC.Internal States Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.Internal States Address">
      <Props Type="u32" Value="170"/>
      <Comment/>
     </Component>
@@ -5638,23 +5642,28 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Vehicle"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Rx">
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Vehicle"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Voltages">
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Vehicle"/>
-      </List.UserTags>
-     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Temps">
@@ -5873,7 +5882,7 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.IMD.State Address">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.IMD State Address">
      <Props Type="u32"/>
      <Comment/>
     </Component>
@@ -6489,34 +6498,26 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Tx">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Temps Address">
-     <Props Type="u32" Value="256"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS Temps Address">
+     <Props Type="u32"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Voltages.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Voltages.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Avg Cell">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Avg Voltage">
+     <Props Qty="V"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Temps.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Temps.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Avg Temp">
-     <Props Qty="K">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
+     <Props Qty="K"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Voltage Address">
-     <Props Type="u32" Value="512"/>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS Voltage Address">
+     <Props Type="u32"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Temperature.Sensor.Calibration.Temperature Voltage 1.Voltage Translation.Value"/>
@@ -7281,157 +7282,26 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.Channel">
+     <Props Type="u32"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Faults">
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Low Temp">
-     <Props Qty="K">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
+     <Props Qty="K"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.High Temp">
-     <Props Qty="K">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
+     <Props Qty="K"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.BMS.Fault Address">
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Highest Voltage">
+     <Props Qty="V"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.BMS">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Vehicle"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.ESC">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Engine"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Internal Comm">
-     <Props Type="u32" Value="2591"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx SOC">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx SOC.State of Charge">
-     <Props Qty="ratio">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-      <Locale>
-       <Default Unit="%"/>
-      </Locale>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Delta Cell">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx SOC.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx SOC.Receive">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Pack Voltage">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Lowest Cell">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Lowest Cell ID">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Highest Cell ID">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Highest Cell">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.Low Temp ID">
-     <Props Type="u32">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Temps.High Temp ID">
-     <Props Type="u32">
-      <List.UserTags>
-       <Entry Value="Diagnostic"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Internal Conversion">
-     <Props Type="u32" Value="2560"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Pack Open Voltage">
-     <Props Qty="V">
-      <List.UserTags>
-       <Entry Value="Normal"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Thermistor">
-     <Props Type="u32" Value="2716"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.IMD">
-     <Props>
-      <List.UserTags>
-       <Entry Value="Vehicle"/>
-      </List.UserTags>
-     </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Current Sensor">
-     <Props Type="u32" Value="2752"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Lowest Voltage">
+     <Props Qty="V"/>
      <Comment/>
     </Component>
    </List>
@@ -7442,25 +7312,14 @@
        <Component Name="CAN Bus"/>
        <Component Name="CAN Rx Temps">
         <Component Name="High Temp"/>
-        <Component Name="High Temp ID"/>
         <Component Name="Low Temp"/>
-        <Component Name="Low Temp ID"/>
         <Component Name="Avg Temp"/>
         <Component Name="Receive"/>
        </Component>
        <Component Name="CAN Rx Voltages">
-        <Component Name="Highest Cell"/>
-        <Component Name="Highest Cell ID"/>
-        <Component Name="Lowest Cell"/>
-        <Component Name="Lowest Cell ID"/>
-        <Component Name="Avg Cell"/>
-        <Component Name="Delta Cell"/>
-        <Component Name="Pack Voltage"/>
-        <Component Name="Pack Open Voltage"/>
-        <Component Name="Receive"/>
-       </Component>
-       <Component Name="CAN Rx SOC">
-        <Component Name="State of Charge"/>
+        <Component Name="Highest Voltage"/>
+        <Component Name="Lowest Voltage"/>
+        <Component Name="Avg Voltage"/>
         <Component Name="Receive"/>
        </Component>
        <Component Name="CAN Rx Faults">
@@ -9339,27 +9198,15 @@
       <Component Name="PAir"/>
       <Component Name="TAir"/>
       <Component Name="mAir"/>
-      <Component Name="ESC">
-       <Component Name="Internal States Address"/>
-       <Component Name="Fault Codes Address"/>
-       <Component Name="Diagnostic Data Address"/>
-       <Component Name="Command Message Address"/>
-       <Component Name="IGBT Temps Address"/>
-       <Component Name="Temps Address"/>
-      </Component>
-      <Component Name="BMS">
-       <Component Name="Temps Address"/>
-       <Component Name="Voltage Address"/>
-       <Component Name="Fault Address">
-        <Component Name="Internal Comm"/>
-        <Component Name="Internal Conversion"/>
-        <Component Name="Current Sensor"/>
-        <Component Name="Thermistor"/>
-       </Component>
-      </Component>
-      <Component Name="IMD">
-       <Component Name="State Address"/>
-      </Component>
+      <Component Name="Internal States Address"/>
+      <Component Name="Fault Codes Address"/>
+      <Component Name="Diagnostic Data Address"/>
+      <Component Name="Command Message Address"/>
+      <Component Name="IGBT Temps Address"/>
+      <Component Name="ESC Temps Address"/>
+      <Component Name="IMD State Address"/>
+      <Component Name="BMS Temps Address"/>
+      <Component Name="BMS Voltage Address"/>
      </Component>
      <Component Name="ECU">
       <Component Name="Battery Voltage">
@@ -10391,6 +10238,7 @@
         <Component Name="Channel 3"/>
         <Component Name="Channel 4"/>
        </Component>
+       <Component Name="Strain Gauges"/>
       </Component>
      </Component>
      <Component Name="Vehicle">
