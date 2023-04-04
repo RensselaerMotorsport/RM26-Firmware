@@ -10,7 +10,7 @@ if (CanComms.RxMessage(hFault)) {
 	Run Fault Lo = CanComms.GetUnsignedInteger(hFault, 32, 16);
 	Run Fault Hi = CanComms.GetUnsignedInteger(hFault, 48, 16);
 	
-	// Update Faults
+	// Update Important Faults? Possibly to be implemented in the future
 	
 }
 
