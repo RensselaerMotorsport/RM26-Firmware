@@ -3,9 +3,9 @@
  <Project FileFormat="10106" Name="RM26 Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
   <System VersionMajor="1" VersionMinor="4" VersionRelease="0" VersionBuild="0102" SelectedRelease="0" SelectedBuild="0102"/>
   <SelectedModuleSets>
-   <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="58"/>
+   <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="63"/>
    <File Name="MoTeC Types" VersionMajor="1" VersionMinor="6" VersionBuild="0"/>
-   <File Name="MoTeC Comms" VersionMajor="1" VersionMinor="10" VersionBuild="8"/>
+   <File Name="MoTeC Comms" VersionMajor="1" VersionMinor="10" VersionBuild="25"/>
    <File Name="MoTeC Control" VersionMajor="1" VersionMinor="13" VersionBuild="3"/>
    <File Name="MoTeC Coolant Fan" VersionMajor="1" VersionMinor="6" VersionBuild="7"/>
    <File Name="MoTeC Lap Time" VersionMajor="1" VersionMinor="9" VersionBuild="8"/>
@@ -5348,7 +5348,7 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.APPS.BSPD">
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.BSPD">
      <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
@@ -5525,13 +5525,13 @@
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Faults">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.APPS.BSPD.BSPD Parameter">
+    <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.BSPD.BSPD Parameter">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.APPS.BSPD.Update.m1scr" Name="Root.Motor.APPS.BSPD.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.BSPD.Update.m1scr" Name="Root.Motor.BSPD.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.APPS.BSPD.Value">
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.BSPD.Value">
      <Props Type="::This.BSPD Enumeration">
       <List.UserTags>
        <Entry Value="Normal"/>
@@ -5539,80 +5539,80 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Debounce.Value"/>
-    <Component Classname="_IOMethod.av_switch" Name="Root.Motor.APPS.BSPD.BSPD Trigger">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BSPD.BSPD Trigger.Debounce.Value"/>
+    <Component Classname="_IOMethod.av_switch" Name="Root.Motor.BSPD.BSPD Trigger">
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Resource">
+    <Component Classname="BuiltIn.IOResourceValueInput" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Resource">
      <Props NameTarget="Parent.Parent.BSPD Parameter"/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.UpdateDiagnostic"/>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Hysteresis.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Hysteresis">
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.UpdateDiagnostic"/>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BSPD.BSPD Trigger.Hysteresis.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Hysteresis">
      <Props TargetCreation="AutoParam" Target="This.Value">
       <List.UserTags>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Threshold.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Debounce">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BSPD.BSPD Trigger.Threshold.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Debounce">
      <Props TargetCreation="AutoParam" Target="This.Value">
       <List.UserTags>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Threshold">
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Threshold">
      <Props TargetCreation="AutoParam" Target="This.Value">
       <List.UserTags>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Active Edge.Value"/>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Active Edge">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BSPD.BSPD Trigger.Active Edge.Value"/>
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Active Edge">
      <Props TargetCreation="AutoParam" Target="This.Value">
       <List.UserTags>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Pullup Control.Value"/>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Diagnostic">
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.BSPD.BSPD Trigger.Pullup Control.Value"/>
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Diagnostic">
      <Props>
       <List.UserTags>
        <Entry Value="Diagnostic"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Pullup Control">
+    <Component Classname="BuiltIn.Reference" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Pullup Control">
      <Props TargetCreation="AutoParam" Target="This.Value">
       <List.UserTags>
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Voltage">
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Voltage">
      <Props>
       <List.UserTags>
        <Entry Value="Pin"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.State">
+    <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.State">
      <Props>
       <List.UserTags>
        <Entry Value="Advanced"/>
       </List.UserTags>
      </Props>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Release"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Reserve"/>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.APPS.BSPD.BSPD Trigger.Initialise"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Release"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Reserve"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.BSPD.BSPD Trigger.Initialise"/>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Tx Command">
      <Comment/>
     </Component>
@@ -8987,36 +8987,36 @@
        <Component Name="Update"/>
        <Component Name="APPS1 Parameter"/>
        <Component Name="APPS2 Parameter"/>
-       <Component Name="BSPD">
-        <Component Name="Value"/>
-        <Component Name="BSPD Parameter"/>
-        <Component Name="Update"/>
-        <Component Name="BSPD Trigger">
-         <Component Name="Resource"/>
-         <Component Name="State"/>
-         <Component Name="Voltage"/>
-         <Component Name="Diagnostic"/>
-         <Component Name="Pullup Control">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Active Edge">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Threshold">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Hysteresis">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Debounce">
-          <Component Name="Value"/>
-         </Component>
-         <Component Name="Reserve"/>
-         <Component Name="Release"/>
-         <Component Name="Initialise"/>
-         <Component Name="UpdateDiagnostic"/>
-         <Component Name="Update"/>
+      </Component>
+      <Component Name="BSPD">
+       <Component Name="Value"/>
+       <Component Name="BSPD Parameter"/>
+       <Component Name="Update"/>
+       <Component Name="BSPD Trigger">
+        <Component Name="Resource"/>
+        <Component Name="State"/>
+        <Component Name="Voltage"/>
+        <Component Name="Diagnostic"/>
+        <Component Name="Pullup Control">
+         <Component Name="Value"/>
         </Component>
+        <Component Name="Active Edge">
+         <Component Name="Value"/>
+        </Component>
+        <Component Name="Threshold">
+         <Component Name="Value"/>
+        </Component>
+        <Component Name="Hysteresis">
+         <Component Name="Value"/>
+        </Component>
+        <Component Name="Debounce">
+         <Component Name="Value"/>
+        </Component>
+        <Component Name="Reserve"/>
+        <Component Name="Release"/>
+        <Component Name="Initialise"/>
+        <Component Name="UpdateDiagnostic"/>
+        <Component Name="Update"/>
        </Component>
       </Component>
       <Component Name="Driver Tune">
