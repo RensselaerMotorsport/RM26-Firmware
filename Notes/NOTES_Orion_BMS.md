@@ -7,3 +7,9 @@ https://www.orionbms.com/manuals/utility\_o2/
 * Only going to implement simple temp, voltage, etc for now
 
 
+BMS CANBUS Addresses:
+* Internal Comm - 
+
+
+
+

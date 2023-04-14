@@ -1,3 +1,22 @@
 // Receive Broadcast of Cell Voltages from BMS
+local hBMSVoltages = CanComms.RxOpenExtended(
+				Accumulator.BMS.CAN Bus.AsInteger()-1,
+				Constants.BMS.Voltage Address,
+				0xFFFFF,
+				false);
 
+if (CanComms.RxMessage(hBMSVoltages)) {
+	// Highest Cell Voltage (0.0001V) Base+0
+	Highest Cell = CanComms.GetUnsignedInteger(hBMSVoltages, 0, 16) / 10000.0;
+	// Highest Cell Voltage ID Base+16
+	Highest Cell ID = CanComms.GetUnsignedInteger(hBMSVoltages, 16, 8);
+	// Lowest Cell Voltage Base+24
+	Lowest Cell = CanComms.GetUnsignedInteger(hBMSVoltages, 24, 16) / 10000.0;
+	// Lowest Cell Voltage ID Base+40
+	Lowest Cell ID = CanComms.GetUnsignedInteger(hBMSVoltages, 40, 8);
+	// Avg Cell Voltage Base+48
+	Avg Cell = CanComms.GetUnsignedInteger(hBMSVoltages, 48, 16) / 10000.0;
+
+	
+}
 

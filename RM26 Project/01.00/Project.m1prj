@@ -6034,11 +6034,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Motor Outlet.Pressure">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Frequency"/>
@@ -6268,11 +6264,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Motor Inlet.Pressure">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="_CalibrationSchema.Gauge_Pressure_Resistive_1" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1"/>
@@ -6818,11 +6810,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Btw Rads.Pressure">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Btw Rads.Temperature.Update.m1scr" Name="Root.Motor.Water.Btw Rads.Temperature.Update">
@@ -7059,11 +7047,7 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Btw Motor And Esc.Pressure">
-     <Props UseDefValue="true" DefValue="This.Value">
-      <List.UserTags>
-       <Entry Value="Setup"/>
-      </List.UserTags>
-     </Props>
+     <Props UseDefValue="true" DefValue="This.Value"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Value">
@@ -7245,9 +7229,6 @@
     <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.BMS.CAN Rx Faults.Receive.m1scr" Name="Root.Accumulator.BMS.CAN Rx Faults.Receive">
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.Internal Comm">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Faults">
      <Comment/>
     </Component>
@@ -7267,9 +7248,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.BMS.Fault Address">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.BMS">
      <Props>
       <List.UserTags>
@@ -7284,10 +7262,6 @@
        <Entry Value="Engine"/>
       </List.UserTags>
      </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Internal Comm">
-     <Props Type="u32" Value="2591"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx SOC">
@@ -7371,20 +7345,12 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Internal Conversion">
-     <Props Type="u32" Value="2560"/>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Pack Open Voltage">
      <Props Qty="V">
       <List.UserTags>
        <Entry Value="Normal"/>
       </List.UserTags>
      </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Thermistor">
-     <Props Type="u32" Value="2716"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Constants.IMD">
@@ -7395,11 +7361,12 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Fault Address.Current Sensor">
-     <Props Type="u32" Value="2752"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.OBD2 Fault">
+     <Props Type="u32"/>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.Internal Conversion">
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.OBD2">
+     <Props Type="u32" Value="2019"/>
      <Comment/>
     </Component>
    </List>
@@ -7432,9 +7399,8 @@
         <Component Name="Receive"/>
        </Component>
        <Component Name="CAN Rx Faults">
-        <Component Name="Internal Comm"/>
+        <Component Name="OBD2 Fault"/>
         <Component Name="Receive"/>
-        <Component Name="Internal Conversion"/>
        </Component>
       </Component>
       <Component Name="IMD">
@@ -9309,12 +9275,7 @@
       <Component Name="BMS">
        <Component Name="Temps Address"/>
        <Component Name="Voltage Address"/>
-       <Component Name="Fault Address">
-        <Component Name="Internal Comm"/>
-        <Component Name="Internal Conversion"/>
-        <Component Name="Current Sensor"/>
-        <Component Name="Thermistor"/>
-       </Component>
+       <Component Name="OBD2"/>
       </Component>
       <Component Name="IMD">
        <Component Name="State Address"/>

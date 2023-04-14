@@ -1,16 +1,19 @@
 local hBMSTemp = CanComms.RxOpenExtended(
 				Accumulator.BMS.CAN Bus.AsInteger()-1,
-				Constants.ESC.Temps Address + 32,
+				Constants.BMS.Temps Address,
 				0xFFFFF,
 				false);
 
-if (CanComms.RxMessage(hBMSTmp)) {
-	// High temp +0
-	Motor Temp = CanComms.GetUnsignedInteger(hMotorTmp, 0, 16) / 10.0;
-	// High temp +16
+if (CanComms.RxMessage(hBMSTemp)) {
+	// High temp Base+0
+	High Temp = CanComms.GetUnsignedInteger(hBMSTemp, 0, 8);
+	// High temp ID Base+8
+	High Temp ID = CanComms.GetUnsignedInteger(hBMSTemp, 8, 8);
+	// Low temp Base+16
+	Low Temp = CanComms.GetUnsignedInteger(hBMSTemp, 16, 8);
+	// Low Temp ID Base+24
+	Low Temp ID = CanComms.GetUnsignedInteger(hBMSTemp, 24, 8);
+	// Avg Temp Base+32
+	Avg Temp = CanComms.GetUnsignedInteger(hBMSTemp, 32, 8);
 	
-	// Low temp 
-	
-	
-	// 
 }
