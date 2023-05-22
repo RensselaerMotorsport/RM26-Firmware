@@ -1,0 +1,5 @@
+Value = Calculate.Average(Front.Left, Front.Right);
+Front Avg = Calculate.Average(Front.Left, Front.Right);
+Rear Avg = Calculate.Average(Rear.Left, Rear.Right);
+// Needs to change, just putting this here for now
+Drive Ratio = Constants.Drive Ratio;

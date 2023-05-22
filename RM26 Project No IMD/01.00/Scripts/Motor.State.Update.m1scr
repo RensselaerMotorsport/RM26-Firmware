@@ -1,0 +1,108 @@
+local et = System.ElapsedTime();
+
+if (VSM CAN Receive eq 0) {
+	Value.Set(Value.Startup);
+	Timer.Total.Startup Time += et;
+}
+else if (VSM CAN Receive eq 4) {
+	Value.Set(Value.Wait);
+	Timer.Total.Wait Time += et;
+}
+else if (VSM CAN Receive eq 5) {
+	Value.Set(Value.Ready);
+}
+else if (VSM CAN Receive eq 6) {
+	Value.Set(Value.Running);
+	Timer.Total.Run Time += et;
+}
+else if (VSM CAN Receive eq 1) {
+	Value.Set(Value.PreChrg Init);
+	Timer.Total.PreChrg Time += et;
+}
+else if (VSM CAN Receive eq 2) {
+	Value.Set(Value.PreChrg Active);
+	Timer.Total.PreChrg Time += et;
+}
+else if (VSM CAN Receive eq 3) {
+	Value.Set(Value.PreChrg Complete);
+	Timer.Total.PreChrg Time += et;
+}
+else if (VSM CAN Receive eq 7) {
+	Value.Set(Value.Blink Fault Code);
+}
+else if (VSM CAN Receive eq 14) {
+	Value.Set(Value.Shutdown In Progress);
+}
+else if (VSM CAN Receive eq 15) {
+	Value.Set(Value.Recycle Power);
+}
+else {
+	Value.Set(Value.Off);
+}
+
+
+/*
+when (Value) {
+	is (Off) {
+		if (VSM CAN Receive eq 0) {
+			Value.Set(Value.Startup);
+		}
+		else if (VSM CAN Receive eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM CAN Receive eq 1) {
+			Value.Set(Value.PreChrg Init);
+		}
+		else {
+			Timer.Total.Run Time = 0;
+			Timer.Total.PreChrg Time = 0;
+		}
+	}
+	is (Startup) {
+		if (VSM CAN Receive eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM CAN Receive eq 1) {
+			Value.Set(Value.PreChrg Init);
+		}
+		else {
+			Timer.Total.Startup Time += et;
+			Timer.Total.Run Time = 0;
+		}
+	}
+	is (PreChrg Init) {
+		if (VSM CAN Receive eq 0) {
+			Value.Set(Value.Startup);
+		}
+		else if (VSM CAN Receive eq 6) {
+			Value.Set(Value.Running);
+		}
+		else if (VSM CAN Receive eq 1) {
+			Timer.Total.PreChrg Time += et;
+		}
+		else {
+			Value.Set(Value.Off);
+		}
+	}
+	is (Running) {
+		if (VSM CAN Receive eq 0) {
+			Value.Set(Value.Startup);
+			Timer.Total.Run Time = 0;
+		}
+		else if (VSM CAN Receive eq 6) {
+			Timer.Total.Run Time += et;
+			Timer.Total.Startup Time = 0;
+		}
+		else if (VSM CAN Receive eq 1) {
+			Value.Set(Value.PreChrg Init);
+			Timer.Total.PreChrg Time = 0;
+		}
+		else {
+			Value.Set(Value.Off);
+			Timer.Total.Run Time = 0;
+			Timer.Total.PreChrg Time = 0;
+			Timer.Total.Startup Time = 0;
+		}
+	}
+}
+*

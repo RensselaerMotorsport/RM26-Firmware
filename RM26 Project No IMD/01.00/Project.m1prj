@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <MoTeCM1BuildSession Locale="English_United States.1252" DefaultLocale="C" ProductName="M1Build (x64)" ProductVersion="1.4.2.75">
- <Project FileFormat="10106" Name="RM26 Project" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
+ <Project FileFormat="10106" Name="RM26 Project No IMD" VersionMajor="1" VersionMinor="0" BuildNumber="0" Author="Tom Petr" Company="Rensselaer Motorsport" ContactNo="(732) 687-1037" Address="2368 Burdett Ave, Troy, NY 12180" Email="petrt@rpi.edu" SupportURL="formularpi.org" Copyright="N/A" TargetHardware="ecu120" SecurityLevel="Off" DiagnosticLoggingCondition="ECU.Logging.Request" MinimumDataLogging="Data Logging Level 2">
   <System VersionMajor="1" VersionMinor="4" VersionRelease="0" VersionBuild="0103" SelectedRelease="0" SelectedBuild="0103"/>
   <SelectedModuleSets>
    <File Name="MoTeC Input" VersionMajor="1" VersionMinor="10" VersionBuild="63"/>
@@ -226,6 +226,9 @@
     <Enum Name="Internal State 12" ContainerOrder="12">
      <Help/>
     </Enum>
+    <Enum Name="Error" ContainerOrder="13">
+     <Help/>
+    </Enum>
    </Type>
    <Type Name="Motor Direction Enumeration" Storage="enum" Default="Reverse">
     <Enum Name="Reverse" ContainerOrder="0" Tags="Information">
@@ -262,12 +265,21 @@
      <Help/>
     </Enum>
    </Type>
+   <Type Name="Inverter Enable Enumeration" Storage="enum" Default="Disabled">
+    <Enum Name="Disabled" ContainerOrder="0">
+     <Help/>
+    </Enum>
+    <Enum Name="Enabled" ContainerOrder="1">
+     <Help/>
+    </Enum>
+   </Type>
   </DataTypes>
   <PkgUpgrades>
    <Project Name="Rensselaer Motorsport" Version="RM25" Major="1" Minor="2" Build="1"/>
    <Project Name="Rensselaer Motorsport Project" Version="1" Major="1" Minor="0" Build="0"/>
    <Project Name="Rensselaer Motorsport Project Test" Version="1" Major="1" Minor="0" Build="4"/>
    <Project Name="RM25 Project" Version="2" Major="1" Minor="0" Build="34"/>
+   <Project Name="RM26 Project" Version="1" Major="1" Minor="0" Build="0"/>
   </PkgUpgrades>
   <Build PackageSignKey="Rensselaer Polytechnic Institute.M1.Package.Development 01.04.00"/>
   <ComponentStream>
@@ -5526,6 +5538,12 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.BSPD.BSPD Parameter">
+     <Props>
+      <List.UserTags>
+       <Entry Value="Setup"/>
+       <Entry Value="Input"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.BSPD.Update.m1scr" Name="Root.Motor.BSPD.Update">
@@ -5620,30 +5638,14 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 200Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque">
-     <Props UseDefValue="true" DefValue="This.Dynamic Torque"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Force Speed Mode">
-     <Props Type="u32" Validation="MinMax" ValMin="0" ValMax="1"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.CAN Rx Internal States.Inverter State">
-     <Props Type="::This.Inverter State Enumeration"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.CAN Rx Internal States.Receive.m1scr" Name="Root.Motor.ESC.CAN Rx Internal States.Receive">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.CAN Rx Internal States">
+     <Props UseDefValue="true" DefValue="This.Dynamic Torque">
+      <List.UserTags>
+       <Entry Value="Output"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Rx">
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD">
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.BMS.CAN Rx Voltages">
@@ -5666,10 +5668,6 @@
        <Entry Value="Setup"/>
       </List.UserTags>
      </Props>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Parameter" Name="Root.Accumulator.IMD.CAN Bus">
-     <Props Type="MoTeC Types.CAN Bus Enumeration 2"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Torque.TC Tune">
@@ -5752,6 +5750,10 @@
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.TC Tune.TC Strength Table">
      <Props NumAxes="2">
+      <List.UserTags>
+       <Entry Value="Setup"/>
+       <Entry Value="Tune"/>
+      </List.UserTags>
       <Axis>
        <X Source="Parent.Parent.Parent.Driver Tune" MaxSites="16"/>
        <Y Source="Parent.Switch"/>
@@ -5825,14 +5827,22 @@
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Driver Tune.Translation Table.Init"/>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Torque.TC Tune.Switch.Calibration.Nine Position Switch 2.Position Four"/>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Dynamic Torque">
-     <Props Qty="N.m"/>
+     <Props Qty="N.m">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Torque.Dynamic TC Update.m1scr" Name="Root.Motor.Torque.Dynamic TC Update">
      <Props SelectedTrigger="Parent.Parent.Parent.Events.On 500Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Torque.Slip Ratio">
-     <Props Qty="ratio"/>
+     <Props Qty="ratio">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Torque.Dynamic Translation">
@@ -5858,13 +5868,6 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.IMD.CAN Rx.Receive.m1scr" Name="Root.Accumulator.IMD.CAN Rx.Receive">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.IMD.CAN Rx.IMD State">
-     <Props Type="::This.IMD State Enumeration"/>
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Vehicle.Speed.Rear Avg">
      <Props Qty="m/s" Validation="MinMax" ValMin="0.00000000000000000e+00" ValMax="5.00000000000000000e+01">
       <Locale>
@@ -5875,10 +5878,6 @@
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.IMD.State Address">
      <Props Type="u32"/>
-     <Comment/>
-    </Component>
-    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Motor Direction">
-     <Props Type="::This.Motor Direction Enumeration"/>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Testing.Force Torque Limit">
@@ -5908,7 +5907,9 @@
      </Props>
      <Comment/>
     </Component>
-    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Update"/>
+    <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Update">
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+    </Component>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Initialise"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Release"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Reserve"/>
@@ -5960,7 +5961,9 @@
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic High"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Drive.Value"/>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Drive"/>
-    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Temperature Sensor Diagnostic"/>
+    <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Temperature Sensor Diagnostic">
+     <Props Target="Parent.Parent.Diagnostic"/>
+    </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Temperature">
      <Props Target="Parent.Parent.Temp Difference"/>
     </Component>
@@ -5973,7 +5976,11 @@
      <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Temp Difference">
-     <Props Qty="K"/>
+     <Props Qty="K">
+      <List.UserTags>
+       <Entry Value="Normal"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.CalibrationParameter" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Sealed Gauge Pressure 1.Diagnostic Low"/>
@@ -6040,7 +6047,7 @@
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Frequency"/>
     <Component Classname="_IOMethod.UDIG_IO" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Digital.Pin"/>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Motor Inlet.Pressure.Update.m1scr" Name="Root.Motor.Water.Motor Inlet.Pressure.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.IsActive"/>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.GetEngineSpeedLimit"/>
@@ -6061,28 +6068,28 @@
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Hysteresis.Value"/>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Hysteresis"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Maximum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Maximum.Value.Init"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Maximum.Value.Value"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Maximum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Maximum"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Minimum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Minimum.Value.Init"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Minimum.Value.Value"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Motor Inlet.Pressure.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6107,13 +6114,14 @@
      <Props>
       <List.UserTags>
        <Entry Value="Setup"/>
+       <Entry Value="Input"/>
       </List.UserTags>
      </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Startup"/>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Calculation">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
@@ -6169,7 +6177,7 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Voltage.Input Source"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Voltage.Input Impedance"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Voltage.Initialise"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Voltage.Release"/>
@@ -6277,7 +6285,7 @@
     <Component Classname="BuiltIn.CalibrationTable" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Differential Pressure 1.Translation"/>
     <Component Classname="_CalibrationSchema.Differential_Pressure_1" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Differential Pressure 1"/>
     <Component Classname="BuiltIn.FuncUser" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 200Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
     </Component>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Radiator Fan.Generic Fan.SetDuty"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Radiator Fan.Generic Fan.Voltage.Input Resolution"/>
@@ -6297,13 +6305,14 @@
      <Props>
       <List.UserTags>
        <Entry Value="Setup"/>
+       <Entry Value="Input"/>
       </List.UserTags>
      </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Startup"/>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calculation">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
@@ -6341,7 +6350,7 @@
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Digital.Decode.Initialise"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Digital.Decode.Release"/>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Motor Outlet.Pressure.Update.m1scr" Name="Root.Motor.Water.Motor Outlet.Pressure.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.IsActive"/>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.GetEngineSpeedLimit"/>
@@ -6365,28 +6374,28 @@
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Hysteresis.Value"/>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Hysteresis"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Maximum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Maximum.Value.Init"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Maximum.Value.Value"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Maximum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Maximum"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Minimum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Minimum.Value.Init"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Minimum.Value.Value"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Motor Outlet.Pressure.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6417,7 +6426,7 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Voltage.Input Source"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Voltage.Input Impedance"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Voltage.Initialise"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Voltage.Release"/>
@@ -6442,10 +6451,6 @@
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.X"/>
     <Component Classname="BuiltIn.CalibrationChannel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Outlet.Pressure.Sensor.Calibration.Gauge Pressure Resistive 1.Translation.Value"/>
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Motor Inlet.Pressure.Sensor.Digital.Voltage.Minimum"/>
-    <Component Classname="BuiltIn.FuncUser" Filename="Accumulator.IMD.CAN Tx.Transmit.m1scr" Name="Root.Accumulator.IMD.CAN Tx.Transmit"/>
-    <Component Classname="BuiltIn.GroupCompound" Name="Root.Accumulator.IMD.CAN Tx">
-     <Comment/>
-    </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.Temps Address">
      <Props Type="u32" Value="256"/>
      <Comment/>
@@ -6532,13 +6537,14 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Calculation">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Startup"/>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor Resource">
      <Props>
       <List.UserTags>
        <Entry Value="Setup"/>
+       <Entry Value="Input"/>
       </List.UserTags>
      </Props>
      <Comment/>
@@ -6562,7 +6568,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6570,13 +6576,13 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Minimum.Value.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Minimum.Value.Init"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Minimum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Maximum"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Maximum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6584,7 +6590,7 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Maximum.Value.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Maximum.Value.Init"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Maximum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Hysteresis"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.Hysteresis.Value"/>
@@ -6605,7 +6611,7 @@
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.GetEngineSpeedLimit"/>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Btw Rads.Pressure.Warning.IsActive"/>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Btw Rads.Pressure.Update.m1scr" Name="Root.Motor.Water.Btw Rads.Pressure.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.Water.Btw Motor And Esc">
      <Comment/>
@@ -6656,7 +6662,7 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Voltage.Input Source"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Voltage.Input Impedance"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Btw Rads.Temperature.Warning.Delay.Enable"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Voltage.Release"/>
@@ -6899,13 +6905,14 @@
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Digital.Voltage.Input Maximum"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Digital.Voltage.Input Resolution"/>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Calculation">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor.Startup"/>
     <Component Classname="BuiltIn.IOResourceParameter" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Sensor Resource">
      <Props>
       <List.UserTags>
        <Entry Value="Setup"/>
+       <Entry Value="Input"/>
       </List.UserTags>
      </Props>
      <Comment/>
@@ -6930,7 +6937,7 @@
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Minimum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6938,13 +6945,13 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Minimum.Value.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Minimum.Value.Init"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Minimum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Maximum"/>
     <Component Classname="BuiltIn.Table" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Maximum.Value">
      <Props>
       <Axis>
-       <X Source="Parent.Parent.Parent.Parent.Outlet.Temperature" MaxSites="5"/>
+       <X Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
        <Y Source="Parent.Parent.Parent.Parent.Temperature" MaxSites="5"/>
       </Axis>
      </Props>
@@ -6952,7 +6959,7 @@
     <Component Classname="BuiltIn.Channel" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Maximum.Value.Value"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Init" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Maximum.Value.Init"/>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Maximum.Value.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.Reference" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Hysteresis"/>
     <Component Classname="BuiltIn.Parameter" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.Hysteresis.Value"/>
@@ -6981,7 +6988,7 @@
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.GetEngineSpeedLimit"/>
     <Component Classname="BuiltIn.MethodUserParam" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Warning.IsActive"/>
     <Component Classname="BuiltIn.FuncUser" Filename="Motor.Water.Btw Motor And Esc.Pressure.Update.m1scr" Name="Root.Motor.Water.Btw Motor And Esc.Pressure.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Events.On 10Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Events.On 10Hz"/>
     </Component>
     <Component Classname="BuiltIn.FuncGenerated.Table.Lookup" Caps="AutoCreated" Name="Root.Motor.Water.Btw Motor And Esc.Temperature.Sensor.Translation.Update"/>
     <Component Classname="BuiltIn.MethodUser" Name="Root.Motor.Water.Btw Motor And Esc.Temperature.Sensor.Calculation">
@@ -7163,7 +7170,7 @@
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Voltage.Release"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Voltage.Initialise"/>
     <Component Classname="BuiltIn.FuncGenerated.IOMethod" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Voltage.Update">
-     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
+     <Props SelectedTrigger="Parent.Parent.Parent.Parent.Parent.Parent.Parent.Events.On 100Hz"/>
     </Component>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Voltage.Input Impedance"/>
     <Component Classname="BuiltIn.IOCharacteristic" Caps="AutoCreated" Name="Root.Motor.Water.Btw Rads.Pressure.Sensor.Voltage.Input Source"/>
@@ -7306,7 +7313,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Lowest Cell ID">
-     <Props>
+     <Props Qty="V">
       <List.UserTags>
        <Entry Value="Diagnostic"/>
       </List.UserTags>
@@ -7314,7 +7321,7 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Voltages.Highest Cell ID">
-     <Props>
+     <Props Qty="V">
       <List.UserTags>
        <Entry Value="Diagnostic"/>
       </List.UserTags>
@@ -7362,11 +7369,43 @@
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Channel" Name="Root.Accumulator.BMS.CAN Rx Faults.OBD2 Fault">
-     <Props Type="u32"/>
+     <Props Type="u32">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
      <Comment/>
     </Component>
     <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.OBD2">
      <Props Type="u32" Value="2019"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Constant" Name="Root.Constants.BMS.SOC Address">
+     <Props Type="u32"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.Water.Radiator Fan.Diagnostic">
+     <Props Type="MoTeC Coolant Fan.Fan Sensor Diagnostic Enumeration">
+      <List.UserTags>
+       <Entry Value="Diagnostic"/>
+      </List.UserTags>
+     </Props>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.FuncUser" Filename="Motor.ESC.Internal State.Update.m1scr" Name="Root.Motor.ESC.Internal State.Update"/>
+    <Component Classname="BuiltIn.Channel" Name="Root.Motor.ESC.Internal State.Value">
+     <Props Type="::This.Motor State Enumeration"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.GroupCompound" Name="Root.Motor.ESC.Internal State">
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Inverter Enable">
+     <Props Type="::This.Inverter Enable Enumeration"/>
+     <Comment/>
+    </Component>
+    <Component Classname="BuiltIn.Parameter" Name="Root.Motor.ESC.Motor Direction">
+     <Props Type="::This.Motor Direction Enumeration"/>
      <Comment/>
     </Component>
    </List>
@@ -7401,16 +7440,6 @@
        <Component Name="CAN Rx Faults">
         <Component Name="OBD2 Fault"/>
         <Component Name="Receive"/>
-       </Component>
-      </Component>
-      <Component Name="IMD">
-       <Component Name="CAN Bus"/>
-       <Component Name="CAN Rx">
-        <Component Name="IMD State"/>
-        <Component Name="Receive"/>
-       </Component>
-       <Component Name="CAN Tx">
-        <Component Name="Transmit"/>
        </Component>
       </Component>
      </Component>
@@ -8739,6 +8768,7 @@
        </Component>
        <Component Name="Radiator Fan">
         <Component Name="Temp Difference"/>
+        <Component Name="Diagnostic"/>
         <Component Name="Update"/>
         <Component Name="Generic Fan">
          <Component Name="Output Resource">
@@ -9221,12 +9251,8 @@
       </Component>
       <Component Name="ESC">
        <Component Name="CAN Bus"/>
-       <Component Name="Force Speed Mode"/>
        <Component Name="Motor Direction"/>
-       <Component Name="CAN Rx Internal States">
-        <Component Name="Inverter State"/>
-        <Component Name="Receive"/>
-       </Component>
+       <Component Name="Inverter Enable"/>
        <Component Name="CAN Rx Temps">
         <Component Name="Motor Temp"/>
         <Component Name="Receive"/>
@@ -9240,6 +9266,10 @@
        </Component>
        <Component Name="CAN Tx Command">
         <Component Name="Transmit 200Hz"/>
+       </Component>
+       <Component Name="Internal State">
+        <Component Name="Value"/>
+        <Component Name="Update"/>
        </Component>
       </Component>
       <Component Name="Testing">
@@ -9276,6 +9306,7 @@
        <Component Name="Temps Address"/>
        <Component Name="Voltage Address"/>
        <Component Name="OBD2"/>
+       <Component Name="SOC Address"/>
       </Component>
       <Component Name="IMD">
        <Component Name="State Address"/>

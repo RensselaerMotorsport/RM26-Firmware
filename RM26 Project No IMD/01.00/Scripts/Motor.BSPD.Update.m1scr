@@ -1,0 +1,5 @@
+if(BSPD Trigger eq BSPD Trigger.On) {
+	Value = BSPD Enumeration.Fault;
+} else {
+	Value = BSPD Enumeration.Functioning;
+}
