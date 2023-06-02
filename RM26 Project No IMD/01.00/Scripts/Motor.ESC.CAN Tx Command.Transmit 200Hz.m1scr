@@ -28,7 +28,7 @@ if (Motor.ESC.CAN Bus neq Motor.ESC.CAN Bus.Not in Use) {
 		// Commanded Torque Limit - 0 = sets to default
 		CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger( Motor.Testing.Torque Limit*10 ));
 	}
-	else if (Motor.Testing.Force Torque Limit eq Force Torque Limit Enumeration.Disabled) {
+	else {
 		// Commanded Torque Limit - 0 = sets to default
 		CanComms.SetUnsignedInteger	(handle, 48, 16, Convert.ToUnsignedInteger(250));
 	}
