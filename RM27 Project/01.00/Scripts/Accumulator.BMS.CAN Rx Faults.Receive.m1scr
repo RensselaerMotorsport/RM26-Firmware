@@ -1,0 +1,9 @@
+local hBMSfault = CanComms.RxOpenExtended(
+				Motor.ESC.CAN Bus.AsInteger()-1,
+				Constants.BMS.OBD2,
+				0xFFFFF,
+				false);
+				
+if (CanComms.RxMessage(hBMSfault)) {
+	OBD2 Fault = CanComms.GetUnsignedInteger(hBMSfault, 0, 8);
+}

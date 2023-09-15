@@ -1,0 +1,12 @@
+if (not Calculate.IsNAN(APPS1)) {
+	if (not Calculate.IsNAN(APPS2)) {
+		Value = (APPS1 + APPS2) / 2;
+		Difference = APPS2 - APPS1;
+	} else {
+		Value = APPS1;
+		Difference = 0;
+	}
+} else {
+	Value = Calculate.NAN();
+	Difference = Calculate.NAN();
+}

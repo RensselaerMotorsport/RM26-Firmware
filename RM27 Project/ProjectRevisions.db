@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Project Locale="English_United States.1252" DefaultLocale="C">
+ <Version Name="1" Major="1" Minor="0" HeadBuildNo="0">
+  <Revision BuildNo="0" FileFmt="10106">
+   <ModifiedBy UserName="tompe"/>
+   <LastModified DateTime="2023-06-02 16:24:33" UserName="tompe"/>
+  </Revision>
+ </Version>
+</Project>

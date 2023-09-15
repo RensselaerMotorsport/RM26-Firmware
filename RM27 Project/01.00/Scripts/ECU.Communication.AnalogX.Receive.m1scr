@@ -1,0 +1,26 @@
+local h = CanComms.RxOpenExtended(
+	CAN Bus.AsInteger() - 1,
+	Base Address + Message Offset,
+	0xFFFFF,
+	false);
+
+static local c1 = 0.0;
+static local c2 = 0.0;
+static local c3 = 0.0;
+static local c4 = 0.0;
+
+if (CanComms.RxMessage(h)) {
+	c1 = CanComms.GetUnsignedInteger(h,  0, 16) / 1000.0;
+	c2 = CanComms.GetUnsignedInteger(h, 16, 16) / 1000.0;
+	c3 = CanComms.GetUnsignedInteger(h, 32, 16) / 1000.0;
+	c4 = CanComms.GetUnsignedInteger(h, 48, 16) / 1000.0;
+}
+
+Channel 1 = c1;
+Channel 2 = c2;
+Channel 3 = c3;
+Channel 4 = c4;
+System.SetFirmwareResource(4, c1);
+System.SetFirmwareResource(5, c2);
+System.SetFirmwareResource(6, c3);
+System.SetFirmwareResource(7, c4);

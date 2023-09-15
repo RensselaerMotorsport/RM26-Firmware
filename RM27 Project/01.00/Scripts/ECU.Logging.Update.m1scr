@@ -1,0 +1,13 @@
+local logFirmware = true;
+
+if (logFirmware) {
+	Request.Set(1);
+} else {
+	Request.Set(0);
+}
+
+State = Library.Logging.Running(0) ? State.Running : State.Stopped;
+
+Used = Library.Logging.Used(0);
+
+Unload = Library.Logging.Unloading() ? Unload.In Progress : Unload.Idle;

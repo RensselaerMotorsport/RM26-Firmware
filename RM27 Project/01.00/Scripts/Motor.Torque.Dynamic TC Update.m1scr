@@ -1,0 +1,8 @@
+// Update dynamic TC value based on slip of wheels
+// Compare rear wheel speed to front wheel speed -> determine slip rate
+// Based on slip rate (need to determine based on inner wheel in turn?)
+Slip Ratio = (Vehicle.Speed.Rear Avg / Vehicle.Speed.Front Avg);
+
+// Dynamic Translation Table gives fraction of theoretical max torque at pedal position
+// based on the amount of slip occuring
+Dynamic Torque = Dynamic Translation * TC Tune; // To be changed

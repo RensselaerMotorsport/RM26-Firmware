@@ -1,0 +1,19 @@
+local softBrake = Calculate.Hysteresis(
+		Vehicle.Brake.Pressure.Rear,
+		Soft Braking.Pressure,
+		Soft Braking.Pressure - Soft Braking.Hysteresis.Pressure,
+		Soft Braking.Hysteresis.Filter);
+		
+local hardBrake = Calculate.Hysteresis(
+		Vehicle.Brake.Pressure.Rear,
+		Hard Braking.Pressure,
+		Hard Braking.Pressure - Hard Braking.Hysteresis.Pressure,
+		Hard Braking.Hysteresis.Filter);
+		
+if (hardBrake) {
+	Value.Set(Value.Hard Braking);
+} else if (softBrake) {
+	Value.Set(Value.Soft Braking);
+} else {
+	Value.Set(Value.Not Braking);
+}
